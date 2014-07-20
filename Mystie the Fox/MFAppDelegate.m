@@ -12,6 +12,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [self.window makeKeyAndVisible];
+    
+    self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
+    self.splashView.image = [UIImage imageNamed:@"Default.png"];
+    [_window addSubview:self.splashView];
+    [_window bringSubviewToFront:self.splashView];
+    //Set your animation below
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:10];
+    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:_window cache:YES];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector (startupAnimationDone:finished:context:)];
+    self.splashView.frame = CGRectMake(-60, -60, 440, 600);
+    self.splashView.alpha = 0.0;
+    [UIView commitAnimations];
+    
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -41,6 +59,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Custom Methods
+
+- (void)startupAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    [self.splashView removeFromSuperview];
 }
 
 @end

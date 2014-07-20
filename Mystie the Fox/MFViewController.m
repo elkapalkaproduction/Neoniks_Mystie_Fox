@@ -9,6 +9,8 @@
 #import "MFViewController.h"
 #import "MFMyScene.h"
 
+#import "MFIntroScene.h"
+
 @implementation MFViewController
 
 - (void)viewDidLoad
@@ -21,7 +23,7 @@
     skView.showsNodeCount = YES;
     
     // Create and configure the scene.
-    SKScene * scene = [MFMyScene sceneWithSize:skView.bounds.size];
+    SKScene * scene = [MFIntroScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.

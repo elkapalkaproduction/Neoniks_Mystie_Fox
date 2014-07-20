@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3010926E197BCAAD00AA2295 /* MFImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3010926D197BCAAD00AA2295 /* MFImageCropper.m */; };
 		30BEC84D197B1E600069093E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BEC84C197B1E600069093E /* Foundation.framework */; };
 		30BEC84F197B1E600069093E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BEC84E197B1E600069093E /* CoreGraphics.framework */; };
 		30BEC851197B1E600069093E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BEC850197B1E600069093E /* UIKit.framework */; };
@@ -24,6 +25,7 @@
 		30BEC878197B1E600069093E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BEC850197B1E600069093E /* UIKit.framework */; };
 		30BEC880197B1E600069093E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BEC87E197B1E600069093E /* InfoPlist.strings */; };
 		30BEC882197B1E600069093E /* Mystie_the_FoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BEC881197B1E600069093E /* Mystie_the_FoxTests.m */; };
+		30BEC890197B51C50069093E /* MFIntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BEC88F197B51C50069093E /* MFIntroScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3010926C197BCAAD00AA2295 /* MFImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFImageCropper.h; sourceTree = "<group>"; };
+		3010926D197BCAAD00AA2295 /* MFImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFImageCropper.m; sourceTree = "<group>"; };
 		30BEC849197B1E5F0069093E /* Mystie the Fox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mystie the Fox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BEC84C197B1E600069093E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		30BEC84E197B1E600069093E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,6 +64,8 @@
 		30BEC87D197B1E600069093E /* Mystie the FoxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mystie the FoxTests-Info.plist"; sourceTree = "<group>"; };
 		30BEC87F197B1E600069093E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30BEC881197B1E600069093E /* Mystie_the_FoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mystie_the_FoxTests.m; sourceTree = "<group>"; };
+		30BEC88E197B51C50069093E /* MFIntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFIntroScene.h; sourceTree = "<group>"; };
+		30BEC88F197B51C50069093E /* MFIntroScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFIntroScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30109268197BCA2900AA2295 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				30BEC869197B1E600069093E /* MFMyScene.h */,
+				30BEC86A197B1E600069093E /* MFMyScene.m */,
+				30BEC88E197B51C50069093E /* MFIntroScene.h */,
+				30BEC88F197B51C50069093E /* MFIntroScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		30109269197BCA3200AA2295 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				30BEC866197B1E600069093E /* MFViewController.h */,
+				30BEC867197B1E600069093E /* MFViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3010926A197BCA4C00AA2295 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
+		3010926B197BCA6400AA2295 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3010926C197BCAAD00AA2295 /* MFImageCropper.h */,
+				3010926D197BCAAD00AA2295 /* MFImageCropper.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		30BEC840197B1E5F0069093E = {
 			isa = PBXGroup;
 			children = (
@@ -125,10 +167,11 @@
 				30BEC85E197B1E600069093E /* MFAppDelegate.m */,
 				30BEC860197B1E600069093E /* Main_iPhone.storyboard */,
 				30BEC863197B1E600069093E /* Main_iPad.storyboard */,
-				30BEC866197B1E600069093E /* MFViewController.h */,
-				30BEC867197B1E600069093E /* MFViewController.m */,
-				30BEC869197B1E600069093E /* MFMyScene.h */,
-				30BEC86A197B1E600069093E /* MFMyScene.m */,
+				30BEC88B197B46710069093E /* Resources */,
+				3010926A197BCA4C00AA2295 /* Nodes */,
+				3010926B197BCA6400AA2295 /* Model */,
+				30109269197BCA3200AA2295 /* Controllers */,
+				30109268197BCA2900AA2295 /* Scenes */,
 				30BEC86E197B1E600069093E /* Images.xcassets */,
 				30BEC855197B1E600069093E /* Supporting Files */,
 			);
@@ -162,6 +205,13 @@
 				30BEC87E197B1E600069093E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		30BEC88B197B46710069093E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +314,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				30BEC85B197B1E600069093E /* main.m in Sources */,
+				30BEC890197B51C50069093E /* MFIntroScene.m in Sources */,
+				3010926E197BCAAD00AA2295 /* MFImageCropper.m in Sources */,
 				30BEC86B197B1E600069093E /* MFMyScene.m in Sources */,
 				30BEC868197B1E600069093E /* MFViewController.m in Sources */,
 				30BEC85F197B1E600069093E /* MFAppDelegate.m in Sources */,
