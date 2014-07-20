@@ -10,4 +10,10 @@
 
 @implementation MFImageCropper
 
++(float)spriteRatio:(SKSpriteNode *)node{
+    float ratio=0;
+    ratio = node.size.height / node.size.width;
+    return ratio;
+}
+
 @end

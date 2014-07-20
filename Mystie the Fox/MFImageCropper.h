@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface MFImageCropper : NSObject
+
++(float) spriteRatio:(SKSpriteNode *)node;
 
 @end
