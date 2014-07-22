@@ -9,6 +9,7 @@
 #import "MFIntroScene.h"
 #import "MFLanguage.h"
 #import "MFImageCropper.h"
+#import "MFCoverScene.h"
 
 @interface MFIntroScene ()
 
@@ -45,7 +46,11 @@
     SKAction *wait = [SKAction waitForDuration:1];
     SKAction * fadeIn = [SKAction fadeInWithDuration:1.5];
     SKAction * fadeOut = [SKAction fadeOutWithDuration:1.5];
-    SKAction * sequence = [SKAction sequence:@[wait,fadeIn, fadeOut]];
+    SKAction * transitionToCover= [SKAction runBlock:^{
+        MFCoverScene *coverScene= [[MFCoverScene alloc] initWithSize:self.view.bounds.size];
+        [self.view presentScene:coverScene];
+    }];
+    SKAction * sequence = [SKAction sequence:@[wait,fadeIn, fadeOut,transitionToCover]];
     
     [self.introSprite runAction:sequence];
 }
