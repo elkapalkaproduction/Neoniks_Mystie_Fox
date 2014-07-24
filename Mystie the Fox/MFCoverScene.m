@@ -9,6 +9,7 @@
 #import "MFCoverScene.h"
 #import "MFLanguage.h"
 #import "MFImageCropper.h"
+#import "MFFirstPageScene.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -111,7 +112,6 @@
         self.siteNode.name=siteNodeName;
         [self addChild:self.siteNode];
         
-//        Fox
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] !=UIUserInterfaceIdiomPad) {
             self.mystieTheFoxNode = [[SKSpriteNode alloc] initWithImageNamed:mystieTheFoxNodeName];
@@ -119,6 +119,8 @@
             self.mystieTheFoxNode.size = CGSizeMake(320, 320*mystieRatio);
             self.mystieTheFoxNode.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height- self.mystieTheFoxNode.size.height);
             [self addChild:self.mystieTheFoxNode];
+            
+//            Fox
             
             tailNodeName = @"fox_tail.png";
             self.tailNode =[[SKSpriteNode alloc]initWithImageNamed:tailNodeName];
@@ -159,6 +161,13 @@
         
         if (node.name !=nil) {
             SKAction * sound = [SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
+            if ([node.name isEqualToString:@"startNode"]) {
+                SKAction * transitionAction = [SKAction runBlock:^{
+                    MFFirstPageScene *firstScene = [[MFFirstPageScene alloc] initWithSize:self.view.bounds.size];
+                    [self.view presentScene:firstScene];
+                }];
+                sound = [SKAction group:@[sound, transitionAction]];
+            }
             [self runAction:sound];
         }
     }
