@@ -9,6 +9,7 @@
 #import "MFFirstPageScene.h"
 #import "MFLanguage.h"
 #import "MFImageCropper.h"
+#import "MFCharactersScroller.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -16,6 +17,7 @@
 @property (strong,nonatomic) SKSpriteNode * background;
 //@property (strong , nonatomic) SKSpriteNode * wings;
 @property (strong, nonatomic) SKSpriteNode * siteNode;
+@property (strong ,nonatomic) SKSpriteNode * moreNode;
 
 // Fox
 @property (strong,nonatomic) SKSpriteNode * foxNode;
@@ -29,6 +31,7 @@
 @property (nonatomic) BOOL isLaughter;
 
 @property (strong,nonatomic) SKAction * tailRotation;
+@property (strong ,nonatomic) MFCharactersScroller *characterScroller;
 
 
 @end
@@ -40,6 +43,7 @@
         NSString * backgroundName = @"";
         //        NSString * wingsNodeName = @"";
         NSString * siteNodeName = @"";
+        NSString * moreNodeName =@"";
         
         NSString * foxNodeName = @"";
         NSString * eyesNodeName = @"";
@@ -50,11 +54,13 @@
             //            backgroundName = @"iPade_startup-screen_rus.png";
             backgroundName = ASSET_BY_SCREEN_HEIGHT(@"page1_background-568h.png", @"page1_background.png");
             siteNodeName = @"site_rus.png";
+            moreNodeName = @"more-rus.png";
         }else{
             //            backgroundName = @"iPad_startup-screen_eng.png";
             
             backgroundName = ASSET_BY_SCREEN_HEIGHT(@"page1_background-568h.png", @"page1_background.png");
             siteNodeName = @"site_eng.png";
+            moreNodeName = @"more-eng.png";
         }
         //        Background
         
@@ -70,13 +76,24 @@
         self.siteNode = [[SKSpriteNode alloc] initWithImageNamed:siteNodeName];
         float siteNodeRatio = [MFImageCropper spriteRatio:self.siteNode];
         if ([[UIDevice currentDevice] userInterfaceIdiom] !=UIUserInterfaceIdiomPad) {
-            self.siteNode.size = CGSizeMake(192, 192*siteNodeRatio);
+            self.siteNode.size = CGSizeMake(150, 150*siteNodeRatio);
             self.siteNode.position = CGPointMake(CGRectGetMidX(self.frame), 20);
         }else{
             self.siteNode.position = CGPointMake(CGRectGetMidX(self.frame), 40);
         }
         self.siteNode.name=siteNodeName;
         [self addChild:self.siteNode];
+        
+        self.moreNode =[SKSpriteNode spriteNodeWithImageNamed:moreNodeName];
+        float moreNodeRatio = [MFImageCropper spriteRatio:self.moreNode];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] !=UIUserInterfaceIdiomPad) {
+            self.moreNode.size = CGSizeMake(150, 150*moreNodeRatio);
+            self.moreNode.position = CGPointMake(CGRectGetMaxX(self.frame) -self.moreNode.size.width/2, CGRectGetMaxY(self.frame) - self.moreNode.size.height/2);
+        }else{
+            self.moreNode.position = CGPointMake(CGRectGetMaxX(self.frame) -self.moreNode.size.width/2, CGRectGetMaxY(self.frame) - self.moreNode.size.height/2);
+        }
+        self.moreNode.name =@"more";
+        [self addChild:self.moreNode];
         
         //        Fox
         
@@ -149,6 +166,28 @@
         SKAction * moveTailUp =[SKAction rotateByAngle:M_PI_4 /2 duration:0.15];
         SKAction *moveTailDowm = [SKAction rotateByAngle:-M_PI_4 /2 duration:0.15];
         self.tailRotation =[SKAction sequence:@[moveTailDowm, moveTailUp]];
+        
+        self.characterScroller = [[MFCharactersScroller alloc] init];
+        [self addChild:self.characterScroller];
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            
+            SKSpriteNode * leftArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-left.png"];
+            float arrowRatio = [MFImageCropper spriteRatio:leftArrow];
+            leftArrow.size = CGSizeMake(50/arrowRatio, 50);
+            leftArrow.position = CGPointMake(leftArrow.size.width/2, 70);
+            leftArrow.name =@"leftArrow";
+            [self addChild:leftArrow];
+            
+            SKSpriteNode * rightArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-right.png"];
+            rightArrow.size = CGSizeMake(50/arrowRatio, 50);
+            rightArrow.position = CGPointMake(self.size.width-rightArrow.size.width/2, 70);
+            rightArrow.name = @"rightArrow";
+            [self addChild:rightArrow];
+        }
+        
+        
+        
     }
     
     return self;
@@ -178,7 +217,6 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
-        NSLog(@"node name: %@" , node.name);
         
         if ([node.name isEqualToString:@"fox"]) {
             if (!self.isLaughter) {
@@ -197,6 +235,15 @@
             
         }else if([node.name isEqualToString:@"tail"]){
             [node runAction:self.tailRotation];
+        }else if([node.name isEqualToString:@"leftArrow"]){
+            [self.characterScroller scrollToLeft];
+        }else if([node.name isEqualToString:@"rightArrow"]){
+            [self.characterScroller scrollToRight];
+        }
+        
+        if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
+            SKAction * playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
+            [self runAction:playClickSound];
         }
         
     }
