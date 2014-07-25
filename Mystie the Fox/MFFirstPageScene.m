@@ -163,8 +163,8 @@
         SKAction * laughterSound = [SKAction playSoundFileNamed:@"fox_giggles.mp3" waitForCompletion:YES];
         self.laughter = [SKAction group:@[laughter,laughterSound]];
         
-        SKAction * moveTailUp =[SKAction rotateByAngle:M_PI_4 /2 duration:0.15];
-        SKAction *moveTailDowm = [SKAction rotateByAngle:-M_PI_4 /2 duration:0.15];
+        SKAction * moveTailUp =[SKAction rotateByAngle:M_PI_4 /2 duration:0.30];
+        SKAction *moveTailDowm = [SKAction rotateByAngle:-M_PI_4 /2 duration:0.25];
         self.tailRotation =[SKAction sequence:@[moveTailDowm, moveTailUp]];
         
         self.characterScroller = [[MFCharactersScroller alloc] init];
