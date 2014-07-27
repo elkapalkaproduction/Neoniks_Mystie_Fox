@@ -12,8 +12,8 @@
 
 @property (strong,nonatomic) NSMutableArray * buttons;
 
--(void)scrollToLeft;
+-(void)scrollToLeftWithComplition:(void(^)())block;
 
--(void)scrollToRight;
+-(void)scrollToRightWithComplition:(void(^)())block;
 
 @end

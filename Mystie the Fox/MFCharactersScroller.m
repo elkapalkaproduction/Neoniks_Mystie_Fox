@@ -57,7 +57,7 @@
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             mask.size = CGSizeMake(768, 100);
             mask.color = [UIColor greenColor];
-            self.position = CGPointMake(768/2,140);
+            self.position = CGPointMake(768/2,147.5);
             for (int i =0; i<8; i++) {
                 SKSpriteNode * button = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"IPad_button_%d.png", i+1]];
                 button.position = CGPointMake(i*button.size.width -768/2 +button.size.width/2 +2, 0 );
@@ -74,7 +74,7 @@
         }else{
             mask.size = CGSizeMake(240, 60);
             mask.color = [UIColor greenColor];
-            self.position = CGPointMake(320/2,70);
+            self.position = CGPointMake(320/2,80);
             
             for (int i =0; i<8; i++) {
                 SKSpriteNode * button = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"IPad_button_%d.png", i+1]];
@@ -97,25 +97,30 @@
     return self;
 }
 
--(void)scrollToLeft{
+-(void)scrollToLeftWithComplition:(void(^)())block{
     if (self.currentPosition >0) {
-        NSMutableArray * action = [[NSMutableArray alloc] init];
         SKAction * moveToLeft = [SKAction moveByX:60 y:0 duration:0.5];
-        for (SKSpriteNode *button in self.buttons) {
-            [button runAction:moveToLeft];
-        }
+        SKAction * move =[SKAction runBlock:^{
+            for (SKSpriteNode *button in self.buttons) {
+                [button runAction:moveToLeft];
+            }
+        }];
         self.currentPosition=self.currentPosition-1;
+        [self runAction:move completion:block];
     }
 }
 
--(void)scrollToRight{
+-(void)scrollToRightWithComplition:(void(^)())block{
     if (self.currentPosition <4) {
-        NSMutableArray * action = [[NSMutableArray alloc] init];
         SKAction * moveToRight = [SKAction moveByX:-60 y:0 duration:0.5];
-        for (SKSpriteNode *button in self.buttons) {
-            [button runAction:moveToRight];
-        }
+        SKAction * move =[SKAction runBlock:^{
+            for (SKSpriteNode *button in self.buttons) {
+                [button runAction:moveToRight];
+            }
+        }];
         self.currentPosition=self.currentPosition+1;
+        [self runAction:move completion:block];
+        
     }
 }
 

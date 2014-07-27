@@ -34,6 +34,10 @@
 @property (strong ,nonatomic) MFCharactersScroller *characterScroller;
 
 
+//Buttons scrolling
+@property (nonatomic) BOOL isScrollingNow;
+@property (nonatomic) BOOL isTapEnd;
+
 @end
 
 @implementation MFFirstPageScene
@@ -170,21 +174,21 @@
         self.characterScroller = [[MFCharactersScroller alloc] init];
         [self addChild:self.characterScroller];
         
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            
-            SKSpriteNode * leftArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-left.png"];
-            float arrowRatio = [MFImageCropper spriteRatio:leftArrow];
-            leftArrow.size = CGSizeMake(50/arrowRatio, 50);
-            leftArrow.position = CGPointMake(leftArrow.size.width/2, 70);
-            leftArrow.name =@"leftArrow";
-            [self addChild:leftArrow];
-            
-            SKSpriteNode * rightArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-right.png"];
-            rightArrow.size = CGSizeMake(50/arrowRatio, 50);
-            rightArrow.position = CGPointMake(self.size.width-rightArrow.size.width/2, 70);
-            rightArrow.name = @"rightArrow";
-            [self addChild:rightArrow];
-        }
+//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+//            
+//            SKSpriteNode * leftArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-left.png"];
+//            float arrowRatio = [MFImageCropper spriteRatio:leftArrow];
+//            leftArrow.size = CGSizeMake(50/arrowRatio, 50);
+//            leftArrow.position = CGPointMake(leftArrow.size.width/2, 80);
+//            leftArrow.name =@"leftArrow";
+//            [self addChild:leftArrow];
+//            
+//            SKSpriteNode * rightArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-right.png"];
+//            rightArrow.size = CGSizeMake(50/arrowRatio, 50);
+//            rightArrow.position = CGPointMake(self.size.width-rightArrow.size.width/2, 80);
+//            rightArrow.name = @"rightArrow";
+//            [self addChild:rightArrow];
+//        }
         
         
         
@@ -209,6 +213,31 @@
     SKAction * blink = [SKAction sequence:@[wait, closeEyes, openEyes]];
     self.eyesBlink = [SKAction repeatActionForever:blink];
     [self.eyesNode runAction:self.eyesBlink];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+        UIImage * leftArrowImage = [UIImage imageNamed:@"arrow-left.png"];
+        UIImageView * leftArrow =[[UIImageView alloc] initWithImage:leftArrowImage];
+        float arrowRatio = [MFImageCropper viewRatio:leftArrow];
+        leftArrow.frame = CGRectMake(0, self.size.height-80-25, 50/arrowRatio, 50);
+        leftArrow.userInteractionEnabled=YES;
+        [self.view addSubview:leftArrow];
+        UILongPressGestureRecognizer *longPressLeft =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressLeft:)];
+        longPressLeft.minimumPressDuration=0;
+        [leftArrow addGestureRecognizer:longPressLeft];
+        
+        UIImage * rightArrowImage = [UIImage imageNamed:@"arrow-right.png"];
+        UIImageView * rightArrow =[[UIImageView alloc] initWithImage:rightArrowImage];
+        rightArrow.frame = CGRectMake(self.frame.size.width - 50/arrowRatio, self.size.height-80-25, 50/arrowRatio, 50);
+        rightArrow.userInteractionEnabled=YES;
+        [self.view addSubview:rightArrow];
+        UILongPressGestureRecognizer *longPressRight =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRight:)];
+        longPressRight.minimumPressDuration=0;
+        [rightArrow addGestureRecognizer:longPressRight];
+        
+    }
+    
+    
     
 }
 
@@ -236,9 +265,9 @@
         }else if([node.name isEqualToString:@"tail"]){
             [node runAction:self.tailRotation];
         }else if([node.name isEqualToString:@"leftArrow"]){
-            [self.characterScroller scrollToLeft];
+            [self.characterScroller scrollToLeftWithComplition:nil];
         }else if([node.name isEqualToString:@"rightArrow"]){
-            [self.characterScroller scrollToRight];
+            [self.characterScroller scrollToRightWithComplition:nil];
         }
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
@@ -246,6 +275,49 @@
             [self runAction:playClickSound];
         }
         
+    }
+}
+
+-(void)leftButtonPressed{
+    if (!self.isScrollingNow && !self.isTapEnd) {
+        [self.characterScroller scrollToLeftWithComplition:^{
+            SKAction * wait = [SKAction waitForDuration:0.2];
+            [self runAction:wait completion:^{
+                [self leftButtonPressed];
+            }];
+            
+        }];
+    }
+}
+
+-(void)rightButtonPressed{
+    if (!self.isScrollingNow && !self.isTapEnd) {
+        [self.characterScroller scrollToRightWithComplition:^{
+            SKAction * wait = [SKAction waitForDuration:0.2];
+            [self runAction:wait completion:^{
+                [self rightButtonPressed];
+            }];
+        }];
+    }
+}
+
+-(void)longPressLeft:(UIGestureRecognizer*)gesture{
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        self.isTapEnd=NO;
+        [self leftButtonPressed];
+    }else if (gesture.state ==UIGestureRecognizerStateEnded){
+        self.isTapEnd=YES;
+    }
+}
+
+-(void)longPressRight:(UIGestureRecognizer*)gesture{
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        self.isTapEnd=NO;
+        [self rightButtonPressed];
+    }else if (gesture.state ==UIGestureRecognizerStateEnded){
+        self.isTapEnd=YES;
     }
 }
 

@@ -13,4 +13,6 @@
 
 +(float) spriteRatio:(SKSpriteNode *)node;
 
++(float) viewRatio:(UIView *)view;
+
 @end

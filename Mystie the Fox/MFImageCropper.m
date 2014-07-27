@@ -16,4 +16,10 @@
     return ratio;
 }
 
++(float) viewRatio:(UIView *)view{
+    float ratio=0;
+    ratio = view.frame.size.height / view.frame.size.width;
+    return ratio;
+}
+
 @end
