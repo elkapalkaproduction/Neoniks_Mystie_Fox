@@ -16,4 +16,6 @@
 
 -(void)scrollToRightWithComplition:(void(^)())block;
 
+-(void)characterButtonPressed:(NSString *) name;
+
 @end

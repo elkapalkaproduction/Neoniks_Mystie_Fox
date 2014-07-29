@@ -8,6 +8,7 @@
 
 #import "MFCharactersScroller.h"
 #import "MFImageCropper.h"
+#import "MFBug.h"
 
 @interface MFCharactersScroller ()
 
@@ -93,6 +94,7 @@
             
         }
         self.maskNode=mask;
+        self.zPosition =1;
     }
     return self;
 }
@@ -123,5 +125,16 @@
         
     }
 }
+
+#pragma mark - Characters
+
+-(void)characterButtonPressed:(NSString *) name{
+    if ([name isEqualToString:@"button_0"]) {
+        MFBug *bug = [[MFBug alloc] initWithParent:self.parent];
+        [self.parent addChild:bug];
+        [bug runAction:bug.move];
+    }
+}
+
 
 @end

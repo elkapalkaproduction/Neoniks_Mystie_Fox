@@ -11,6 +11,8 @@
 #import "MFImageCropper.h"
 #import "MFCharactersScroller.h"
 
+#import "MFBug.h"
+
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
 @interface MFFirstPageScene ()
@@ -35,7 +37,6 @@
 
 
 //Buttons scrolling
-@property (nonatomic) BOOL isScrollingNow;
 @property (nonatomic) BOOL isTapEnd;
 
 @end
@@ -246,7 +247,7 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
-        
+        NSLog(@" %@ node.name" ,node.name);
         if ([node.name isEqualToString:@"fox"]) {
             if (!self.isLaughter) {
                 self.isLaughter=YES;
@@ -272,6 +273,18 @@
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
             SKAction * playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
+            
+            [self.characterScroller characterButtonPressed:node.name];
+            
+            if ([node.name isEqualToString:@"bugCharacter"]) {
+                MFBug *bug = (MFBug *)node;
+                [bug taped];
+            }
+            if ([node.name isEqualToString:@"particle"]) {
+                MFBug *bug = (MFBug *)node.parent;
+                [bug taped];
+            }
+            
             [self runAction:playClickSound];
         }
         
@@ -279,7 +292,7 @@
 }
 
 -(void)leftButtonPressed{
-    if (!self.isScrollingNow && !self.isTapEnd) {
+    if ( !self.isTapEnd) {
         [self.characterScroller scrollToLeftWithComplition:^{
             SKAction * wait = [SKAction waitForDuration:0.2];
             [self runAction:wait completion:^{
@@ -291,7 +304,7 @@
 }
 
 -(void)rightButtonPressed{
-    if (!self.isScrollingNow && !self.isTapEnd) {
+    if (!self.isTapEnd) {
         [self.characterScroller scrollToRightWithComplition:^{
             SKAction * wait = [SKAction waitForDuration:0.2];
             [self runAction:wait completion:^{

@@ -10,4 +10,13 @@
 
 @interface MFBug : SKSpriteNode
 
+-(instancetype) initWithParent:(SKNode*)parent;
+
+@property(strong,nonatomic) SKAction *move;
+@property (strong,nonatomic) SKAction *actionOnTap;
+
+@property (strong ,nonatomic) NSMutableArray * particles;
+
+-(void)taped;
+
 @end
