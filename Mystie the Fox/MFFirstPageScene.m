@@ -12,6 +12,8 @@
 #import "MFCharactersScroller.h"
 
 #import "MFBug.h"
+#import "MFDoll.h"
+#import "MFDragon.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -248,6 +250,7 @@
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
         NSLog(@" %@ node.name" ,node.name);
+        NSLog (@" %@ point" , NSStringFromCGPoint(location));
         if ([node.name isEqualToString:@"fox"]) {
             if (!self.isLaughter) {
                 self.isLaughter=YES;
@@ -276,14 +279,20 @@
             
             [self.characterScroller characterButtonPressed:node.name];
             
+            MFCharacter *character;
+            
             if ([node.name isEqualToString:@"bugCharacter"]) {
-                MFBug *bug = (MFBug *)node;
-                [bug taped];
+                character = (MFBug *)node;
+            }else if ([node.name isEqualToString:@"particle"]) {
+                character= (MFBug *)node.parent;
+            }else if ([node.name isEqualToString:@"dollCharacter"]) {
+                character = (MFDoll *)node.parent;
+            }else if ([node.name isEqualToString:@"dragonCharacter"]){
+                character = (MFDragon *)node.parent;
             }
-            if ([node.name isEqualToString:@"particle"]) {
-                MFBug *bug = (MFBug *)node.parent;
-                [bug taped];
-            }
+            [character taped];
+            
+            
             
             [self runAction:playClickSound];
         }

@@ -8,7 +8,10 @@
 
 #import "MFCharactersScroller.h"
 #import "MFImageCropper.h"
+
 #import "MFBug.h"
+#import "MFDoll.h"
+#import "MFDragon.h"
 
 @interface MFCharactersScroller ()
 
@@ -133,6 +136,14 @@
         MFBug *bug = [[MFBug alloc] initWithParent:self.parent];
         [self.parent addChild:bug];
         [bug runAction:bug.move];
+    }else if ([name isEqualToString:@"button_1"]){
+        MFDoll *doll= [[MFDoll alloc] initWithParent:self.parent];
+        [self.parent addChild:doll];
+        [doll runAction:doll.move];
+    }else if ([name isEqualToString:@"button_2"]){
+        MFDragon *dragon = [[MFDragon alloc] initWithParent:self.parent];
+        [self.parent addChild:dragon];
+        [dragon runAction:dragon.move];
     }
 }
 

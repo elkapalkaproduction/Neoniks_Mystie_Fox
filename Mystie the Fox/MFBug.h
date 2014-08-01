@@ -7,12 +7,13 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "MFCharacter.h"
 
-@interface MFBug : SKSpriteNode
+@interface MFBug : MFCharacter
 
 -(instancetype) initWithParent:(SKNode*)parent;
 
-@property(strong,nonatomic) SKAction *move;
+
 @property (strong,nonatomic) SKAction *actionOnTap;
 
 @property (strong ,nonatomic) NSMutableArray * particles;

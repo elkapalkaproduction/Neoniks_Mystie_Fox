@@ -13,12 +13,12 @@
 
 -(instancetype) initWithParent:(SKNode*)parent{
     self.particles =[[NSMutableArray alloc] init];
-    if (self=[super initWithImageNamed:@"bug.png"]) {
+    if (self=[super initWithName:@"bug.png" parent:parent]) {
+        self.name=@"bugCharacter";
+        
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
             float ratio = [MFImageCropper spriteRatio:self];
             self.size = CGSizeMake(75, 75*ratio);
-            float randomY = arc4random()% ((int)parent.frame.size.height-(310+(int)self.size.width)-50) +310 +self.size.width/2 +25;
-            self.position = CGPointMake(parent.frame.size.width + self.size.width/2, randomY);
             
             for (int i=0; i<16; i++) {
                 SKSpriteNode * particle =[SKSpriteNode spriteNodeWithImageNamed:@"stamen.png"];
@@ -27,48 +27,32 @@
                 particle.anchorPoint =CGPointMake(0.3, 0);
                 CGPoint position =CGPointMake(-self.size.width/4 -2, self.size.height/2-18);
                 particle.position = position;//[self convertPoint:position toNode:parent];
-//                NSLog(@"%@ position and converted postition %@" ,NSStringFromCGPoint(position) , NSStringFromCGPoint(particle.position) );
                 particle.zRotation = M_PI_4/2 *i;
                 particle.name =@"particle";
                 [self addChild:particle];
                 [self.particles addObject:particle];
             }
-//            NSLog(@"%@ parent " , parent);
-            
             
         }else{
-            float randomY = arc4random()% ((int)parent.frame.size.height-(710-(int)self.size.width) -50) +710 +self.size.width/2 +25;
-            self.position = CGPointMake(parent.frame.size.width + self.size.width/2, randomY);
+            for (int i=0; i<16; i++) {
+                SKSpriteNode * particle =[SKSpriteNode spriteNodeWithImageNamed:@"stamen.png"];
+                particle.anchorPoint =CGPointMake(0.3, 0);
+                CGPoint position =CGPointMake(-self.size.width/4 -2, self.size.height/2-18);
+                particle.position = position;//[self convertPoint:position toNode:parent];
+                particle.zRotation = M_PI_4/2 *i;
+                particle.name =@"particle";
+                [self addChild:particle];
+                [self.particles addObject:particle];
+            }
         }
-        self.name=@"bugCharacter";
-        
-        self.move = [self createMoveAction:parent];
-//        self.actionOnTap =[self createActionOnTap];
+        self.position =[self rightRandomPosition:parent];
         
     }
     return self;
 }
 
 
--(UIBezierPath*)createSinCurve:(SKNode *) parent{
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    [bezierPath moveToPoint:CGPointMake(0, 0)];
-//    CGPoint firstPoint = CGPointMake(0, 0);
-    CGPoint firstPoint = CGPointMake((parent.frame.size.width + self.size.width)/3, 0);
-    CGPoint secondPoint = CGPointMake((parent.frame.size.width + self.size.width)/3*2, 0);
-    CGPoint thirdPoint = CGPointMake(parent.frame.size.width + self.size.width, 0);
-    
-    CGPoint fistControl =CGPointMake((parent.frame.size.width + self.size.width)/3 /2, 50);
-    CGPoint secondControl =CGPointMake((parent.frame.size.width + self.size.width)/3*2 -(parent.frame.size.width+ self.size.width)/3 /2, -50);
-    CGPoint thirdControl =CGPointMake((parent.frame.size.width+ self.size.width)-(parent.frame.size.width+ self.size.width)/3 /2, 50);
-    
-    [bezierPath addQuadCurveToPoint:firstPoint controlPoint:fistControl];
-    [bezierPath addQuadCurveToPoint:secondPoint controlPoint:secondControl];
-    [bezierPath addQuadCurveToPoint:thirdPoint controlPoint:thirdControl];
-    
-    
-    return bezierPath;
-}
+
 
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
@@ -77,13 +61,14 @@
     move =[move reversedAction];
     SKAction *windSound = [SKAction playSoundFileNamed:@"wind.mp3" waitForCompletion:NO];
     move = [SKAction group:@[move, windSound]];
-    SKAction * remove = [SKAction removeFromParent];
-    return [SKAction sequence:@[move,remove]];
+//    SKAction * remove = [SKAction removeFromParent];
+    return [SKAction sequence:@[move,self.removeNode]];
 }
 
 -(void)taped{
-    [self removeAllActions];
-    self.name =nil;
+//    [self removeAllActions];
+//    self.name =nil;
+    [super taped];
     SKAction * remove = [SKAction removeFromParent];
     for (SKSpriteNode *particle in self.particles) {
         [particle removeAllActions];
