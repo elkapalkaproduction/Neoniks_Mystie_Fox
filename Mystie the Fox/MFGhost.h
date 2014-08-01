@@ -7,7 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "MFCharacter.h"
 
-@interface MFGhost : SKSpriteNode
+@interface MFGhost : MFCharacter
+
+-(instancetype)initWithParent:(SKNode *) parent;
 
 @end

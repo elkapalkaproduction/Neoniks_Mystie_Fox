@@ -14,6 +14,7 @@
 #import "MFBug.h"
 #import "MFDoll.h"
 #import "MFDragon.h"
+#import "MFGhost.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -250,7 +251,7 @@
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
         NSLog(@" %@ node.name" ,node.name);
-        NSLog (@" %@ point" , NSStringFromCGPoint(location));
+//        NSLog (@" %@ point" , NSStringFromCGPoint(location));
         if ([node.name isEqualToString:@"fox"]) {
             if (!self.isLaughter) {
                 self.isLaughter=YES;
@@ -268,16 +269,20 @@
             
         }else if([node.name isEqualToString:@"tail"]){
             [node runAction:self.tailRotation];
-        }else if([node.name isEqualToString:@"leftArrow"]){
+        }/*else if([node.name isEqualToString:@"leftArrow"]){
             [self.characterScroller scrollToLeftWithComplition:nil];
         }else if([node.name isEqualToString:@"rightArrow"]){
             [self.characterScroller scrollToRightWithComplition:nil];
-        }
+        }*/
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
             SKAction * playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
-            
-            [self.characterScroller characterButtonPressed:node.name];
+            if ([self.characterScroller containsPoint:location]) {
+                NSRange range = [node.name rangeOfString:@"button"];
+                if (range.location !=NSNotFound) {
+                    [self.characterScroller characterButtonPressed:node.name];
+                }
+            }
             
             MFCharacter *character;
             
@@ -289,6 +294,8 @@
                 character = (MFDoll *)node.parent;
             }else if ([node.name isEqualToString:@"dragonCharacter"]){
                 character = (MFDragon *)node.parent;
+            }else if ([node.name isEqualToString:@"ghostCharacter"]){
+                character = (MFGhost *)node;
             }
             [character taped];
             

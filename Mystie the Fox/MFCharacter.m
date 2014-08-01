@@ -61,9 +61,12 @@ static int const kWaveOffsetPad = 240;
         float randomY = arc4random()% ((int)parent.frame.size.height-(310+(int)self.size.height)-kWaveOffsetPhone) +310 +self.size.height/2 +kWaveOffsetPhone/2 ;
         point = CGPointMake(parent.frame.size.width + self.size.width/2, randomY);
     }else{
+//        int random =arc4random()% ((int)parent.frame.size.height-(710+(int)self.size.height));// -kWaveOffsetPhone);
         float randomY = arc4random()% ((int)parent.frame.size.height-(710+(int)self.size.height) -kWaveOffsetPhone) +710 +self.size.height/2 +kWaveOffsetPhone/2;
+//        NSLog(@"%d random" , random);
         point = CGPointMake(parent.frame.size.width + self.size.width/2, randomY);
     }
+    NSLog(@"%@ point " , NSStringFromCGPoint(point));
     return point;
 }
 

@@ -57,7 +57,7 @@
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
     
-    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:2];
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:5];
     move =[move reversedAction];
     SKAction *windSound = [SKAction playSoundFileNamed:@"wind.mp3" waitForCompletion:NO];
     move = [SKAction group:@[move, windSound]];

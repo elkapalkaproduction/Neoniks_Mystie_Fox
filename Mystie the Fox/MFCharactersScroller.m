@@ -12,6 +12,7 @@
 #import "MFBug.h"
 #import "MFDoll.h"
 #import "MFDragon.h"
+#import "MFGhost.h"
 
 @interface MFCharactersScroller ()
 
@@ -132,18 +133,26 @@
 #pragma mark - Characters
 
 -(void)characterButtonPressed:(NSString *) name{
+    MFCharacter *character;
     if ([name isEqualToString:@"button_0"]) {
-        MFBug *bug = [[MFBug alloc] initWithParent:self.parent];
-        [self.parent addChild:bug];
-        [bug runAction:bug.move];
+        character = [[MFBug alloc] initWithParent:self.parent];
+//        [self.parent addChild:bug];
+//        [bug runAction:bug.move];
     }else if ([name isEqualToString:@"button_1"]){
-        MFDoll *doll= [[MFDoll alloc] initWithParent:self.parent];
-        [self.parent addChild:doll];
-        [doll runAction:doll.move];
+        character= [[MFDoll alloc] initWithParent:self.parent];
+//        [self.parent addChild:doll];
+//        [doll runAction:doll.move];
     }else if ([name isEqualToString:@"button_2"]){
-        MFDragon *dragon = [[MFDragon alloc] initWithParent:self.parent];
-        [self.parent addChild:dragon];
-        [dragon runAction:dragon.move];
+        character = [[MFDragon alloc] initWithParent:self.parent];
+//        [self.parent addChild:dragon];
+//        [dragon runAction:dragon.move];
+    }else if ([name isEqualToString:@"button_3"]){
+        character = [[MFGhost alloc] initWithParent:self.parent];
+    }
+    if (name!=nil&& character!=nil) {
+        
+        [self.parent addChild:character];
+        [character runAction:character.move];
     }
 }
 

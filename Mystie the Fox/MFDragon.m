@@ -55,7 +55,7 @@
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
     
-    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:2];
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:5];
     move =[move reversedAction];
 //    SKAction *windSound = [SKAction playSoundFileNamed:@"dragon.mp3" waitForCompletion:NO];
     SKAction *dragonSound = [SKAction runBlock:^{
@@ -67,6 +67,7 @@
 
 -(void)taped{
     [super taped];
+    self.dragon.name =nil;
     [self.dragonSound stop];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
     for (int i = 0; i<16; i++) {
