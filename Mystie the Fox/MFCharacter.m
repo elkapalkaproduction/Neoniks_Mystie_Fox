@@ -85,4 +85,8 @@ static int const kWaveOffsetPad = 240;
     }
 }
 
+-(instancetype)initWithParent:(SKNode *) parent{
+    return [self initWithName:@"" parent:parent];
+}
+
 @end

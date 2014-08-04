@@ -102,19 +102,17 @@
 		301093A0197BCDC300AA2295 /* mosquito-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092EE197BCDC200AA2295 /* mosquito-6.png */; };
 		301093A1197BCDC300AA2295 /* mosquito-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092EF197BCDC200AA2295 /* mosquito-7.png */; };
 		301093A2197BCDC300AA2295 /* mosquito-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F0197BCDC200AA2295 /* mosquito-8.png */; };
-		301093A3197BCDC300AA2295 /* mosquito-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F1197BCDC200AA2295 /* mosquito-2.png */; };
-		301093A4197BCDC300AA2295 /* mosquito-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F2197BCDC200AA2295 /* mosquito-3.png */; };
-		301093A5197BCDC300AA2295 /* mosquito-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F3197BCDC200AA2295 /* mosquito-4.png */; };
-		301093A6197BCDC300AA2295 /* mosquito-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F4197BCDC200AA2295 /* mosquito-1.png */; };
-		301093A7197BCDC300AA2295 /* mosquito.psd in Resources */ = {isa = PBXBuildFile; fileRef = 301092F5197BCDC200AA2295 /* mosquito.psd */; };
-		301093A8197BCDC300AA2295 /* mosquito_samples.gif in Resources */ = {isa = PBXBuildFile; fileRef = 301092F6197BCDC200AA2295 /* mosquito_samples.gif */; };
+		301093A3197BCDC300AA2295 /* mosquito-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F1197BCDC200AA2295 /* mosquito-2@2x.png */; };
+		301093A4197BCDC300AA2295 /* mosquito-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F2197BCDC200AA2295 /* mosquito-3@2x.png */; };
+		301093A5197BCDC300AA2295 /* mosquito-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F3197BCDC200AA2295 /* mosquito-4@2x.png */; };
+		301093A6197BCDC300AA2295 /* mosquito-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092F4197BCDC200AA2295 /* mosquito-1@2x.png */; };
 		301093A9197BCDC300AA2295 /* light_on.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 301092F8197BCDC200AA2295 /* light_on.mp3 */; };
 		301093AA197BCDC300AA2295 /* mosquito.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 301092F9197BCDC200AA2295 /* mosquito.mp3 */; };
-		301093AB197BCDC300AA2295 /* wings.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092FA197BCDC200AA2295 /* wings.png */; };
+		301093AB197BCDC300AA2295 /* wings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 301092FA197BCDC200AA2295 /* wings@2x.png */; };
 		301093AC197BCDC300AA2295 /* aliens.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 301092FD197BCDC200AA2295 /* aliens.mp3 */; };
 		301093AD197BCDC300AA2295 /* screech.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 301092FE197BCDC200AA2295 /* screech.mp3 */; };
 		301093AE197BCDC300AA2295 /* ufo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 301092FF197BCDC200AA2295 /* ufo.mp3 */; };
-		301093AF197BCDC300AA2295 /* ufo.png in Resources */ = {isa = PBXBuildFile; fileRef = 30109300197BCDC200AA2295 /* ufo.png */; };
+		301093AF197BCDC300AA2295 /* ufo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30109300197BCDC200AA2295 /* ufo@2x.png */; };
 		301093B0197BCDC300AA2295 /* IPad_button_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30109302197BCDC200AA2295 /* IPad_button_1@2x.png */; };
 		301093B1197BCDC300AA2295 /* IPad_button_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30109303197BCDC200AA2295 /* IPad_button_2@2x.png */; };
 		301093B2197BCDC300AA2295 /* IPad_button_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30109304197BCDC200AA2295 /* IPad_button_3@2x.png */; };
@@ -330,19 +328,17 @@
 		301092EE197BCDC200AA2295 /* mosquito-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-6.png"; sourceTree = "<group>"; };
 		301092EF197BCDC200AA2295 /* mosquito-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-7.png"; sourceTree = "<group>"; };
 		301092F0197BCDC200AA2295 /* mosquito-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-8.png"; sourceTree = "<group>"; };
-		301092F1197BCDC200AA2295 /* mosquito-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-2.png"; sourceTree = "<group>"; };
-		301092F2197BCDC200AA2295 /* mosquito-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-3.png"; sourceTree = "<group>"; };
-		301092F3197BCDC200AA2295 /* mosquito-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-4.png"; sourceTree = "<group>"; };
-		301092F4197BCDC200AA2295 /* mosquito-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-1.png"; sourceTree = "<group>"; };
-		301092F5197BCDC200AA2295 /* mosquito.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = mosquito.psd; sourceTree = "<group>"; };
-		301092F6197BCDC200AA2295 /* mosquito_samples.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mosquito_samples.gif; sourceTree = "<group>"; };
+		301092F1197BCDC200AA2295 /* mosquito-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-2@2x.png"; sourceTree = "<group>"; };
+		301092F2197BCDC200AA2295 /* mosquito-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-3@2x.png"; sourceTree = "<group>"; };
+		301092F3197BCDC200AA2295 /* mosquito-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-4@2x.png"; sourceTree = "<group>"; };
+		301092F4197BCDC200AA2295 /* mosquito-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mosquito-1@2x.png"; sourceTree = "<group>"; };
 		301092F8197BCDC200AA2295 /* light_on.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = light_on.mp3; sourceTree = "<group>"; };
 		301092F9197BCDC200AA2295 /* mosquito.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mosquito.mp3; sourceTree = "<group>"; };
-		301092FA197BCDC200AA2295 /* wings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wings.png; sourceTree = "<group>"; };
+		301092FA197BCDC200AA2295 /* wings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wings@2x.png"; sourceTree = "<group>"; };
 		301092FD197BCDC200AA2295 /* aliens.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aliens.mp3; sourceTree = "<group>"; };
 		301092FE197BCDC200AA2295 /* screech.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = screech.mp3; sourceTree = "<group>"; };
 		301092FF197BCDC200AA2295 /* ufo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ufo.mp3; sourceTree = "<group>"; };
-		30109300197BCDC200AA2295 /* ufo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ufo.png; sourceTree = "<group>"; };
+		30109300197BCDC200AA2295 /* ufo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ufo@2x.png"; sourceTree = "<group>"; };
 		30109302197BCDC200AA2295 /* IPad_button_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IPad_button_1@2x.png"; sourceTree = "<group>"; };
 		30109303197BCDC200AA2295 /* IPad_button_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IPad_button_2@2x.png"; sourceTree = "<group>"; };
 		30109304197BCDC200AA2295 /* IPad_button_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IPad_button_3@2x.png"; sourceTree = "<group>"; };
@@ -866,11 +862,9 @@
 			isa = PBXGroup;
 			children = (
 				301092EB197BCDC200AA2295 /* frames */,
-				301092F4197BCDC200AA2295 /* mosquito-1.png */,
-				301092F5197BCDC200AA2295 /* mosquito.psd */,
-				301092F6197BCDC200AA2295 /* mosquito_samples.gif */,
+				301092F4197BCDC200AA2295 /* mosquito-1@2x.png */,
 				301092F7197BCDC200AA2295 /* sound */,
-				301092FA197BCDC200AA2295 /* wings.png */,
+				301092FA197BCDC200AA2295 /* wings@2x.png */,
 			);
 			path = mosquito;
 			sourceTree = "<group>";
@@ -879,9 +873,9 @@
 			isa = PBXGroup;
 			children = (
 				301092EC197BCDC200AA2295 /* additional frames */,
-				301092F1197BCDC200AA2295 /* mosquito-2.png */,
-				301092F2197BCDC200AA2295 /* mosquito-3.png */,
-				301092F3197BCDC200AA2295 /* mosquito-4.png */,
+				301092F1197BCDC200AA2295 /* mosquito-2@2x.png */,
+				301092F2197BCDC200AA2295 /* mosquito-3@2x.png */,
+				301092F3197BCDC200AA2295 /* mosquito-4@2x.png */,
 			);
 			path = frames;
 			sourceTree = "<group>";
@@ -910,7 +904,7 @@
 			isa = PBXGroup;
 			children = (
 				301092FC197BCDC200AA2295 /* sound */,
-				30109300197BCDC200AA2295 /* ufo.png */,
+				30109300197BCDC200AA2295 /* ufo@2x.png */,
 			);
 			path = ufo;
 			sourceTree = "<group>";
@@ -1259,7 +1253,7 @@
 				30109361197BCDC300AA2295 /* meow.mp3 in Resources */,
 				3010934A197BCDC300AA2295 /* start-rus@2x.png in Resources */,
 				30BEC865197B1E600069093E /* Main_iPad.storyboard in Resources */,
-				301093A4197BCDC300AA2295 /* mosquito-3.png in Resources */,
+				301093A4197BCDC300AA2295 /* mosquito-3@2x.png in Resources */,
 				30109392197BCDC300AA2295 /* fire.mp3 in Resources */,
 				30109403197C27F100AA2295 /* icon_mystie_120x120.png in Resources */,
 				30109389197BCDC300AA2295 /* Fire-2@2x.png in Resources */,
@@ -1281,7 +1275,7 @@
 				3010937C197BCDC300AA2295 /* ouch.mp3 in Resources */,
 				3010940C197C27F100AA2295 /* icon_mystie_58x58.png in Resources */,
 				301093BF197BCDC300AA2295 /* Fox-blinks-frames-06@2x.png in Resources */,
-				301093A6197BCDC300AA2295 /* mosquito-1.png in Resources */,
+				301093A6197BCDC300AA2295 /* mosquito-1@2x.png in Resources */,
 				30109400197C27F100AA2295 /* icon_mystie_100x100.png in Resources */,
 				30109381197BCDC300AA2295 /* Fire-1@2x.png in Resources */,
 				30109364197BCDC300AA2295 /* cloud_sample.gif in Resources */,
@@ -1289,14 +1283,13 @@
 				3010935B197BCDC300AA2295 /* cat-3.png in Resources */,
 				301093DB197BCDC300AA2295 /* fox_tail@2x.png in Resources */,
 				30109346197BCDC300AA2295 /* Who-is-Mystie-eng@2x.png in Resources */,
-				301093AB197BCDC300AA2295 /* wings.png in Resources */,
-				301093A7197BCDC300AA2295 /* mosquito.psd in Resources */,
+				301093AB197BCDC300AA2295 /* wings@2x.png in Resources */,
 				30109407197C27F100AA2295 /* icon_mystie_29x29.png in Resources */,
 				301093DE197BCDC300AA2295 /* more-rus@2x.png in Resources */,
 				30109375197BCDC300AA2295 /* parachute_7@2x.png in Resources */,
 				30109352197BCDC300AA2295 /* wind.mp3 in Resources */,
 				301093CC197BCDC300AA2295 /* Fox-laughter-frame-13@2x.png in Resources */,
-				301093A5197BCDC300AA2295 /* mosquito-4.png in Resources */,
+				301093A5197BCDC300AA2295 /* mosquito-4@2x.png in Resources */,
 				3010936E197BCDC300AA2295 /* doll@2x.png in Resources */,
 				301093C4197BCDC300AA2295 /* Fox-laughter-frame-5@2x.png in Resources */,
 				3010938B197BCDC300AA2295 /* Fire-4@2x.png in Resources */,
@@ -1355,7 +1348,6 @@
 				30109360197BCDC300AA2295 /* helicopter2.mp3 in Resources */,
 				30109365197BCDC300AA2295 /* cloud-2.png in Resources */,
 				3010934C197BCDC300AA2295 /* site_rus@2x.png in Resources */,
-				301093A8197BCDC300AA2295 /* mosquito_samples.gif in Resources */,
 				30109355197BCDC300AA2295 /* cat.psd in Resources */,
 				3010936C197BCDC300AA2295 /* thunder.mp3 in Resources */,
 				30BEC862197B1E600069093E /* Main_iPhone.storyboard in Resources */,
@@ -1406,7 +1398,7 @@
 				30109404197C27F100AA2295 /* icon_mystie_144x144.png in Resources */,
 				301093CB197BCDC300AA2295 /* Fox-laughter-frame-12@2x.png in Resources */,
 				301093BB197BCDC300AA2295 /* Fox-blinks-frames-02@2x.png in Resources */,
-				301093AF197BCDC300AA2295 /* ufo.png in Resources */,
+				301093AF197BCDC300AA2295 /* ufo@2x.png in Resources */,
 				30BEC859197B1E600069093E /* InfoPlist.strings in Resources */,
 				3010940F197C27F100AA2295 /* icon_mystie_76x76.png in Resources */,
 				30109349197BCDC300AA2295 /* iPade_startup-screen_rus@2x~ipad.png in Resources */,
@@ -1420,7 +1412,7 @@
 				3010936B197BCDC300AA2295 /* cloud.mp3 in Resources */,
 				301093AD197BCDC300AA2295 /* screech.mp3 in Resources */,
 				30109357197BCDC300AA2295 /* cat-5.png in Resources */,
-				301093A3197BCDC300AA2295 /* mosquito-2.png in Resources */,
+				301093A3197BCDC300AA2295 /* mosquito-2@2x.png in Resources */,
 				301093E3197BCDC300AA2295 /* iPad_page2_sample.png in Resources */,
 				3010934F197BCDC300AA2295 /* bug_sample@2x.png in Resources */,
 				3010936A197BCDC300AA2295 /* skeleton.png in Resources */,

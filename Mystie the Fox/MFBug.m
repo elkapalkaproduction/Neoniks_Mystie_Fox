@@ -37,7 +37,7 @@
             for (int i=0; i<16; i++) {
                 SKSpriteNode * particle =[SKSpriteNode spriteNodeWithImageNamed:@"stamen.png"];
                 particle.anchorPoint =CGPointMake(0.3, 0);
-                CGPoint position =CGPointMake(-self.size.width/4 -2, self.size.height/2-18);
+                CGPoint position =CGPointMake(-self.size.width/4 -2, self.size.height/2-40);//18
                 particle.position = position;//[self convertPoint:position toNode:parent];
                 particle.zRotation = M_PI_4/2 *i;
                 particle.name =@"particle";

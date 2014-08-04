@@ -22,4 +22,12 @@
     return ratio;
 }
 
++(CGSize ) sizeWith2xSprite:(SKSpriteNode *)node{
+    CGSize size;
+    float ratio = [self spriteRatio:node];
+    size = CGSizeMake(node.size.width / 2.4, node.size.width / 2.4 *ratio);
+    
+    return size;
+}
+
 @end

@@ -12,10 +12,14 @@
 
 @property (strong,nonatomic) NSMutableArray * buttons;
 
+@property (nonatomic) CGRect maskFrame;
+
 -(void)scrollToLeftWithComplition:(void(^)())block;
 
 -(void)scrollToRightWithComplition:(void(^)())block;
 
 -(void)characterButtonPressed:(NSString *) name;
+
+-(void)checkingForAvailability;
 
 @end

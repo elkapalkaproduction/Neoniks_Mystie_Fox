@@ -28,4 +28,6 @@
 
 -(CGPoint)topRandomPosition:(SKNode *)parent;
 
+-(instancetype)initWithParent:(SKNode *) parent;
+
 @end

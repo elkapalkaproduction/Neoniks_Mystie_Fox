@@ -15,6 +15,10 @@
 #import "MFDoll.h"
 #import "MFDragon.h"
 #import "MFGhost.h"
+#import "MFUfo.h"
+#import "MFMosquito.h"
+#import "MFCat.h"
+#import "MFCloud.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -277,7 +281,8 @@
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
             SKAction * playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
-            if ([self.characterScroller containsPoint:location]) {
+            NSLog(@"%@ rect " ,NSStringFromCGRect(self.characterScroller.maskFrame)) ;
+            if (CGRectContainsPoint(self.characterScroller.maskFrame, location)) {
                 NSRange range = [node.name rangeOfString:@"button"];
                 if (range.location !=NSNotFound) {
                     [self.characterScroller characterButtonPressed:node.name];
@@ -296,6 +301,10 @@
                 character = (MFDragon *)node.parent;
             }else if ([node.name isEqualToString:@"ghostCharacter"]){
                 character = (MFGhost *)node;
+            }else if ([node.name isEqualToString:@"ufoCharacter"]){
+                character =(MFUfo *)node;
+            }else if ([node.name isEqualToString:@"mosquitoCharacter"]){
+                character = (MFMosquito *)node.parent;
             }
             [character taped];
             

@@ -13,6 +13,10 @@
 #import "MFDoll.h"
 #import "MFDragon.h"
 #import "MFGhost.h"
+#import "MFUfo.h"
+#import "MFMosquito.h"
+#import "MFCat.h"
+#import "MFCloud.h"
 
 @interface MFCharactersScroller ()
 
@@ -97,6 +101,7 @@
             }
             
         }
+        self.maskFrame = CGRectMake(self.position.x -mask.size.width/2, self.position.y - mask.size.height/2, mask.size.width, mask.size.height );
         self.maskNode=mask;
         self.zPosition =1;
     }
@@ -130,6 +135,7 @@
     }
 }
 
+
 #pragma mark - Characters
 
 -(void)characterButtonPressed:(NSString *) name{
@@ -148,6 +154,10 @@
 //        [dragon runAction:dragon.move];
     }else if ([name isEqualToString:@"button_3"]){
         character = [[MFGhost alloc] initWithParent:self.parent];
+    }else if ([name isEqualToString:@"button_4"]){
+        character = [[MFUfo alloc] initWithParent:self.parent];
+    }else if ([name isEqualToString:@"button_5"]){
+        character = [[MFMosquito alloc] initWithParent:self.parent];
     }
     if (name!=nil&& character!=nil) {
         

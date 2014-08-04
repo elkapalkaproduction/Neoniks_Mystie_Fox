@@ -108,12 +108,15 @@
 -(void)loadSounds{
     NSURL *urlFalling = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"doll_falling" ofType:@"mp3"]];
     self.fallingSound = [[AVAudioPlayer alloc] initWithContentsOfURL:urlFalling error:nil];
+    [self.fallingSound prepareToPlay];
     
     NSURL *urlLaught = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"doll_laughs_3" ofType:@"mp3"]];
     self.laughtSound =[[AVAudioPlayer alloc] initWithContentsOfURL:urlLaught error:nil];
+    [self.laughtSound prepareToPlay];
     
     NSURL *urlOuch = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ouch" ofType:@"mp3"]];
     self.ouchSound = [[AVAudioPlayer alloc] initWithContentsOfURL:urlOuch error:nil];
+    [self.ouchSound prepareToPlay];
 }
 
 @end

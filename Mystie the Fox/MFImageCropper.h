@@ -15,4 +15,6 @@
 
 +(float) viewRatio:(UIView *)view;
 
++(CGSize) sizeWith2xSprite:(SKSpriteNode *)node;
+
 @end
