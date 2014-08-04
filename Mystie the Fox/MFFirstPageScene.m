@@ -305,6 +305,8 @@
                 character =(MFUfo *)node;
             }else if ([node.name isEqualToString:@"mosquitoCharacter"]){
                 character = (MFMosquito *)node.parent;
+            }else if ([node.name isEqualToString:@"catCharacter"]){
+                character = (MFCat *)node;
             }
             [character taped];
             

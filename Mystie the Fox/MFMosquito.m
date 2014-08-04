@@ -31,8 +31,6 @@
             self.wings.size = [MFImageCropper sizeWith2xSprite:self.wings];
             
         }else{
-            float ratio = [MFImageCropper spriteRatio:self.mosquito];
-            float wingsRatio = [MFImageCropper spriteRatio:self.wings];
             self.size =CGSizeMake(self.mosquito.size.width, self.mosquito.size.height);
         }
         self.mosquito.zPosition=0.1;

@@ -158,6 +158,8 @@
         character = [[MFUfo alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_5"]){
         character = [[MFMosquito alloc] initWithParent:self.parent];
+    }else if ([name isEqualToString:@"button_6"]){
+        character = [[MFCat alloc] initWithParent:self.parent];
     }
     if (name!=nil&& character!=nil) {
         

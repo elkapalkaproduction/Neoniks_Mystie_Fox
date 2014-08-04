@@ -7,7 +7,95 @@
 //
 
 #import "MFCat.h"
+#import "MFImageCropper.h"
+
+@interface MFCat ()
+
+@property (nonatomic) BOOL isTapped;
+
+@property (nonatomic) float speed;
+
+@end
 
 @implementation MFCat
+
+-(instancetype)initWithParent:(SKNode *)parent{
+    if (self=[super initWithName:@"cat-1.png" parent:parent]) {
+        self.name=@"catCharacter";
+        SKSpriteNode * bigPropeller = [SKSpriteNode spriteNodeWithImageNamed:@"propeller-big.png"];
+        SKSpriteNode * smallPropeller = [SKSpriteNode spriteNodeWithImageNamed:@"propeller-small.png"];
+        float ratio = [MFImageCropper spriteRatio:self];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
+            self.size = CGSizeMake( 130, 130 *ratio );
+            bigPropeller.size = [MFImageCropper sizeWith2xSprite:bigPropeller];
+            smallPropeller.size = [MFImageCropper sizeWith2xSprite:smallPropeller];
+            bigPropeller.position = CGPointMake(0 -4, self.size.height/2 -5);
+            smallPropeller.position = CGPointMake(self.size.width/2 -17, 8);
+        }else{
+            self.size =CGSizeMake(200, 200*ratio);
+            bigPropeller.position = CGPointMake(0 -4 *2.4 +5, self.size.height/2 -5*2.4 +2);
+            smallPropeller.position = CGPointMake(self.size.width/2-27, 14);
+        }
+        
+        SKAction *propellerMoving = [SKAction rotateByAngle:M_PI_4/8 duration:0.02];
+        SKAction *propellerReverseMoving = [propellerMoving reversedAction];
+        SKAction *sequence = [SKAction sequence:@[propellerMoving, propellerReverseMoving]];
+        SKAction *foreverSequence = [SKAction repeatActionForever:sequence];
+        [bigPropeller runAction:foreverSequence];
+        [smallPropeller runAction: foreverSequence];
+        
+        [self addChild:smallPropeller];
+        [self addChild:bigPropeller];
+        self.position = [self rightRandomPosition:parent];
+        
+    }
+    return self;
+}
+
+-(SKAction *)createMoveAction :(SKNode *)parent{
+    UIBezierPath *bezierPath = [self createSinCurve:parent];
+    
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
+    move =[move reversedAction];
+    //    SKAction *windSound = [SKAction playSoundFileNamed:@"ghost.mp3" waitForCompletion:NO];
+    
+    SKAction *ufoSound = [SKAction runBlock:^{
+        
+    }];
+    move = [SKAction group:@[move, ufoSound]];
+    //    SKAction * remove = [SKAction removeFromParent];
+    return [SKAction sequence:@[move,self.removeNode]];
+}
+
+-(void)taped{
+    SKAction *screechSound =[SKAction runBlock:^{
+        
+    }];
+    SKAction *aliensSound =[SKAction runBlock:^{
+        
+    }];
+    NSMutableArray * textures=[[NSMutableArray alloc] init];
+    for (int i = 0; i<4; i++) {
+        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cat-%d.png",i+1]];
+        [textures addObject:texture];
+    }
+    SKAction * catAnimation = [SKAction animateWithTextures:textures timePerFrame:0.08];
+    SKAction * wait = [SKAction waitForDuration:0.24];
+    SKAction *reverseCatAnimation = [catAnimation reversedAction];
+    SKAction *sequence = [SKAction sequence:@[catAnimation,wait,reverseCatAnimation]];
+//    if (!self.isTapped) {
+//        self.isTapped =YES;
+        [self runAction:sequence];
+    self.move.speed= self.move.speed *10;
+        
+//    }else{
+////        SKAction *lightOffAnimation = [lightOnAnimation reversedAction];
+//        self.isTapped =NO;
+//        
+//        
+//    }
+    
+}
+
 
 @end
