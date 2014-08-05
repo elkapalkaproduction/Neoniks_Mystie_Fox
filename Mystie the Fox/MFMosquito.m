@@ -17,11 +17,15 @@
 @property (strong,nonatomic) SKSpriteNode * mosquito;
 @property (strong , nonatomic) SKSpriteNode *wings;
 
+@property (strong, nonatomic) SKAction * mosquitoFlying;
+@property (strong,nonatomic) SKAction * mosquitoLightOn;
+
 @end
 
 @implementation MFMosquito
 
 -(instancetype)initWithParent:(SKNode *)parent{
+    [self loadSounds];
     if (self=[super initWithColor:[UIColor clearColor] size:CGSizeZero]) {
         self.mosquito = [SKSpriteNode spriteNodeWithImageNamed:@"mosquito-1.png"];
         self.wings = [SKSpriteNode spriteNodeWithImageNamed:@"wings.png"];
@@ -61,13 +65,11 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
-    //    SKAction *windSound = [SKAction playSoundFileNamed:@"ghost.mp3" waitForCompletion:NO];
     
     SKAction *ufoSound = [SKAction runBlock:^{
         
     }];
-    move = [SKAction group:@[move, ufoSound]];
-    //    SKAction * remove = [SKAction removeFromParent];
+    move = [SKAction group:@[move, self.mosquitoFlying]];
     return [SKAction sequence:@[move,self.removeNode]];
 }
 
@@ -86,14 +88,22 @@
     SKAction * lightOnAnimation = [SKAction animateWithTextures:textures timePerFrame:0.08];
     if (!self.isTapped) {
         self.isTapped =YES;
-        [self.mosquito runAction:lightOnAnimation];
+        SKAction * group = [SKAction group:@[lightOnAnimation, self.mosquitoLightOn]];
+        [self.mosquito runAction:group];
     }else{
         SKAction *lightOffAnimation = [lightOnAnimation reversedAction];
         self.isTapped =NO;
-        [self.mosquito runAction:lightOffAnimation];
+        SKAction * group = [SKAction group:@[lightOffAnimation, self.mosquitoLightOn]];
+        [self.mosquito runAction:group];
         
     }
     
 }
+
+-(void)loadSounds{
+    self.mosquitoFlying = [SKAction playSoundFileNamed:@"mosquito.mp3" waitForCompletion:NO];
+    self.mosquitoLightOn = [SKAction playSoundFileNamed:@"light_on.mp3" waitForCompletion:NO];
+}
+
 
 @end

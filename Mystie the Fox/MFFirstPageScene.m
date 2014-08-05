@@ -46,6 +46,9 @@
 //Buttons scrolling
 @property (nonatomic) BOOL isTapEnd;
 
+//sound
+@property (strong,nonatomic) SKAction * playClickSound;
+
 
 
 @end
@@ -201,7 +204,7 @@
 //        }
         
         
-        
+        self.playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
     }
     
     return self;
@@ -282,8 +285,8 @@
         }*/
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
-            SKAction * playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
-            NSLog(@"%@ rect " ,NSStringFromCGRect(self.characterScroller.maskFrame)) ;
+//            SKAction * playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
+            
             if (CGRectContainsPoint(self.characterScroller.maskFrame, location)) {
                 NSRange range = [node.name rangeOfString:@"button"];
                 if (range.location !=NSNotFound) {
@@ -316,7 +319,7 @@
             
             
             
-            [self runAction:playClickSound];
+//            [self runAction:playClickSound];
         }
         
     }
@@ -349,6 +352,7 @@
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.isTapEnd=NO;
+        [self runAction:self.playClickSound];
         [self leftButtonPressed];
     }else if (gesture.state ==UIGestureRecognizerStateEnded){
         self.isTapEnd=YES;
@@ -359,6 +363,7 @@
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.isTapEnd=NO;
+        [self runAction:self.playClickSound];
         [self rightButtonPressed];
     }else if (gesture.state ==UIGestureRecognizerStateEnded){
         self.isTapEnd=YES;

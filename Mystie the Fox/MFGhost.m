@@ -15,11 +15,16 @@
 
 @property (nonatomic) BOOL isTapped;
 
+@property (strong,nonatomic) SKAction *ghostFlying;
+@property (strong,nonatomic) SKAction *ghostSobbing;
+@property (strong, nonatomic) SKAction * ghostHole;
+
 @end
 
 @implementation MFGhost
 
 -(instancetype)initWithParent:(SKNode *)parent{
+    [self loadSounds];
     if (self=[super initWithName:@"Ghost-1.png" parent:parent]) {
         self.name=@"ghostCharacter";
         float ratio = [MFImageCropper spriteRatio:self];
@@ -29,6 +34,7 @@
             self.size =CGSizeMake(200, 200*ratio);
         }
         self.position = [self rightRandomPosition:parent];
+        
     }
     return self;
 }
@@ -38,9 +44,7 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
-    SKAction *windSound = [SKAction playSoundFileNamed:@"ghost.mp3" waitForCompletion:NO];
-    move = [SKAction group:@[move, windSound]];
-    //    SKAction * remove = [SKAction removeFromParent];
+    move = [SKAction group:@[move, self.ghostFlying]];
     return [SKAction sequence:@[move,self.removeNode]];
 }
 
@@ -52,27 +56,24 @@
     }
     SKAction *holeAction= [SKAction animateWithTextures:textures timePerFrame:0.1];
     if (!self.isTapped) {
-//        [self.fallingSound stop];
-//        [self removeAllActions];
-        SKAction * sobbingSound = [SKAction runBlock:^{
-//            [self.laughtSound play];
-            self.isTapped =YES;
-        }];
-//        self.moveDown.speed = self.moveDown.speed/2;
-        holeAction = [SKAction group:@[holeAction, sobbingSound]];
+        self.isTapped =YES;
+        holeAction = [SKAction group:@[holeAction,self.ghostHole]];
+        holeAction = [SKAction group:@[holeAction, self.ghostSobbing]];
         [self runAction:holeAction];
     }else{
         holeAction =[holeAction reversedAction];
-        SKAction * holeSound = [SKAction runBlock:^{
-            //            [self.laughtSound play];
-            self.isTapped =NO;
-        }];
-        holeAction =[SKAction group:@[holeAction,holeSound]];
-        [self runAction:holeAction];
-//        [self.laughtSound stop];
-//        [self.ouchSound play];
+        self.isTapped =NO;
+        holeAction =[SKAction group:@[holeAction,self.ghostHole]];
+        SKAction *sequence = [SKAction sequence:@[holeAction , self.ghostFlying]];
+        [self runAction:sequence];
     }
     
+}
+
+-(void)loadSounds{
+    self.ghostFlying = [SKAction playSoundFileNamed:@"ghost.mp3" waitForCompletion:NO];
+    self.ghostSobbing = [SKAction playSoundFileNamed:@"sobbing.mp3" waitForCompletion:NO];
+    self.ghostHole = [SKAction playSoundFileNamed:@"hole.mp3" waitForCompletion:NO];
 }
 
 @end

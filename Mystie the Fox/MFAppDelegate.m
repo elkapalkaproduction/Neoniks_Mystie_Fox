@@ -7,12 +7,13 @@
 //
 
 #import "MFAppDelegate.h"
+#import "MFSounds.h"
 
 @implementation MFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [MFSounds sharedSound];
     [self.window makeKeyAndVisible];
     
     self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];

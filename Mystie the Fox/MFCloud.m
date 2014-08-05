@@ -16,18 +16,21 @@
 
 @property (nonatomic) BOOL isTapped;
 
+@property (strong,nonatomic) SKAction *cloudFlying;
+@property (strong,nonatomic) SKAction *cloudThunder;
 
 @end
 
 @implementation MFCloud
 
 -(instancetype)initWithParent:(SKNode *)parent{
+    [self loadSounds];
     if (self=[super initWithName:@"cloud-1.png" parent:parent]) {
         self.name=@"cloudCharacter";
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
             self.size = [MFImageCropper sizeWith2xSprite:self];
         }else{
-//            self.size =CGSizeMake(200, 200*ratio);
+
         }
 
         self.position = [self rightRandomPosition:parent];
@@ -41,13 +44,8 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
-    //    SKAction *windSound = [SKAction playSoundFileNamed:@"ghost.mp3" waitForCompletion:NO];
     
-    SKAction *ufoSound = [SKAction runBlock:^{
-        
-    }];
-    move = [SKAction group:@[move, ufoSound]];
-    //    SKAction * remove = [SKAction removeFromParent];
+    move = [SKAction group:@[move, self.cloudFlying]];
     return [SKAction sequence:@[move,self.removeNode]];
 }
 
@@ -97,9 +95,15 @@
         
     }];
     SKAction *wait = [SKAction waitForDuration:0.3];
+    whiteScreenOn = [SKAction group:@[whiteScreenOn, self.cloudThunder]];
     animate = [SKAction sequence:@[animate,whiteScreenOn,wait,whiteScreenOff]];
     [self runAction:animate ];
     
+}
+
+-(void)loadSounds{
+    self.cloudFlying = [SKAction playSoundFileNamed:@"cloud.mp3" waitForCompletion:NO];
+    self.cloudThunder = [SKAction playSoundFileNamed:@"thunder.mp3" waitForCompletion:NO];
 }
 
 @end

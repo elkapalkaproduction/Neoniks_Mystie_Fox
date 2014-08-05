@@ -9,6 +9,7 @@
 #import "MFDoll.h"
 #import "MFImageCropper.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MFSounds.h"
 
 @interface MFDoll ()
 @property(strong,nonatomic) SKSpriteNode *doll;
@@ -16,9 +17,9 @@
 
 @property (strong,nonatomic) SKAction *moveDown;
 
-@property (strong,nonatomic) AVAudioPlayer *fallingSound;
-@property (strong,nonatomic) AVAudioPlayer *laughtSound;
-@property (strong,nonatomic) AVAudioPlayer *ouchSound;
+@property (strong,nonatomic) AVAudioPlayer *dollFalling;
+@property (strong,nonatomic) AVAudioPlayer *dollLaught;
+@property (strong,nonatomic) AVAudioPlayer *dollOuch;
 
 @end
 
@@ -52,7 +53,7 @@
 //    self.moveDown = [SKAction moveByX:0 y:-parent.frame.size.height -2*self.size.height duration:3];
     self.moveDown = [SKAction moveTo:CGPointMake(self.position.x, -2*self.size.height) duration:3];
     SKAction * fallingSound = [SKAction runBlock:^{
-        [self.fallingSound play];
+        [self.dollFalling play];
     }];
     SKAction * moveDown = [SKAction group:@[self.moveDown,fallingSound]];
     SKAction *hitTheGroundSound = [SKAction playSoundFileNamed:@"hit_the_ground.mp3" waitForCompletion:NO];
@@ -61,7 +62,7 @@
 
 -(void)taped{
     if (!self.isParachuteOpened) {
-        [self.fallingSound stop];
+        [self.dollFalling stop];
         [self removeAllActions];
         NSMutableArray * textures=[[NSMutableArray alloc] init];
         for (int i = 0; i<8; i++) {
@@ -81,7 +82,7 @@
         [self addChild:parachute];
         SKAction *parachuteOpening= [SKAction animateWithTextures:textures timePerFrame:0.05];
         SKAction * laughtSound = [SKAction runBlock:^{
-            [self.laughtSound play];
+            [self.dollLaught play];
             self.parachuteOpened =YES;
         }];
         
@@ -91,8 +92,8 @@
         SKAction *moveDown = [SKAction sequence:@[self.moveDown , self.removeNode]];
         [self runAction:moveDown];
     }else{
-        [self.laughtSound stop];
-        [self.ouchSound play];
+        [self.dollLaught stop];
+        [self.dollOuch play];
     }
     
 }
@@ -108,16 +109,16 @@
 
 -(void)loadSounds{
     NSURL *urlFalling = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"doll_falling" ofType:@"mp3"]];
-    self.fallingSound = [[AVAudioPlayer alloc] initWithContentsOfURL:urlFalling error:nil];
-    [self.fallingSound prepareToPlay];
+    self.dollFalling = [[AVAudioPlayer alloc] initWithContentsOfURL:urlFalling error:nil];
+    [self.dollFalling prepareToPlay];
     
     NSURL *urlLaught = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"doll_laughs_3" ofType:@"mp3"]];
-    self.laughtSound =[[AVAudioPlayer alloc] initWithContentsOfURL:urlLaught error:nil];
-    [self.laughtSound prepareToPlay];
+    self.dollLaught =[[AVAudioPlayer alloc] initWithContentsOfURL:urlLaught error:nil];
+    [self.dollLaught prepareToPlay];
     
     NSURL *urlOuch = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ouch" ofType:@"mp3"]];
-    self.ouchSound = [[AVAudioPlayer alloc] initWithContentsOfURL:urlOuch error:nil];
-    [self.ouchSound prepareToPlay];
+    self.dollOuch = [[AVAudioPlayer alloc] initWithContentsOfURL:urlOuch error:nil];
+    [self.dollOuch prepareToPlay];
 }
 
 @end

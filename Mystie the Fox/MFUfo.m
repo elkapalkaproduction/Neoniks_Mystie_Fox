@@ -13,11 +13,16 @@
 
 @property (nonatomic) BOOL isTapped;
 
+@property (strong,nonatomic) SKAction *ufoFlying;
+@property (strong,nonatomic) SKAction *ufoAliens;
+@property (strong, nonatomic) SKAction * ufoScreech;
+
 @end
 
 @implementation MFUfo
 
 -(instancetype)initWithParent:(SKNode *)parent{
+    [self loadSounds];
     if (self=[super initWithName:@"ufo.png" parent:parent]) {
         self.name=@"ufoCharacter";
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
@@ -33,34 +38,33 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
-//    SKAction *windSound = [SKAction playSoundFileNamed:@"ghost.mp3" waitForCompletion:NO];
     
-    SKAction *ufoSound = [SKAction runBlock:^{
-        
-    }];
-    move = [SKAction group:@[move, ufoSound]];
-    //    SKAction * remove = [SKAction removeFromParent];
+    move = [SKAction group:@[move, self.ufoFlying]];
     return [SKAction sequence:@[move,self.removeNode]];
 }
 
 -(void)taped{
-    SKAction *screechSound =[SKAction runBlock:^{
-        
-    }];
-    SKAction *aliensSound =[SKAction runBlock:^{
-        
-    }];
     if (!self.isTapped) {
         SKAction *zRotation = [SKAction rotateByAngle:-M_PI_4 duration:1];
         self.isTapped =YES;
-        [self runAction:zRotation];
+        SKAction *group = [SKAction group:@[zRotation, self.ufoScreech]];
+        SKAction *sequence = [SKAction sequence:@[group , self.ufoAliens]];
+        [self runAction:sequence];
     }else{
         SKAction *zRotation = [SKAction rotateByAngle:M_PI_4 duration:1];
         self.isTapped =NO;
-        [self runAction:zRotation];
+        SKAction *group = [SKAction group:@[zRotation, self.ufoScreech]];
+        SKAction * sequence = [SKAction sequence:@[group, self.ufoFlying]];
+        [self runAction:sequence];
         
     }
     
+}
+
+-(void)loadSounds{
+    self.ufoFlying = [SKAction playSoundFileNamed:@"ufo.mp3" waitForCompletion:NO];
+    self.ufoAliens = [SKAction playSoundFileNamed:@"aliens.mp3" waitForCompletion:NO];
+    self.ufoScreech = [SKAction playSoundFileNamed:@"screech.mp3" waitForCompletion:NO];
 }
 
 @end

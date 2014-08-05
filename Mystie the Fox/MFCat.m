@@ -15,11 +15,17 @@
 
 @property (nonatomic) float speed;
 
+@property (strong,nonatomic) SKAction *catHelicopterOne;
+@property (strong,nonatomic) SKAction *catHelicopterTwo;
+@property (strong, nonatomic) SKAction * catMeow;
+
+
 @end
 
 @implementation MFCat
 
 -(instancetype)initWithParent:(SKNode *)parent{
+    [self loadSounds];
     if (self=[super initWithName:@"cat-1.png" parent:parent]) {
         self.name=@"catCharacter";
         SKSpriteNode * bigPropeller = [SKSpriteNode spriteNodeWithImageNamed:@"propeller-big.png"];
@@ -57,23 +63,12 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
-    //    SKAction *windSound = [SKAction playSoundFileNamed:@"ghost.mp3" waitForCompletion:NO];
     
-    SKAction *ufoSound = [SKAction runBlock:^{
-        
-    }];
-    move = [SKAction group:@[move, ufoSound]];
-    //    SKAction * remove = [SKAction removeFromParent];
+    move = [SKAction group:@[move, self.catHelicopterOne]];
     return [SKAction sequence:@[move,self.removeNode]];
 }
 
 -(void)taped{
-    SKAction *screechSound =[SKAction runBlock:^{
-        
-    }];
-    SKAction *aliensSound =[SKAction runBlock:^{
-        
-    }];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
     for (int i = 0; i<4; i++) {
         SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cat-%d.png",i+1]];
@@ -84,11 +79,20 @@
     SKAction * wait = [SKAction waitForDuration:timePerFrame *3];
     SKAction *reverseCatAnimation = [catAnimation reversedAction];
     SKAction *sequence = [SKAction sequence:@[catAnimation,wait,reverseCatAnimation]];
-        [self runAction:sequence];
+    SKAction *soundSequence = [SKAction sequence:@[self.catMeow, self.catHelicopterTwo]];
+    [self runAction:sequence];
+    [self runAction:soundSequence];
     self.speed = self.speed *2.0f;
     
     
 }
+
+-(void)loadSounds{
+    self.catHelicopterOne = [SKAction playSoundFileNamed:@"helicopter1.mp3" waitForCompletion:NO];
+    self.catHelicopterTwo = [SKAction playSoundFileNamed:@"helicopter1.mp3" waitForCompletion:NO];
+    self.catMeow = [SKAction playSoundFileNamed:@"meow.mp3" waitForCompletion:NO];
+}
+
 
 
 @end
