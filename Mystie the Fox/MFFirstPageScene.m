@@ -46,6 +46,8 @@
 //Buttons scrolling
 @property (nonatomic) BOOL isTapEnd;
 
+
+
 @end
 
 @implementation MFFirstPageScene
@@ -225,23 +227,23 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         
         UIImage * leftArrowImage = [UIImage imageNamed:@"arrow-left.png"];
-        UIImageView * leftArrow =[[UIImageView alloc] initWithImage:leftArrowImage];
-        float arrowRatio = [MFImageCropper viewRatio:leftArrow];
-        leftArrow.frame = CGRectMake(0, self.size.height-80-25, 50/arrowRatio, 50);
-        leftArrow.userInteractionEnabled=YES;
-        [self.view addSubview:leftArrow];
+        self.leftArrow =[[UIImageView alloc] initWithImage:leftArrowImage];
+        float arrowRatio = [MFImageCropper viewRatio:self.leftArrow];
+        self.leftArrow.frame = CGRectMake(0, self.size.height-80-25, 50/arrowRatio, 50);
+        self.leftArrow.userInteractionEnabled=YES;
+        [self.view addSubview:self.leftArrow];
         UILongPressGestureRecognizer *longPressLeft =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressLeft:)];
         longPressLeft.minimumPressDuration=0;
-        [leftArrow addGestureRecognizer:longPressLeft];
+        [self.leftArrow addGestureRecognizer:longPressLeft];
         
         UIImage * rightArrowImage = [UIImage imageNamed:@"arrow-right.png"];
-        UIImageView * rightArrow =[[UIImageView alloc] initWithImage:rightArrowImage];
-        rightArrow.frame = CGRectMake(self.frame.size.width - 50/arrowRatio, self.size.height-80-25, 50/arrowRatio, 50);
-        rightArrow.userInteractionEnabled=YES;
-        [self.view addSubview:rightArrow];
+        self.rightArrow =[[UIImageView alloc] initWithImage:rightArrowImage];
+        self.rightArrow.frame = CGRectMake(self.frame.size.width - 50/arrowRatio, self.size.height-80-25, 50/arrowRatio, 50);
+        self.rightArrow.userInteractionEnabled=YES;
+        [self.view addSubview:self.rightArrow];
         UILongPressGestureRecognizer *longPressRight =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRight:)];
         longPressRight.minimumPressDuration=0;
-        [rightArrow addGestureRecognizer:longPressRight];
+        [self.rightArrow addGestureRecognizer:longPressRight];
         
     }
     
@@ -307,6 +309,8 @@
                 character = (MFMosquito *)node.parent;
             }else if ([node.name isEqualToString:@"catCharacter"]){
                 character = (MFCat *)node;
+            }else if ([node.name isEqualToString:@"cloudCharacter"]){
+                character =(MFCloud *)node;
             }
             [character taped];
             

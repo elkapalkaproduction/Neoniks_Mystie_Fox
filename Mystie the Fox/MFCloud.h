@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "MFCharacter.h"
 
-@interface MFCloud : SKSpriteNode
+@interface MFCloud : MFCharacter
 
 @end

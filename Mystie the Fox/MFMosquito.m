@@ -9,6 +9,8 @@
 #import "MFMosquito.h"
 #import "MFImageCropper.h"
 
+#define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
+
 @interface MFMosquito ()
 
 @property (nonatomic) BOOL isTapped;
@@ -29,7 +31,9 @@
             self.size = [MFImageCropper sizeWith2xSprite:self.mosquito];
             self.size = CGSizeMake(self.size.width, 125.5);
             self.wings.size = [MFImageCropper sizeWith2xSprite:self.wings];
-            
+            if ([[UIScreen mainScreen] bounds].size.height != 568.0) {
+                self.size = CGSizeMake(self.size.width *0.8, self.size.height *0.8);
+            }
         }else{
             self.size =CGSizeMake(self.mosquito.size.width, self.mosquito.size.height);
         }

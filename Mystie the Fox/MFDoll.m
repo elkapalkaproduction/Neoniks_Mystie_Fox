@@ -84,6 +84,7 @@
             [self.laughtSound play];
             self.parachuteOpened =YES;
         }];
+        
         self.moveDown.speed = self.moveDown.speed/2;
         SKAction *openningGroup = [SKAction group:@[parachuteOpening, laughtSound]];
         [parachute runAction:openningGroup];

@@ -10,4 +10,7 @@
 
 @interface MFFirstPageScene : SKScene
 
+@property (strong,nonatomic) UIImageView * leftArrow;
+@property (strong,nonatomic) UIImageView * rightArrow;
+
 @end

@@ -142,16 +142,10 @@
     MFCharacter *character;
     if ([name isEqualToString:@"button_0"]) {
         character = [[MFBug alloc] initWithParent:self.parent];
-//        [self.parent addChild:bug];
-//        [bug runAction:bug.move];
     }else if ([name isEqualToString:@"button_1"]){
         character= [[MFDoll alloc] initWithParent:self.parent];
-//        [self.parent addChild:doll];
-//        [doll runAction:doll.move];
     }else if ([name isEqualToString:@"button_2"]){
         character = [[MFDragon alloc] initWithParent:self.parent];
-//        [self.parent addChild:dragon];
-//        [dragon runAction:dragon.move];
     }else if ([name isEqualToString:@"button_3"]){
         character = [[MFGhost alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_4"]){
@@ -160,6 +154,8 @@
         character = [[MFMosquito alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_6"]){
         character = [[MFCat alloc] initWithParent:self.parent];
+    }else if ([name isEqualToString:@"button_7"]){
+        character = [[MFCloud alloc] initWithParent:self.parent];
     }
     if (name!=nil&& character!=nil) {
         

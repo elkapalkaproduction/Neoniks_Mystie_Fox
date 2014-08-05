@@ -79,21 +79,14 @@
         SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cat-%d.png",i+1]];
         [textures addObject:texture];
     }
-    SKAction * catAnimation = [SKAction animateWithTextures:textures timePerFrame:0.08];
-    SKAction * wait = [SKAction waitForDuration:0.24];
+    float timePerFrame = 0.15;
+    SKAction * catAnimation = [SKAction animateWithTextures:textures timePerFrame:timePerFrame];
+    SKAction * wait = [SKAction waitForDuration:timePerFrame *3];
     SKAction *reverseCatAnimation = [catAnimation reversedAction];
     SKAction *sequence = [SKAction sequence:@[catAnimation,wait,reverseCatAnimation]];
-//    if (!self.isTapped) {
-//        self.isTapped =YES;
         [self runAction:sequence];
-    self.move.speed= self.move.speed *10;
-        
-//    }else{
-////        SKAction *lightOffAnimation = [lightOnAnimation reversedAction];
-//        self.isTapped =NO;
-//        
-//        
-//    }
+    self.speed = self.speed *2.0f;
+    
     
 }
 

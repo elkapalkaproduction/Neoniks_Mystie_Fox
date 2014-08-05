@@ -9,6 +9,8 @@
 #import "MFGhost.h"
 #import "MFImageCropper.h"
 
+#define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
+
 @interface MFGhost ()
 
 @property (nonatomic) BOOL isTapped;
@@ -22,7 +24,7 @@
         self.name=@"ghostCharacter";
         float ratio = [MFImageCropper spriteRatio:self];
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
-            self.size = CGSizeMake( 130, 130 *ratio );
+            self.size = CGSizeMake( ASSET_BY_SCREEN_HEIGHT(130, 90), ASSET_BY_SCREEN_HEIGHT(130, 90) *ratio );
         }else{
             self.size =CGSizeMake(200, 200*ratio);
         }
