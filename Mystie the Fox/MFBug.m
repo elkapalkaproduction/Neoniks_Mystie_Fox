@@ -8,12 +8,22 @@
 
 #import "MFBug.h"
 #import "MFImageCropper.h"
+#import "MFSounds.h"
+
+@interface MFBug ()
+
+@property (strong,nonatomic) AVAudioPlayer *bugWind;
+@property (strong,nonatomic) AVAudioPlayer *bugScream;
+@property (strong, nonatomic) AVAudioPlayer * bugPuff;
+
+@end
 
 @implementation MFBug
 
 -(instancetype) initWithParent:(SKNode*)parent{
+    [self loadSounds];
     self.particles =[[NSMutableArray alloc] init];
-    if (self=[super initWithName:@"bug.png" parent:parent]) {
+    if (self=[super initWithName:@"bug.png"]) {
         self.name=@"bugCharacter";
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
@@ -46,7 +56,7 @@
             }
         }
         self.position =[self rightRandomPosition:parent];
-        
+        self.move=[self createMoveAction:parent];
     }
     return self;
 }
@@ -59,16 +69,24 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:5];
     move =[move reversedAction];
-    SKAction *windSound = [SKAction playSoundFileNamed:@"wind.mp3" waitForCompletion:NO];
+    SKAction *windSound = [SKAction runBlock:^{
+        [self.bugWind play];
+    }];
+    SKAction * removeSounds = [SKAction runBlock:^{
+        [self.bugWind stop];
+        [self.bugScream stop];
+        [self.bugPuff stop];
+        self.bugWind=nil;
+        self.bugScream=nil;
+        self.bugPuff=nil;
+    }];
     move = [SKAction group:@[move, windSound]];
-//    SKAction * remove = [SKAction removeFromParent];
-    return [SKAction sequence:@[move,self.removeNode]];
+    return [SKAction sequence:@[move,removeSounds, self.removeNode]];
 }
 
 -(void)taped{
-//    [self removeAllActions];
-//    self.name =nil;
     [super taped];
+    [self.bugWind stop];
     SKAction * remove = [SKAction removeFromParent];
     for (SKSpriteNode *particle in self.particles) {
         [particle removeAllActions];
@@ -76,22 +94,9 @@
         float tang = tan(rad);
         float positionY;
         float positionX;
-//        NSLog ( @" %f rad" , rad);
-//        if ( (rad < M_PI_4 && rad >0)|| (rad < 2 *M_PI && rad>7*M_PI_4 )) {
-            positionY = self.parent.frame.size.height - particle.position.y + particle.size.height/2;
-            positionX = tang * positionY;
-//        }else if(rad<3*M_PI_4 && rad>M_PI_4 ){
-//            positionX = self.parent.frame.size.width - particle.position.x +particle.size.width/2;
-//            positionY = tang * positionX;
-//        }else if(rad<5*M_PI_4 && rad >3*M_PI_4){
-//            positionY = -particle.position.y - particle.size.height/2;
-//            positionX  = tang * fabsf(positionY);
-//        }else if(rad < 7 *M_PI_4 && rad > 5*M_PI_4){
-//            positionX = - particle.position.x -particle.size.width/2;
-//            positionY = tang * fabs(positionX);
-//        }
-        
-                 
+        positionY = self.parent.frame.size.height - particle.position.y + particle.size.height/2;
+        positionX = tang * positionY;
+
         particle.name =nil;
         
         SKAction * moveTo = [SKAction moveTo:CGPointMake(positionX, positionY+self.parent.frame.size.height *2.5) duration:3];
@@ -100,14 +105,36 @@
         SKAction * sequence = [SKAction sequence:@[moveTo , remove]];
         [particle runAction:sequence];
     }
-    SKAction * scream = [SKAction playSoundFileNamed:@"scream.mp3" waitForCompletion:NO];
-    SKAction *puff =[SKAction playSoundFileNamed:@"puff.mp3" waitForCompletion:NO];
+    SKAction * scream = [SKAction runBlock:^{
+        [self.bugScream play];
+    }];
+    SKAction *puff =[SKAction runBlock:^{
+        [self.bugPuff play];
+    }];
     
-    SKAction * moveDown = [SKAction moveByX:-self.size.height/2 y:-self.position.y duration:1];
+    SKAction * moveDown = [SKAction moveByX:0 y:-self.position.y -self.size.height/2 duration:1];
     
     SKAction * downGroup = [SKAction group:@[scream,moveDown]];
-    SKAction *sequence =[SKAction sequence:@[puff, downGroup,remove] ];
+    SKAction * removeSounds = [SKAction runBlock:^{
+        [self.bugWind stop];
+        [self.bugScream stop];
+        [self.bugPuff stop];
+        self.bugWind=nil;
+        self.bugScream=nil;
+        self.bugPuff=nil;
+    }];
+    SKAction *sequence =[SKAction sequence:@[puff, downGroup, removeSounds, remove] ];
     [self runAction:sequence];
+}
+
+-(void)loadSounds{
+    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+    dispatch_async(soundQueue, ^{
+        self.bugWind = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].bugWind error:nil];
+        self.bugWind.numberOfLoops=-1;
+        self.bugScream = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].bugScream error:nil];
+        self.bugPuff = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].bugPuff error:nil];
+    });
 }
 
 @end

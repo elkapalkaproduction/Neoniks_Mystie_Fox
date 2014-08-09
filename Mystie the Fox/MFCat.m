@@ -8,6 +8,7 @@
 
 #import "MFCat.h"
 #import "MFImageCropper.h"
+#import "MFSounds.h"
 
 @interface MFCat ()
 
@@ -15,9 +16,9 @@
 
 @property (nonatomic) float speed;
 
-@property (strong,nonatomic) SKAction *catHelicopterOne;
-@property (strong,nonatomic) SKAction *catHelicopterTwo;
-@property (strong, nonatomic) SKAction * catMeow;
+@property (strong,nonatomic) AVAudioPlayer *catHelicopterOne;
+@property (strong,nonatomic) AVAudioPlayer *catHelicopterTwo;
+@property (strong, nonatomic) AVAudioPlayer * catMeow;
 
 
 @end
@@ -26,7 +27,7 @@
 
 -(instancetype)initWithParent:(SKNode *)parent{
     [self loadSounds];
-    if (self=[super initWithName:@"cat-1.png" parent:parent]) {
+    if (self=[super initWithName:@"cat-1.png"]) {
         self.name=@"catCharacter";
         SKSpriteNode * bigPropeller = [SKSpriteNode spriteNodeWithImageNamed:@"propeller-big.png"];
         SKSpriteNode * smallPropeller = [SKSpriteNode spriteNodeWithImageNamed:@"propeller-small.png"];
@@ -53,6 +54,7 @@
         [self addChild:smallPropeller];
         [self addChild:bigPropeller];
         self.position = [self rightRandomPosition:parent];
+        self.move = [self createMoveAction:parent];
         
     }
     return self;
@@ -63,12 +65,34 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
+    SKAction * flyingSound= [SKAction runBlock:^{
+        [self.catHelicopterOne play];
+    }];
+    SKAction * removeSounds = [SKAction runBlock:^{
+        [self.catHelicopterOne stop];
+        [self.catHelicopterTwo stop];
+        [self.catMeow stop];
+        self.catHelicopterOne=nil;
+        self.catHelicopterTwo=nil;
+        self.catMeow=nil;
+    }];
     
-    move = [SKAction group:@[move, self.catHelicopterOne]];
-    return [SKAction sequence:@[move,self.removeNode]];
+    move = [SKAction group:@[move, flyingSound]];
+    return [SKAction sequence:@[move, removeSounds, self.removeNode]];
 }
 
 -(void)taped{
+    [self.catHelicopterOne stop];
+    [self.catHelicopterTwo stop];
+    [self.catMeow stop];
+    SKAction *catHelicopterTwo =[SKAction runBlock:^{
+        [self.catHelicopterTwo play];
+    }];
+    SKAction *catMeow =[SKAction runBlock:^{
+        self.catMeow=nil;
+        self.catMeow = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catMeow error:nil];
+        [self.catMeow play];
+    }];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
     for (int i = 0; i<4; i++) {
         SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cat-%d.png",i+1]];
@@ -79,7 +103,7 @@
     SKAction * wait = [SKAction waitForDuration:timePerFrame *3];
     SKAction *reverseCatAnimation = [catAnimation reversedAction];
     SKAction *sequence = [SKAction sequence:@[catAnimation,wait,reverseCatAnimation]];
-    SKAction *soundSequence = [SKAction sequence:@[self.catMeow, self.catHelicopterTwo]];
+    SKAction *soundSequence = [SKAction sequence:@[catMeow, catHelicopterTwo]];
     [self runAction:sequence];
     [self runAction:soundSequence];
     self.speed = self.speed *2.0f;
@@ -88,9 +112,13 @@
 }
 
 -(void)loadSounds{
-    self.catHelicopterOne = [SKAction playSoundFileNamed:@"helicopter1.mp3" waitForCompletion:NO];
-    self.catHelicopterTwo = [SKAction playSoundFileNamed:@"helicopter1.mp3" waitForCompletion:NO];
-    self.catMeow = [SKAction playSoundFileNamed:@"meow.mp3" waitForCompletion:NO];
+    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+    dispatch_async(soundQueue, ^{
+        self.catHelicopterOne = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catHelicopterOne error:nil];
+        self.catHelicopterOne.numberOfLoops=-1;
+        self.catHelicopterTwo = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catHelicopterTwo error:nil];
+        self.catMeow = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catMeow error:nil];
+    });
 }
 
 

@@ -7,6 +7,8 @@
 //
 
 #import "MFCharacter.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 
 @implementation MFCharacter
@@ -15,7 +17,22 @@
 static int const kWaveOffsetPhone = 50 ;
 static int const kWaveOffsetPad = 240;
 
+-(instancetype) initWithName:(NSString*)name {
+    if (self=[super initWithImageNamed:name]) {
+        self.removeNode = [SKAction removeFromParent];
+    }
+    return self;
+}
+
 -(instancetype) initWithName:(NSString*)name parent:(SKNode*)parent{
+    if (self=[super initWithImageNamed:name]) {
+        self.removeNode = [SKAction removeFromParent];
+        self.move = [self createMoveAction:parent];
+    }
+    return self;
+}
+
+-(instancetype) initWithName:(NSString *)name parent:(SKNode *)parent sizeForIpad:(CGSize)sizeIpad sizeForIphone:(CGSize )sizeIphone{
     if (self=[super initWithImageNamed:name]) {
         self.removeNode = [SKAction removeFromParent];
         self.move = [self createMoveAction:parent];
@@ -39,6 +56,8 @@ static int const kWaveOffsetPad = 240;
     [bezierPath addQuadCurveToPoint:firstPoint controlPoint:fistControl];
     [bezierPath addQuadCurveToPoint:secondPoint controlPoint:secondControl];
     [bezierPath addQuadCurveToPoint:thirdPoint controlPoint:thirdControl];
+    NSLog(@"%f parent width", parent.frame.size.width);
+    NSLog(@"%@ point1  %@ pont2 %@ point3" , NSStringFromCGPoint(firstPoint) ,NSStringFromCGPoint(secondPoint),NSStringFromCGPoint(thirdPoint));
     
     
     return bezierPath;

@@ -14,9 +14,11 @@
 
 @property (strong,nonatomic) SKAction * removeNode;
 
-
+-(instancetype) initWithName:(NSString*)name;
 
 -(instancetype) initWithName:(NSString*)name parent:(SKNode*)parent;
+
+-(instancetype) initWithName:(NSString *)name parent:(SKNode *)parent sizeForIpad:(CGSize)sizeIpad sizeForIphone:(CGSize )sizeIphone;
 
 -(UIBezierPath*)createSinCurve:(SKNode *) parent;
 

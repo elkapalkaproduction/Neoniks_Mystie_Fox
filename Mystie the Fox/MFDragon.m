@@ -9,6 +9,7 @@
 #import "MFDragon.h"
 #import "MFImageCropper.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MFSounds.h"
 
 
 @interface MFDragon ()
@@ -17,15 +18,16 @@
 @property (strong,nonatomic) SKSpriteNode *fire;
 
 @property (strong,nonatomic) AVAudioPlayer *dragonSound;
+@property (strong,nonatomic) AVAudioPlayer *dragonFire;
 
 @end
 
 @implementation MFDragon
 
 -(instancetype)initWithParent:(SKNode *)parent{
+    [self loadSounds];
     if (self = [super initWithColor:[UIColor clearColor] size:CGSizeZero]) {
         self.removeNode =[SKAction removeFromParent];
-//        self.anchorPoint=CGPointMake(0, 0.5);
         self.dragon= [SKSpriteNode spriteNodeWithImageNamed:@"Dragon.png"];
         if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPad) {
             self.size=CGSizeMake(319.5 +250, 239.5);
@@ -40,15 +42,23 @@
         self.dragon.name=@"dragonCharacter";
         [self addChild:self.dragon];
         self.position=[self rightRandomPosition:parent];
-        [self loadSounds];
+        
         self.move = [self createMoveAction:parent];
     }
     return self;
 }
 
 -(void)loadSounds{
-    NSURL *urlDragon = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"dragon" ofType:@"mp3"]];
-    self.dragonSound = [[AVAudioPlayer alloc] initWithContentsOfURL:urlDragon error:nil];
+    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+    dispatch_async(soundQueue, ^{
+        self.dragonSound = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dragonSound error:nil];
+        self.dragonSound.numberOfLoops =-1;
+        [self.dragonSound prepareToPlay];
+        
+        self.dragonFire = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dragonFire error:nil];
+        [self.dragonFire prepareToPlay];
+        
+    });
 }
 
 
@@ -57,12 +67,17 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:5];
     move =[move reversedAction];
-//    SKAction *windSound = [SKAction playSoundFileNamed:@"dragon.mp3" waitForCompletion:NO];
     SKAction *dragonSound = [SKAction runBlock:^{
         [self.dragonSound play];
     }];
+    SKAction * removeSounds = [SKAction runBlock:^{
+        [self.dragonSound stop];
+        [self.dragonFire stop];
+        self.dragonSound=nil;
+        self.dragonFire=nil;
+    }];
     move = [SKAction group:@[move, dragonSound]];
-    return [SKAction sequence:@[move,self.removeNode]];
+    return [SKAction sequence:@[move,removeSounds, self.removeNode]];
 }
 
 -(void)taped{
@@ -85,7 +100,9 @@
     self.fire.position =CGPointMake(-self.size.width/2, -self.size.height/16*3);
     [self addChild:self.fire];
     SKAction *fireAction = [SKAction animateWithTextures:textures timePerFrame:0.05 resize:NO restore:YES];
-    SKAction *sound = [SKAction playSoundFileNamed:@"fire.mp3" waitForCompletion:NO];
+    SKAction *sound = [SKAction runBlock:^{
+        [self.dragonFire play];
+    }];
     SKAction *moveTo = [SKAction moveTo:CGPointMake(self.parent.frame.size.width + self.size.width/2, self.position.y) duration:1];
     fireAction =[SKAction group:@[fireAction,sound]];
     [self.fire runAction:fireAction];

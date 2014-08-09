@@ -49,6 +49,9 @@
 //sound
 @property (strong,nonatomic) SKAction * playClickSound;
 
+//test
+@property ( strong, nonatomic) SKSpriteNode *testCharacter;
+
 
 
 @end
@@ -317,6 +320,8 @@
             }
             [character taped];
             
+            self.testCharacter=character;
+            
             
             
 //            [self runAction:playClickSound];
@@ -367,6 +372,12 @@
         [self rightButtonPressed];
     }else if (gesture.state ==UIGestureRecognizerStateEnded){
         self.isTapEnd=YES;
+    }
+}
+
+- (void)update:(NSTimeInterval)currentTime{
+    if (self.testCharacter != nil) {
+        NSLog(@"%@ character location" ,NSStringFromCGPoint(self.testCharacter.position));
     }
 }
 

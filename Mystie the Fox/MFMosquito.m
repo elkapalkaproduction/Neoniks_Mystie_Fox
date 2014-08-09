@@ -8,6 +8,7 @@
 
 #import "MFMosquito.h"
 #import "MFImageCropper.h"
+#import "MFSounds.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
 
@@ -17,8 +18,8 @@
 @property (strong,nonatomic) SKSpriteNode * mosquito;
 @property (strong , nonatomic) SKSpriteNode *wings;
 
-@property (strong, nonatomic) SKAction * mosquitoFlying;
-@property (strong,nonatomic) SKAction * mosquitoLightOn;
+@property (strong, nonatomic) AVAudioPlayer * mosquitoFlying;
+@property (strong,nonatomic) AVAudioPlayer * mosquitoLightOn;
 
 @end
 
@@ -66,19 +67,24 @@
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
     
-    SKAction *ufoSound = [SKAction runBlock:^{
-        
+    SKAction * flyingSound= [SKAction runBlock:^{
+        [self.mosquitoFlying play];
     }];
-    move = [SKAction group:@[move, self.mosquitoFlying]];
-    return [SKAction sequence:@[move,self.removeNode]];
+    SKAction * removeSounds = [SKAction runBlock:^{
+        [self.mosquitoFlying stop];
+        [self.mosquitoLightOn stop];
+        self.mosquitoFlying=nil;
+        self.mosquitoLightOn=nil;
+    }];
+    move = [SKAction group:@[move, flyingSound]];
+    return [SKAction sequence:@[move,removeSounds, self.removeNode]];
 }
 
 -(void)taped{
-    SKAction *screechSound =[SKAction runBlock:^{
-        
-    }];
-    SKAction *aliensSound =[SKAction runBlock:^{
-        
+    SKAction *mosquitoLightOn =[SKAction runBlock:^{
+        self.mosquitoLightOn=nil;
+        self.mosquitoLightOn = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].mosquitoLightOn error:nil];
+        [self.mosquitoLightOn play];
     }];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
     for (int i = 0; i<4; i++) {
@@ -88,12 +94,12 @@
     SKAction * lightOnAnimation = [SKAction animateWithTextures:textures timePerFrame:0.08];
     if (!self.isTapped) {
         self.isTapped =YES;
-        SKAction * group = [SKAction group:@[lightOnAnimation, self.mosquitoLightOn]];
+        SKAction * group = [SKAction group:@[lightOnAnimation, mosquitoLightOn]];
         [self.mosquito runAction:group];
     }else{
         SKAction *lightOffAnimation = [lightOnAnimation reversedAction];
         self.isTapped =NO;
-        SKAction * group = [SKAction group:@[lightOffAnimation, self.mosquitoLightOn]];
+        SKAction * group = [SKAction group:@[lightOffAnimation, mosquitoLightOn]];
         [self.mosquito runAction:group];
         
     }
@@ -101,8 +107,12 @@
 }
 
 -(void)loadSounds{
-    self.mosquitoFlying = [SKAction playSoundFileNamed:@"mosquito.mp3" waitForCompletion:NO];
-    self.mosquitoLightOn = [SKAction playSoundFileNamed:@"light_on.mp3" waitForCompletion:NO];
+    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+    dispatch_async(soundQueue, ^{
+        self.mosquitoFlying = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].mosquitoFlying error:nil];
+        self.mosquitoFlying.numberOfLoops=-1;
+        self.mosquitoLightOn = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].mosquitoLightOn error:nil];
+    });
 }
 
 

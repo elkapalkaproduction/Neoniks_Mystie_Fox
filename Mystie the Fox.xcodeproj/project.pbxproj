@@ -178,6 +178,7 @@
 		3010940E197C27F100AA2295 /* icon_mystie_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 301093FD197C27F100AA2295 /* icon_mystie_72x72.png */; };
 		3010940F197C27F100AA2295 /* icon_mystie_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 301093FE197C27F100AA2295 /* icon_mystie_76x76.png */; };
 		30109410197C27F100AA2295 /* icon_mystie_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 301093FF197C27F100AA2295 /* icon_mystie_80x80.png */; };
+		301CFC231994389900C2AED6 /* scream2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 301CFC221994389900C2AED6 /* scream2.mp3 */; };
 		301F064F19879B210018149A /* MFDoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 301F064E19879B210018149A /* MFDoll.m */; };
 		301F065219879C6D0018149A /* MFDragon.m in Sources */ = {isa = PBXBuildFile; fileRef = 301F065119879C6D0018149A /* MFDragon.m */; };
 		301F065519879C840018149A /* MFGhost.m in Sources */ = {isa = PBXBuildFile; fileRef = 301F065419879C840018149A /* MFGhost.m */; };
@@ -215,6 +216,7 @@
 		30BEC880197B1E600069093E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BEC87E197B1E600069093E /* InfoPlist.strings */; };
 		30BEC882197B1E600069093E /* Mystie_the_FoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BEC881197B1E600069093E /* Mystie_the_FoxTests.m */; };
 		30BEC890197B51C50069093E /* MFIntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BEC88F197B51C50069093E /* MFIntroScene.m */; };
+		30FD128A1992F3C40055705F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FD12891992F3C40055705F /* CoreAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -402,6 +404,7 @@
 		301093FD197C27F100AA2295 /* icon_mystie_72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_mystie_72x72.png; sourceTree = "<group>"; };
 		301093FE197C27F100AA2295 /* icon_mystie_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_mystie_76x76.png; sourceTree = "<group>"; };
 		301093FF197C27F100AA2295 /* icon_mystie_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_mystie_80x80.png; sourceTree = "<group>"; };
+		301CFC221994389900C2AED6 /* scream2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream2.mp3; sourceTree = "<group>"; };
 		301F064D19879B210018149A /* MFDoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoll.h; sourceTree = "<group>"; };
 		301F064E19879B210018149A /* MFDoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoll.m; sourceTree = "<group>"; };
 		301F065019879C6D0018149A /* MFDragon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDragon.h; sourceTree = "<group>"; };
@@ -458,6 +461,7 @@
 		30BEC881197B1E600069093E /* Mystie_the_FoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mystie_the_FoxTests.m; sourceTree = "<group>"; };
 		30BEC88E197B51C50069093E /* MFIntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFIntroScene.h; sourceTree = "<group>"; };
 		30BEC88F197B51C50069093E /* MFIntroScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFIntroScene.m; sourceTree = "<group>"; };
+		30FD12891992F3C40055705F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30FD128A1992F3C40055705F /* CoreAudio.framework in Frameworks */,
 				30BEC84F197B1E600069093E /* CoreGraphics.framework in Frameworks */,
 				30BEC851197B1E600069093E /* UIKit.framework in Frameworks */,
 				30BEC853197B1E600069093E /* SpriteKit.framework in Frameworks */,
@@ -649,6 +654,7 @@
 		3010928A197BCDC200AA2295 /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				301CFC221994389900C2AED6 /* scream2.mp3 */,
 				3010928B197BCDC200AA2295 /* puff.mp3 */,
 				3010928C197BCDC200AA2295 /* scream.mp3 */,
 				3010928D197BCDC200AA2295 /* wind.mp3 */,
@@ -1088,6 +1094,7 @@
 		30BEC84B197B1E5F0069093E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				30FD12891992F3C40055705F /* CoreAudio.framework */,
 				30BEC84C197B1E600069093E /* Foundation.framework */,
 				30BEC84E197B1E600069093E /* CoreGraphics.framework */,
 				30BEC850197B1E600069093E /* UIKit.framework */,
@@ -1362,6 +1369,7 @@
 				301093E5197BCDC300AA2295 /* more-rus.png in Resources */,
 				30109342197BCDC300AA2295 /* logo_eng.png in Resources */,
 				301093E4197BCDC300AA2295 /* iPade_page2-rus.png in Resources */,
+				301CFC231994389900C2AED6 /* scream2.mp3 in Resources */,
 				30109345197BCDC300AA2295 /* start-eng@2x.png in Resources */,
 				30109359197BCDC300AA2295 /* cat-7.png in Resources */,
 				301093E1197BCDC300AA2295 /* play_button_eng.png in Resources */,

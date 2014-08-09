@@ -9,6 +9,7 @@
 #import "MFCloud.h"
 #import "MFImageCropper.h"
 #import "MFFirstPageScene.h"
+#import "MFSounds.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
 
@@ -16,8 +17,8 @@
 
 @property (nonatomic) BOOL isTapped;
 
-@property (strong,nonatomic) SKAction *cloudFlying;
-@property (strong,nonatomic) SKAction *cloudThunder;
+@property (strong,nonatomic) AVAudioPlayer *cloudFlying;
+@property (strong,nonatomic) AVAudioPlayer *cloudThunder;
 
 @end
 
@@ -25,7 +26,7 @@
 
 -(instancetype)initWithParent:(SKNode *)parent{
     [self loadSounds];
-    if (self=[super initWithName:@"cloud-1.png" parent:parent]) {
+    if (self=[super initWithName:@"cloud-1.png"]) {
         self.name=@"cloudCharacter";
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
             self.size = [MFImageCropper sizeWith2xSprite:self];
@@ -34,6 +35,7 @@
         }
 
         self.position = [self rightRandomPosition:parent];
+        self.move = [self createMoveAction:parent];
         
     }
     return self;
@@ -44,17 +46,25 @@
     
     SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
     move =[move reversedAction];
+    SKAction * flyingSound= [SKAction runBlock:^{
+        [self.cloudFlying play];
+    }];
+    SKAction * removeSounds = [SKAction runBlock:^{
+        [self.cloudFlying stop];
+        [self.cloudThunder stop];
+        self.cloudFlying=nil;
+        self.cloudThunder=nil;
+    }];
     
-    move = [SKAction group:@[move, self.cloudFlying]];
-    return [SKAction sequence:@[move,self.removeNode]];
+    move = [SKAction group:@[move, flyingSound]];
+    return [SKAction sequence:@[move,removeSounds, self.removeNode]];
 }
 
 -(void)taped{
-    SKAction *screechSound =[SKAction runBlock:^{
-        
-    }];
-    SKAction *aliensSound =[SKAction runBlock:^{
-        
+    SKAction *cloudThunder =[SKAction runBlock:^{
+        self.cloudThunder=nil;
+        self.cloudThunder = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].cloudThunder error:nil];
+        [self.cloudThunder play];
     }];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
     for (int i = 0; i<6; i++) {
@@ -95,15 +105,16 @@
         
     }];
     SKAction *wait = [SKAction waitForDuration:0.3];
-    whiteScreenOn = [SKAction group:@[whiteScreenOn, self.cloudThunder]];
+    whiteScreenOn = [SKAction group:@[whiteScreenOn, cloudThunder]];
     animate = [SKAction sequence:@[animate,whiteScreenOn,wait,whiteScreenOff]];
     [self runAction:animate ];
     
 }
 
 -(void)loadSounds{
-    self.cloudFlying = [SKAction playSoundFileNamed:@"cloud.mp3" waitForCompletion:NO];
-    self.cloudThunder = [SKAction playSoundFileNamed:@"thunder.mp3" waitForCompletion:NO];
+    self.cloudFlying = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].cloudFlying error:nil];
+    self.cloudFlying.numberOfLoops=-1;
+    self.cloudThunder = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].cloudThunder error:nil];
 }
 
 @end

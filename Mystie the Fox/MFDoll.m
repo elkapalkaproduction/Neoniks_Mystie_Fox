@@ -57,7 +57,15 @@
     }];
     SKAction * moveDown = [SKAction group:@[self.moveDown,fallingSound]];
     SKAction *hitTheGroundSound = [SKAction playSoundFileNamed:@"hit_the_ground.mp3" waitForCompletion:NO];
-    return [SKAction sequence:@[moveDown, hitTheGroundSound, self.removeNode]];
+    SKAction * removeSounds = [SKAction runBlock:^{
+        [self.dollFalling stop];
+        [self.dollLaught stop];
+        [self.dollOuch stop];
+        self.dollFalling=nil;
+        self.dollLaught=nil;
+        self.dollOuch = nil;
+    }];
+    return [SKAction sequence:@[moveDown, hitTheGroundSound,removeSounds, self.removeNode]];
 }
 
 -(void)taped{
@@ -108,17 +116,18 @@
 #pragma mark - init sound 
 
 -(void)loadSounds{
-    NSURL *urlFalling = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"doll_falling" ofType:@"mp3"]];
-    self.dollFalling = [[AVAudioPlayer alloc] initWithContentsOfURL:urlFalling error:nil];
+    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+    dispatch_async(soundQueue, ^{
+    self.dollFalling = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dollFalling error:nil];
     [self.dollFalling prepareToPlay];
     
-    NSURL *urlLaught = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"doll_laughs_3" ofType:@"mp3"]];
-    self.dollLaught =[[AVAudioPlayer alloc] initWithContentsOfURL:urlLaught error:nil];
+    self.dollLaught = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dollLaught error:nil];
     [self.dollLaught prepareToPlay];
     
-    NSURL *urlOuch = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ouch" ofType:@"mp3"]];
-    self.dollOuch = [[AVAudioPlayer alloc] initWithContentsOfURL:urlOuch error:nil];
+    self.dollOuch = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dollOuch error:nil];
     [self.dollOuch prepareToPlay];
+    });
 }
+
 
 @end
