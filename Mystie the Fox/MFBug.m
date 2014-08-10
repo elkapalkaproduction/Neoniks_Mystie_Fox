@@ -128,13 +128,26 @@
 }
 
 -(void)loadSounds{
-    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
-    dispatch_async(soundQueue, ^{
+//    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+//    dispatch_async(soundQueue, ^{
         self.bugWind = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].bugWind error:nil];
         self.bugWind.numberOfLoops=-1;
         self.bugScream = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].bugScream error:nil];
         self.bugPuff = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].bugPuff error:nil];
-    });
+//    });
+}
+
+-(void)fadeAwaySound{
+    [super fadeAwaySound];
+    if (self.bugWind.volume > 0.1) {
+        self.bugWind.volume = self.bugWind.volume - 0.1;
+        [self performSelector:@selector(fadeAwaySound) withObject:nil afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+//        [self.bugWind stop];
+//        self.bugWind.currentTime = 0;
+
+    }
 }
 
 @end

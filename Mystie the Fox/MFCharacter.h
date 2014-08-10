@@ -20,6 +20,8 @@
 
 -(instancetype) initWithName:(NSString *)name parent:(SKNode *)parent sizeForIpad:(CGSize)sizeIpad sizeForIphone:(CGSize )sizeIphone;
 
+-(instancetype)initWithParent:(SKNode *) parent;
+
 -(UIBezierPath*)createSinCurve:(SKNode *) parent;
 
 -(SKAction *)createMoveAction :(SKNode *)parent;
@@ -30,6 +32,9 @@
 
 -(CGPoint)topRandomPosition:(SKNode *)parent;
 
--(instancetype)initWithParent:(SKNode *) parent;
+
+
+@property (nonatomic)BOOL isFadeAway;
+-(void)fadeAwaySound;
 
 @end

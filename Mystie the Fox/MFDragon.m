@@ -49,8 +49,8 @@
 }
 
 -(void)loadSounds{
-    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
-    dispatch_async(soundQueue, ^{
+//    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+//    dispatch_async(soundQueue, ^{
         self.dragonSound = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dragonSound error:nil];
         self.dragonSound.numberOfLoops =-1;
         [self.dragonSound prepareToPlay];
@@ -58,7 +58,7 @@
         self.dragonFire = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dragonFire error:nil];
         [self.dragonFire prepareToPlay];
         
-    });
+//    });
 }
 
 
@@ -108,6 +108,19 @@
     [self.fire runAction:fireAction];
     moveTo =[SKAction sequence:@[moveTo,self.removeNode]];
     [self runAction:moveTo];
+}
+
+-(void)fadeAwaySound{
+    [super fadeAwaySound];
+    if (self.dragonSound.volume > 0.1) {
+        self.dragonSound.volume = self.dragonSound.volume - 0.1;
+        [self performSelector:@selector(fadeAwaySound) withObject:nil afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+//        [self.dragonSound stop];
+//        self.dragonSound.currentTime = 0;
+        
+    }
 }
 
 @end

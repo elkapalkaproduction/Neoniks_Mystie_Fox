@@ -10,6 +10,7 @@
 #import "MFImageCropper.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MFSounds.h"
+#import "SizesSettings.h"
 
 @interface MFDoll ()
 @property(strong,nonatomic) SKSpriteNode *doll;
@@ -116,8 +117,8 @@
 #pragma mark - init sound 
 
 -(void)loadSounds{
-    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
-    dispatch_async(soundQueue, ^{
+//    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+//    dispatch_async(soundQueue, ^{
     self.dollFalling = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dollFalling error:nil];
     [self.dollFalling prepareToPlay];
     
@@ -126,7 +127,7 @@
     
     self.dollOuch = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].dollOuch error:nil];
     [self.dollOuch prepareToPlay];
-    });
+//    });
 }
 
 

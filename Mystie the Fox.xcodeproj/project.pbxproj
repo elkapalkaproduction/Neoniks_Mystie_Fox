@@ -427,6 +427,7 @@
 		30324793198131BB00A40DFA /* MFCharactersScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCharactersScroller.m; sourceTree = "<group>"; };
 		304F6339197F2C5A00C95274 /* MFFirstPageScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFirstPageScene.h; sourceTree = "<group>"; };
 		304F633A197F2C5A00C95274 /* MFFirstPageScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFirstPageScene.m; sourceTree = "<group>"; };
+		3072C1CF1996E6D700E68160 /* SizesSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SizesSettings.h; sourceTree = "<group>"; };
 		307386A5197D6B5400105ACE /* 1iPhone5_page1_sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1iPhone5_page1_sample.png; sourceTree = "<group>"; };
 		307386A6197D6B5400105ACE /* arrow-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left@2x.png"; sourceTree = "<group>"; };
 		307386A7197D6B5400105ACE /* arrow-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-right@2x.png"; sourceTree = "<group>"; };
@@ -544,6 +545,7 @@
 		3010926B197BCA6400AA2295 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3072C1CF1996E6D700E68160 /* SizesSettings.h */,
 				3010926C197BCAAD00AA2295 /* MFImageCropper.h */,
 				3010926D197BCAAD00AA2295 /* MFImageCropper.m */,
 				301093E8197BDB5700AA2295 /* MFLanguage.h */,

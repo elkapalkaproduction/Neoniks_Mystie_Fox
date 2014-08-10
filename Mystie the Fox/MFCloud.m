@@ -10,6 +10,7 @@
 #import "MFImageCropper.h"
 #import "MFFirstPageScene.h"
 #import "MFSounds.h"
+#import "SizesSettings.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
 
@@ -30,6 +31,7 @@
         self.name=@"cloudCharacter";
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
             self.size = [MFImageCropper sizeWith2xSprite:self];
+//            self.size = CGSizeMake(kCloudWidthIphone, kCloudHeightIphone);
         }else{
 
         }
@@ -62,8 +64,8 @@
 
 -(void)taped{
     SKAction *cloudThunder =[SKAction runBlock:^{
-        self.cloudThunder=nil;
-        self.cloudThunder = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].cloudThunder error:nil];
+        self.cloudThunder.currentTime =0;
+        [self.cloudThunder prepareToPlay];
         [self.cloudThunder play];
     }];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
@@ -115,6 +117,19 @@
     self.cloudFlying = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].cloudFlying error:nil];
     self.cloudFlying.numberOfLoops=-1;
     self.cloudThunder = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].cloudThunder error:nil];
+}
+
+-(void)fadeAwaySound{
+    [super fadeAwaySound];
+    if (self.cloudFlying.volume > 0.1) {
+        self.cloudFlying.volume = self.cloudFlying.volume - 0.1;
+        [self performSelector:@selector(fadeAwaySound) withObject:nil afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+//        [self.cloudFlying stop];
+//        self.cloudFlying.currentTime = 0;
+        
+    }
 }
 
 @end

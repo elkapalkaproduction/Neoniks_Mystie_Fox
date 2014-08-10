@@ -9,6 +9,7 @@
 #import "MFGhost.h"
 #import "MFImageCropper.h"
 #import "MFSounds.h"
+#import "SizesSettings.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
 
@@ -31,6 +32,7 @@
         float ratio = [MFImageCropper spriteRatio:self];
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad) {
             self.size = CGSizeMake( ASSET_BY_SCREEN_HEIGHT(130, 90), ASSET_BY_SCREEN_HEIGHT(130, 90) *ratio );
+//            self.size = CGSizeMake(kGhostWidthIphone, kGhostHeightIphone);
         }else{
             self.size =CGSizeMake(200, 200*ratio);
         }
@@ -97,13 +99,26 @@
 }
 
 -(void)loadSounds{
-    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
-    dispatch_async(soundQueue, ^{
+//    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+//    dispatch_async(soundQueue, ^{
         self.ghostFlying = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].ghostFlying error:nil];
         self.ghostFlying.numberOfLoops=-1;
         self.ghostSobbing = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].ghostSobbing error:nil];
         self.ghostHole = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].ghostHole error:nil];
-    });
+//    });
+}
+
+-(void)fadeAwaySound{
+    [super fadeAwaySound];
+    if (self.ghostFlying.volume > 0.1) {
+        self.ghostFlying.volume = self.ghostFlying.volume - 0.1;
+        [self performSelector:@selector(fadeAwaySound) withObject:nil afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+//        [self.ghostFlying stop];
+//        self.ghostFlying.currentTime = 0;
+        
+    }
 }
 
 @end

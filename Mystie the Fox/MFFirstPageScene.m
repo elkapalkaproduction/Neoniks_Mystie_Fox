@@ -49,8 +49,6 @@
 //sound
 @property (strong,nonatomic) SKAction * playClickSound;
 
-//test
-@property ( strong, nonatomic) SKSpriteNode *testCharacter;
 
 
 
@@ -263,7 +261,6 @@
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
         NSLog(@" %@ node.name" ,node.name);
-//        NSLog (@" %@ point" , NSStringFromCGPoint(location));
         if ([node.name isEqualToString:@"fox"]) {
             if (!self.isLaughter) {
                 self.isLaughter=YES;
@@ -272,7 +269,6 @@
                     [self.eyesNode removeAllActions];
                     [self.eyesNode runAction:self.eyesBlink];
                 }];
-//                SKAction *sequence =[SKAction sequence:@[self.laughter, blinkAgain]];
                 [self.eyesNode runAction:self.laughter completion:^{
                     [self.eyesNode runAction:blinkAgain];
                     self.isLaughter = NO;
@@ -281,14 +277,9 @@
             
         }else if([node.name isEqualToString:@"tail"]){
             [node runAction:self.tailRotation];
-        }/*else if([node.name isEqualToString:@"leftArrow"]){
-            [self.characterScroller scrollToLeftWithComplition:nil];
-        }else if([node.name isEqualToString:@"rightArrow"]){
-            [self.characterScroller scrollToRightWithComplition:nil];
-        }*/
+        }
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
-//            SKAction * playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
             
             if (CGRectContainsPoint(self.characterScroller.maskFrame, location)) {
                 NSRange range = [node.name rangeOfString:@"button"];
@@ -320,11 +311,8 @@
             }
             [character taped];
             
-            self.testCharacter=character;
             
             
-            
-//            [self runAction:playClickSound];
         }
         
     }
@@ -376,8 +364,16 @@
 }
 
 - (void)update:(NSTimeInterval)currentTime{
-    if (self.testCharacter != nil) {
-        NSLog(@"%@ character location" ,NSStringFromCGPoint(self.testCharacter.position));
+    for (SKNode *node in self.children) {
+        NSRange range = [node.name rangeOfString:@"Character"];
+        if (range.location !=NSNotFound) {
+            MFCharacter *character = (MFCharacter *) node;
+            if (character.position.x < self.size.width/15) {
+                if (!character.isFadeAway) {
+                    [character fadeAwaySound];
+                }
+            }
+        }
     }
 }
 

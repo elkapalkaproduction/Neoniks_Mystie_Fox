@@ -89,8 +89,8 @@
         [self.catHelicopterTwo play];
     }];
     SKAction *catMeow =[SKAction runBlock:^{
-        self.catMeow=nil;
-        self.catMeow = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catMeow error:nil];
+        self.catMeow.currentTime = 0;
+        [self.catMeow prepareToPlay];
         [self.catMeow play];
     }];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
@@ -112,13 +112,37 @@
 }
 
 -(void)loadSounds{
-    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
-    dispatch_async(soundQueue, ^{
+//    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+//    dispatch_async(soundQueue, ^{
         self.catHelicopterOne = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catHelicopterOne error:nil];
         self.catHelicopterOne.numberOfLoops=-1;
         self.catHelicopterTwo = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catHelicopterTwo error:nil];
         self.catMeow = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].catMeow error:nil];
-    });
+//    });
+}
+
+-(void)fadeAwaySound{
+    [super fadeAwaySound];
+    if (self.catHelicopterOne.volume > 0.1) {
+        self.catHelicopterOne.volume = self.catHelicopterOne.volume - 0.1;
+        [self performSelector:@selector(fadeAwaySound) withObject:nil afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+        [self.catHelicopterOne stop];
+        self.catHelicopterOne.currentTime = 0;
+        
+    }
+    
+    if (self.catHelicopterTwo.volume > 0.1) {
+        self.catHelicopterTwo.volume = self.catHelicopterTwo.volume - 0.1;
+        [self performSelector:@selector(fadeAwaySound) withObject:nil afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+//        [self.catHelicopterTwo stop];
+//        self.catHelicopterTwo.currentTime = 0;
+        
+    }
+    
 }
 
 

@@ -82,8 +82,8 @@
 
 -(void)taped{
     SKAction *mosquitoLightOn =[SKAction runBlock:^{
-        self.mosquitoLightOn=nil;
-        self.mosquitoLightOn = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].mosquitoLightOn error:nil];
+        self.mosquitoLightOn.currentTime=0;
+        [self.mosquitoLightOn prepareToPlay];
         [self.mosquitoLightOn play];
     }];
     NSMutableArray * textures=[[NSMutableArray alloc] init];
@@ -107,12 +107,25 @@
 }
 
 -(void)loadSounds{
-    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
-    dispatch_async(soundQueue, ^{
+//    dispatch_queue_t soundQueue=dispatch_queue_create("soundQueue", NULL);
+//    dispatch_async(soundQueue, ^{
         self.mosquitoFlying = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].mosquitoFlying error:nil];
         self.mosquitoFlying.numberOfLoops=-1;
         self.mosquitoLightOn = [[AVAudioPlayer alloc] initWithData:[MFSounds sharedSound].mosquitoLightOn error:nil];
-    });
+//    });
+}
+
+-(void)fadeAwaySound{
+    [super fadeAwaySound];
+    if (self.mosquitoFlying.volume > 0.1) {
+        self.mosquitoFlying.volume = self.mosquitoFlying.volume - 0.1;
+        [self performSelector:@selector(fadeAwaySound) withObject:nil afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+//        [self.mosquitoFlying stop];
+//        self.mosquitoFlying.currentTime = 0;
+        
+    }
 }
 
 

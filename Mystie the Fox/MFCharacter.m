@@ -41,6 +41,11 @@ static int const kWaveOffsetPad = 240;
 }
 
 
+-(instancetype)initWithParent:(SKNode *) parent{
+    return [self initWithName:@"" parent:parent];
+}
+
+
 -(UIBezierPath*)createSinCurve:(SKNode *) parent{
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath moveToPoint:CGPointMake(0, 0)];
@@ -56,8 +61,6 @@ static int const kWaveOffsetPad = 240;
     [bezierPath addQuadCurveToPoint:firstPoint controlPoint:fistControl];
     [bezierPath addQuadCurveToPoint:secondPoint controlPoint:secondControl];
     [bezierPath addQuadCurveToPoint:thirdPoint controlPoint:thirdControl];
-    NSLog(@"%f parent width", parent.frame.size.width);
-    NSLog(@"%@ point1  %@ pont2 %@ point3" , NSStringFromCGPoint(firstPoint) ,NSStringFromCGPoint(secondPoint),NSStringFromCGPoint(thirdPoint));
     
     
     return bezierPath;
@@ -80,12 +83,9 @@ static int const kWaveOffsetPad = 240;
         float randomY = arc4random()% ((int)parent.frame.size.height-(310+(int)self.size.height)-kWaveOffsetPhone) +310 +self.size.height/2 +kWaveOffsetPhone/2 ;
         point = CGPointMake(parent.frame.size.width + self.size.width/2, randomY);
     }else{
-//        int random =arc4random()% ((int)parent.frame.size.height-(710+(int)self.size.height));// -kWaveOffsetPhone);
         float randomY = arc4random()% ((int)parent.frame.size.height-(710+(int)self.size.height) -kWaveOffsetPhone) +710 +self.size.height/2 +kWaveOffsetPhone/2;
-//        NSLog(@"%d random" , random);
         point = CGPointMake(parent.frame.size.width + self.size.width/2, randomY);
     }
-    NSLog(@"%@ point " , NSStringFromCGPoint(point));
     return point;
 }
 
@@ -104,8 +104,8 @@ static int const kWaveOffsetPad = 240;
     }
 }
 
--(instancetype)initWithParent:(SKNode *) parent{
-    return [self initWithName:@"" parent:parent];
+-(void)fadeAwaySound{
+    self.isFadeAway =YES;
 }
 
 @end
