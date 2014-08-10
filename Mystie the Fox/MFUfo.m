@@ -9,7 +9,8 @@
 #import "MFUfo.h"
 #import "MFImageCropper.h"
 #import "MFSounds.h"
-#import "SizesSettings.h"
+#import "MFSizesSettings.h"
+#import "MFAnimationsSettings.h"
 
 @interface MFUfo ()
 
@@ -40,7 +41,7 @@
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
     
-    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:kUfoFlyingDuration];
     move =[move reversedAction];
     SKAction * flyingSound= [SKAction runBlock:^{
         [self.ufoFlying play];

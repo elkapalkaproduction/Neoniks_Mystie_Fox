@@ -9,6 +9,7 @@
 #import "MFCat.h"
 #import "MFImageCropper.h"
 #import "MFSounds.h"
+#import "MFAnimationsSettings.h"
 
 @interface MFCat ()
 
@@ -63,7 +64,7 @@
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
     
-    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:kCatFlyingDuration];
     move =[move reversedAction];
     SKAction * flyingSound= [SKAction runBlock:^{
         [self.catHelicopterOne play];

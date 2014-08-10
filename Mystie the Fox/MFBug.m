@@ -9,6 +9,7 @@
 #import "MFBug.h"
 #import "MFImageCropper.h"
 #import "MFSounds.h"
+#import "MFAnimationsSettings.h"
 
 @interface MFBug ()
 
@@ -36,7 +37,7 @@
                 particle.size =CGSizeMake(21, 21*particleRatio);
                 particle.anchorPoint =CGPointMake(0.3, 0);
                 CGPoint position =CGPointMake(-self.size.width/4 -2, self.size.height/2-18);
-                particle.position = position;//[self convertPoint:position toNode:parent];
+                particle.position = position;
                 particle.zRotation = M_PI_4/2 *i;
                 particle.name =@"particle";
                 [self addChild:particle];
@@ -47,8 +48,8 @@
             for (int i=0; i<16; i++) {
                 SKSpriteNode * particle =[SKSpriteNode spriteNodeWithImageNamed:@"stamen.png"];
                 particle.anchorPoint =CGPointMake(0.3, 0);
-                CGPoint position =CGPointMake(-self.size.width/4 -2, self.size.height/2-40);//18
-                particle.position = position;//[self convertPoint:position toNode:parent];
+                CGPoint position =CGPointMake(-self.size.width/4 -2, self.size.height/2-40);
+                particle.position = position;
                 particle.zRotation = M_PI_4/2 *i;
                 particle.name =@"particle";
                 [self addChild:particle];
@@ -67,7 +68,7 @@
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
     
-    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:5];
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:kBugFlyingDuration];
     move =[move reversedAction];
     SKAction *windSound = [SKAction runBlock:^{
         [self.bugWind play];

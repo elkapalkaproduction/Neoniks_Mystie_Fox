@@ -9,6 +9,7 @@
 #import "MFMosquito.h"
 #import "MFImageCropper.h"
 #import "MFSounds.h"
+#import "MFAnimationsSettings.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
 
@@ -64,7 +65,7 @@
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
     
-    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:7];
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:kMosquitoFlyingDuration];
     move =[move reversedAction];
     
     SKAction * flyingSound= [SKAction runBlock:^{

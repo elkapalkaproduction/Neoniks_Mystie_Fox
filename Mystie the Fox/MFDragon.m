@@ -10,6 +10,7 @@
 #import "MFImageCropper.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MFSounds.h"
+#import "MFAnimationsSettings.h"
 
 
 @interface MFDragon ()
@@ -65,7 +66,7 @@
 -(SKAction *)createMoveAction :(SKNode *)parent{
     UIBezierPath *bezierPath = [self createSinCurve:parent];
     
-    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:5];
+    SKAction * move = [SKAction followPath:bezierPath.CGPath asOffset:YES orientToPath:NO duration:kDragonFlyingDuration];
     move =[move reversedAction];
     SKAction *dragonSound = [SKAction runBlock:^{
         [self.dragonSound play];

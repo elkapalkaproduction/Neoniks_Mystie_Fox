@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Roman. All rights reserved.
 //
 
-#ifndef Mystie_the_Fox_SizesSettings_h
-#define Mystie_the_Fox_SizesSettings_h
+#ifndef Mystie_the_Fox_MFSizesSettings_h
+#define Mystie_the_Fox_MFSizesSettings_h
 
 
 extern float const kBugWidthIphone = 50 ;

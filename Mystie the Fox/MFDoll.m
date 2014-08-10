@@ -10,7 +10,8 @@
 #import "MFImageCropper.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MFSounds.h"
-#import "SizesSettings.h"
+#import "MFSizesSettings.h"
+#import "MFAnimationsSettings.h"
 
 @interface MFDoll ()
 @property(strong,nonatomic) SKSpriteNode *doll;
@@ -52,7 +53,7 @@
 
 -(SKAction *)createMoveAction :(SKNode *)parent{
 //    self.moveDown = [SKAction moveByX:0 y:-parent.frame.size.height -2*self.size.height duration:3];
-    self.moveDown = [SKAction moveTo:CGPointMake(self.position.x, -2*self.size.height) duration:3];
+    self.moveDown = [SKAction moveTo:CGPointMake(self.position.x, -self.size.height) duration:kDollFlyingDuration];
     SKAction * fallingSound = [SKAction runBlock:^{
         [self.dollFalling play];
     }];
