@@ -10,7 +10,7 @@
 #import "MFImageCropper.h"
 #import "MFSounds.h"
 #import "MFSizesSettings.h"
-#import "MFAnimationsSettings.h"
+#import "MFAnimationSettings.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(longScreen, regular) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? longScreen : regular)
 

@@ -10,7 +10,7 @@
 #import "MFImageCropper.h"
 #import "MFSounds.h"
 #import "MFSizesSettings.h"
-#import "MFAnimationsSettings.h"
+#import "MFAnimationSettings.h"
 
 @interface MFUfo ()
 

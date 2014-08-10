@@ -11,7 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MFSounds.h"
 #import "MFSizesSettings.h"
-#import "MFAnimationsSettings.h"
+#import "MFAnimationSettings.h"
 
 @interface MFDoll ()
 @property(strong,nonatomic) SKSpriteNode *doll;

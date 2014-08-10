@@ -9,7 +9,7 @@
 #import "MFCat.h"
 #import "MFImageCropper.h"
 #import "MFSounds.h"
-#import "MFAnimationsSettings.h"
+#import "MFAnimationSettings.h"
 
 @interface MFCat ()
 

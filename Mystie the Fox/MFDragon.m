@@ -10,7 +10,7 @@
 #import "MFImageCropper.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MFSounds.h"
-#import "MFAnimationsSettings.h"
+#import "MFAnimationSettings.h"
 
 
 @interface MFDragon ()
