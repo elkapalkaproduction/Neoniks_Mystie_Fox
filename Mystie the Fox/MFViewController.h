@@ -11,4 +11,6 @@
 
 @interface MFViewController : UIViewController
 
+@property(nonatomic)BOOL isNeededToPlay;
+
 @end

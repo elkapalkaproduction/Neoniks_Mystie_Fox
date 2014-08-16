@@ -8,12 +8,20 @@
 
 #import "MFAppDelegate.h"
 #import "MFSounds.h"
+#import "MFAdColony.h"
+
+#import "MKStoreManager.h"
+#import "Chartboost.h"
+#import <AdColony/AdColony.h>
 
 @implementation MFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MFSounds sharedSound];
+    [MKStoreManager sharedManager];
+    [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e"] delegate:self logging:YES];
+    
     [self.window makeKeyAndVisible];
     
     self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
@@ -55,6 +63,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [Chartboost startWithAppId:@"53e858d01873da2f5f619e43" appSignature:@"3fa1918953a2213d56b22b93db70bb9d8ff2ae09" delegate:self];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -67,5 +77,36 @@
 - (void)startupAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     [self.splashView removeFromSuperview];
 }
+
+- ( void ) onAdColonyV4VCReward:(BOOL)success currencyName:(NSString*)currencyName currencyAmount:(int)amount inZone:(NSString*)zoneID {
+	NSLog(@"AdColony zone %@ reward %i %i %@", zoneID, success, amount, currencyName);
+	
+	if (success) {
+		NSUserDefaults* storage = [NSUserDefaults standardUserDefaults];
+		
+        [storage setBool:YES forKey:@"isVideoWatched"];
+        [storage synchronize];
+		
+
+	} else {
+//		[[NSNotificationCenter defaultCenter] postNotificationName:@"MFZoneOff" object:nil];
+	}
+}
+
+#pragma mark -
+#pragma mark AdColony ad fill
+
+- ( void ) onAdColonyAdAvailabilityChange:(BOOL)available inZone:(NSString*) zoneID {
+	if(available) {
+        if ([zoneID isEqualToString:@"vz3a0c719cb27b400cb1"]) {
+            [MFAdColony sharedAdColony].isFirstZoneLoaded=YES;
+        }else if ([zoneID isEqualToString:@"vz16512e0b8a19467b8e"]){
+            [MFAdColony sharedAdColony].isSecondZoneLoaded=YES;
+        }
+		
+	}
+}
+
+
 
 @end

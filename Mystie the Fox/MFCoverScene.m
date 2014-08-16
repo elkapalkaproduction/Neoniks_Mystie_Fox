@@ -10,6 +10,11 @@
 #import "MFLanguage.h"
 #import "MFImageCropper.h"
 #import "MFFirstPageScene.h"
+#import "MFSpecialPage.h"
+
+#import "GADBannerView.h"
+#import <AdColony/AdColony.h>
+#import "MFAdColony.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -25,6 +30,11 @@
 @property (strong,nonatomic) SKSpriteNode * foxNode;
 @property (strong,nonatomic) SKSpriteNode * eyesNode;
 @property (strong ,nonatomic) SKSpriteNode * tailNode;
+
+
+//Ads
+
+@property (strong,nonatomic) GADBannerView *bannerView;
 
 @end
 
@@ -109,7 +119,7 @@
         }else{
             self.siteNode.position = CGPointMake(CGRectGetMidX(self.frame), 40);
         }
-        self.siteNode.name=siteNodeName;
+        self.siteNode.name=@"siteNode";
         [self addChild:self.siteNode];
         
         
@@ -148,6 +158,8 @@
         }
         
         
+        
+        
     }
     return self;
 }
@@ -167,12 +179,38 @@
                     [self.view presentScene:firstScene];
                 }];
                 sound = [SKAction group:@[sound, transitionAction]];
+            }else if([node.name isEqualToString:@"whoIsNode"]){
+                __weak UIViewController * vc=(UIViewController*)[self.view nextResponder];
+                
+                [vc performSegueWithIdentifier:@"specialPageSegue" sender:vc];
+            }else if([node.name isEqualToString:@"siteNode"]){
+                NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
+                [[UIApplication sharedApplication] openURL:url];
             }
             [self runAction:sound];
+            
         }
     }
     
     
 }
+
+-(void)didMoveToView:(SKView *)view{
+    self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    
+    self.bannerView.adUnitID = @"ca-app-pub-1480731978958686/9867510198";
+    self.bannerView.frame= CGRectMake(0, self.size.height - self.bannerView.frame.size.height, self.bannerView.frame.size.width, self.bannerView.frame.size.height);
+    
+    UIViewController * vc = (UIViewController *)[self.view nextResponder];
+    self.bannerView.rootViewController = vc;
+    [vc.view addSubview:self.bannerView];
+    
+    [self.bannerView loadRequest:[GADRequest request]];
+    
+    if([MFAdColony sharedAdColony].isFirstZoneLoaded){
+        [AdColony playVideoAdForZone:@"vz3a0c719cb27b400cb1" withDelegate:nil];
+    }
+}
+
 
 @end

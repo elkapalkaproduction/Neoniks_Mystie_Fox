@@ -20,6 +20,7 @@
 #import "MFCat.h"
 #import "MFCloud.h"
 
+#import "Chartboost.h"
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
 @interface MFFirstPageScene ()
@@ -260,7 +261,6 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
-        NSLog(@" %@ node.name" ,node.name);
         if ([node.name isEqualToString:@"fox"]) {
             if (!self.isLaughter) {
                 self.isLaughter=YES;
@@ -277,6 +277,9 @@
             
         }else if([node.name isEqualToString:@"tail"]){
             [node runAction:self.tailRotation];
+        }else if ([node.name isEqualToString:@"more"]){
+            [self runAction:self.playClickSound];
+            [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
         }
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {

@@ -10,6 +10,8 @@
 #import "MFMyScene.h"
 
 #import "MFIntroScene.h"
+#import "MFFirstPageScene.h"
+#import "MFSpecialPage.h"
 
 @implementation MFViewController
 
@@ -22,13 +24,15 @@
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     
-    // Create and configure the scene.
-    SKScene * scene = [MFIntroScene sceneWithSize:skView.bounds.size];
+    SKScene *scene;
+    scene = [MFIntroScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    // Present the scene.
+    
     [skView presentScene:scene];
+    
 }
+
 
 - (BOOL)shouldAutorotate
 {
@@ -44,15 +48,29 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
-
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
+
+-(IBAction)unwindToMain:(UIStoryboardSegue *)segue {
+    SKView * skView = (SKView *)self.view;
+    SKScene *scene;
+    if (self.isNeededToPlay) {
+        scene = [MFFirstPageScene sceneWithSize:skView.bounds.size];
+        scene.scaleMode =SKSceneScaleModeAspectFill;
+        [skView presentScene:scene];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if (segue) {
+        if ([segue.identifier isEqualToString:@"specialPageSegue"]) {
+            __weak MFSpecialPage * destinationVC= segue.destinationViewController;
+            destinationVC.parentVC =self;
+        }
+    }
+}
+
 
 
 @end

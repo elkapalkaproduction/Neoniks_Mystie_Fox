@@ -8,6 +8,8 @@
 
 #import "MFCharactersScroller.h"
 #import "MFImageCropper.h"
+#import "MFLanguage.h"
+#import "MFAdColony.h"
 
 #import "MFBug.h"
 #import "MFDoll.h"
@@ -18,6 +20,8 @@
 #import "MFCat.h"
 #import "MFCloud.h"
 
+#import <AdColony/AdColony.h>
+
 @interface MFCharactersScroller ()
 
 @property (nonatomic) int currentPosition;
@@ -27,39 +31,14 @@
 @implementation MFCharactersScroller
 
 
-//-(instancetype) init{
-//    if (self = [super init]) {
-//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//            self.size = CGSizeMake(768, 100);
-//            self.position = CGPointMake(768/2,140);
-//            for (int i =0; i<8; i++) {
-//                SKSpriteNode * button = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"IPad_button_%d.png", i+1]];
-//                button.position = CGPointMake(i*button.size.width -self.size.width/2 +button.size.width/2 +2, 0 );
-//                button.name =[NSString stringWithFormat:@"button_%d",i];
-//                [self addChild:button];
-//                [self.buttons addObject:button];
-//            }
-//        }else{
-//            self.size = CGSizeMake(240, 60);
-//            self.color = [UIColor greenColor];
-//            self.position = CGPointMake(320/2,70);
-//            
-//            for (int i =0; i<8; i++) {
-//                SKSpriteNode * button = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"IPad_button_%d.png", i+1]];
-//                button.size=CGSizeMake(60, 60);
-//                button.position = CGPointMake(i*button.size.width -self.size.width/2 +button.size.width/2 +2, 0 );
-//                button.name =[NSString stringWithFormat:@"button_%d",i];
-//                
-//                [self addChild:button];
-//                [self.buttons addObject:button];
-//            }
-//        }
-//    }
-//    return self;
-//}
-
 -(instancetype) init{
     if (self = [super init]) {
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
+        BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
+        
         self.buttons = [[NSMutableArray alloc] init];
         self.currentPosition=0;
         SKSpriteNode * mask = [[SKSpriteNode alloc] init];
@@ -74,7 +53,11 @@
                 
                 if (i>3) {
                     button.color = [UIColor blackColor];
-                    button.colorBlendFactor=0.6;
+                    if (IAPurchased||isVideoWathched) {
+                        button.colorBlendFactor=0.0;
+                    }else{
+                        button.colorBlendFactor=0.6;
+                    }
                 }
                 
                 [self addChild:button];
@@ -93,7 +76,11 @@
                 
                 if (i>3) {
                     button.color = [UIColor blackColor];
-                    button.colorBlendFactor=0.6;
+                    if (IAPurchased||isVideoWathched) {
+                        button.colorBlendFactor=0.0;
+                    }else{
+                        button.colorBlendFactor=0.6;
+                    }
                 }
                 
                 [self addChild:button];
@@ -148,19 +135,85 @@
         character = [[MFDragon alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_3"]){
         character = [[MFGhost alloc] initWithParent:self.parent];
-    }else if ([name isEqualToString:@"button_4"]){
-        character = [[MFUfo alloc] initWithParent:self.parent];
-    }else if ([name isEqualToString:@"button_5"]){
-        character = [[MFMosquito alloc] initWithParent:self.parent];
-    }else if ([name isEqualToString:@"button_6"]){
-        character = [[MFCat alloc] initWithParent:self.parent];
-    }else if ([name isEqualToString:@"button_7"]){
-        character = [[MFCloud alloc] initWithParent:self.parent];
+        [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
+                        withDelegate:self
+                    withV4VCPrePopup:NO
+                    andV4VCPostPopup:NO];
+    }else {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
+        BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
+        
+        if (IAPurchased||isVideoWathched) {
+            if ([name isEqualToString:@"button_4"]){
+                character = [[MFUfo alloc] initWithParent:self.parent];
+            }else if ([name isEqualToString:@"button_5"]){
+                character = [[MFMosquito alloc] initWithParent:self.parent];
+            }else if ([name isEqualToString:@"button_6"]){
+                character = [[MFCat alloc] initWithParent:self.parent];
+            }else if ([name isEqualToString:@"button_7"]){
+                character = [[MFCloud alloc] initWithParent:self.parent];
+            }
+        }else{
+            NSString *message;
+            NSString *watchVideo;
+            NSString *unlock;
+            NSString *restore;
+            NSString *cancel;
+            NSString *language = [MFLanguage sharedLanguage].language;
+            if([language isEqualToString:@"ru"]){
+                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+                    
+                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
+                    watchVideo=@"Посмотреть видео";
+                    unlock=@"Разблокировать персонажей";
+                    restore=@"Восстановить";
+                    cancel = @"Отмена";
+                }else{
+                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
+                    unlock=@"Продолжить";
+                    restore=@"Восстановить";
+                    cancel = @"Отмена";
+                }
+            }else{
+                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
+                    watchVideo=@"Watch a video";
+                    unlock=@"Unlock all forever";
+                    restore=@"Restore";
+                    cancel = @"Cancel";
+                }else{
+                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
+                    unlock=@"Continue";
+                    restore=@"Restore";
+                    cancel = @"Cancel";
+                }
+            }
+            UIAlertView *alertView;
+            if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:watchVideo,unlock,restore, nil];
+            }else{
+                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:unlock,restore, nil];
+            }
+            [alertView show];
+        }
     }
-    if (name!=nil&& character!=nil) {
+if (name!=nil&& character!=nil) {
         
         [self.parent addChild:character];
         [character runAction:character.move];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.numberOfButtons==4) {
+        if (buttonIndex==1) {
+            [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
+                            withDelegate:self
+                        withV4VCPrePopup:NO
+                        andV4VCPostPopup:NO];
+        }
     }
 }
 
