@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import <AdColony/AdColony.h>
+#import "AdColony.h"
 
-@interface MFAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MFAppDelegate : UIResponder <UIApplicationDelegate,AdColonyAdDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

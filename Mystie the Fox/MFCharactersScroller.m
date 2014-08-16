@@ -20,7 +20,8 @@
 #import "MFCat.h"
 #import "MFCloud.h"
 
-#import <AdColony/AdColony.h>
+//#import <AdColony/AdColony.h>
+#import "AdColony.h"
 
 @interface MFCharactersScroller ()
 
@@ -135,10 +136,10 @@
         character = [[MFDragon alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_3"]){
         character = [[MFGhost alloc] initWithParent:self.parent];
-        [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
-                        withDelegate:self
-                    withV4VCPrePopup:NO
-                    andV4VCPostPopup:NO];
+//        [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
+//                        withDelegate:self
+//                    withV4VCPrePopup:NO
+//                    andV4VCPostPopup:NO];
     }else {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         

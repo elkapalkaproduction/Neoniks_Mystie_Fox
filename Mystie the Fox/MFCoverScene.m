@@ -13,7 +13,8 @@
 #import "MFSpecialPage.h"
 
 #import "GADBannerView.h"
-#import <AdColony/AdColony.h>
+//#import <AdColony/AdColony.h>
+#import "AdColony.h"
 #import "MFAdColony.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)

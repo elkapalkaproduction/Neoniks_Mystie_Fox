@@ -12,9 +12,9 @@
 
 #import "MKStoreManager.h"
 #import "Chartboost.h"
-#import <AdColony/AdColony.h>
 
-@implementation MFAppDelegate
+
+@implementation MFAppDelegate 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

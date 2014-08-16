@@ -209,6 +209,10 @@
 		307386B0197D919800105ACE /* mystie_the_fox_rus@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 307386AF197D919800105ACE /* mystie_the_fox_rus@2x~iphone.png */; };
 		307386B2197D919E00105ACE /* mystie_the_fox_eng@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 307386B1197D919E00105ACE /* mystie_the_fox_eng@2x~iphone.png */; };
 		307C69BD199AD30A0052DB15 /* MFSpecialPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 307C69BC199AD30A0052DB15 /* MFSpecialPage.m */; };
+		309B0239199F803100FE9668 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 309B0235199F803100FE9668 /* CHANGELOG.md */; };
+		309B023A199F803100FE9668 /* libChartboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 309B0237199F803100FE9668 /* libChartboost.a */; };
+		309B023B199F803100FE9668 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 309B0238199F803100FE9668 /* README.md */; };
+		309B0240199F814000FE9668 /* AdColony in Frameworks */ = {isa = PBXBuildFile; fileRef = 309B023C199F814000FE9668 /* AdColony */; };
 		30B4C3441990680A00F6A915 /* MFSounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B4C3431990680A00F6A915 /* MFSounds.m */; };
 		30BEC84D197B1E600069093E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BEC84C197B1E600069093E /* Foundation.framework */; };
 		30BEC84F197B1E600069093E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BEC84E197B1E600069093E /* CoreGraphics.framework */; };
@@ -228,13 +232,9 @@
 		30BEC880197B1E600069093E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BEC87E197B1E600069093E /* InfoPlist.strings */; };
 		30BEC882197B1E600069093E /* Mystie_the_FoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BEC881197B1E600069093E /* Mystie_the_FoxTests.m */; };
 		30BEC890197B51C50069093E /* MFIntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BEC88F197B51C50069093E /* MFIntroScene.m */; };
-		30EB6CCB199E859F00B01CA9 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 30EB6CC7199E859F00B01CA9 /* CHANGELOG.md */; };
-		30EB6CCC199E859F00B01CA9 /* libChartboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CC9199E859F00B01CA9 /* libChartboost.a */; };
-		30EB6CCD199E859F00B01CA9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 30EB6CCA199E859F00B01CA9 /* README.md */; };
 		30EB6CCF199E85E100B01CA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CCE199E85E100B01CA9 /* QuartzCore.framework */; };
 		30EB6CD1199E860400B01CA9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CD0199E860400B01CA9 /* CoreMedia.framework */; };
 		30EB6CD3199E860B00B01CA9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CD2199E860B00B01CA9 /* CoreData.framework */; };
-		30EB6CD6199E8CE100B01CA9 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CD5199E8CE100B01CA9 /* AdColony.framework */; };
 		30EB6CD8199E8D1200B01CA9 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CD7199E8D1200B01CA9 /* libz.1.2.5.dylib */; };
 		30EB6CDA199E8D3A00B01CA9 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CD9199E8D3A00B01CA9 /* EventKit.framework */; };
 		30EB6CDC199E8D4600B01CA9 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CDB199E8D4600B01CA9 /* EventKitUI.framework */; };
@@ -493,6 +493,18 @@
 		307386B1197D919E00105ACE /* mystie_the_fox_eng@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mystie_the_fox_eng@2x~iphone.png"; sourceTree = "<group>"; };
 		307C69BB199AD30A0052DB15 /* MFSpecialPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSpecialPage.h; sourceTree = "<group>"; };
 		307C69BC199AD30A0052DB15 /* MFSpecialPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSpecialPage.m; sourceTree = "<group>"; };
+		309B0230199F803100FE9668 /* CBMoreAppsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMoreAppsButton.h; sourceTree = "<group>"; };
+		309B0231199F803100FE9668 /* CBNewsfeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBNewsfeed.h; sourceTree = "<group>"; };
+		309B0232199F803100FE9668 /* CBNewsfeedUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBNewsfeedUI.h; sourceTree = "<group>"; };
+		309B0233199F803100FE9668 /* CBPostInstallAnalyticsTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPostInstallAnalyticsTracker.h; sourceTree = "<group>"; };
+		309B0234199F803100FE9668 /* CBStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBStory.h; sourceTree = "<group>"; };
+		309B0235199F803100FE9668 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		309B0236199F803100FE9668 /* Chartboost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chartboost.h; sourceTree = "<group>"; };
+		309B0237199F803100FE9668 /* libChartboost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libChartboost.a; sourceTree = "<group>"; };
+		309B0238199F803100FE9668 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		309B023C199F814000FE9668 /* AdColony */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AdColony; sourceTree = "<group>"; };
+		309B023E199F814000FE9668 /* AdColony.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdColony.h; sourceTree = "<group>"; };
+		309B023F199F814000FE9668 /* AdColonyNativeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdColonyNativeAdView.h; sourceTree = "<group>"; };
 		30B4C3421990680A00F6A915 /* MFSounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSounds.h; sourceTree = "<group>"; };
 		30B4C3431990680A00F6A915 /* MFSounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSounds.m; sourceTree = "<group>"; };
 		30BEC849197B1E5F0069093E /* Mystie the Fox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mystie the Fox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -520,19 +532,9 @@
 		30BEC881197B1E600069093E /* Mystie_the_FoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mystie_the_FoxTests.m; sourceTree = "<group>"; };
 		30BEC88E197B51C50069093E /* MFIntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFIntroScene.h; sourceTree = "<group>"; };
 		30BEC88F197B51C50069093E /* MFIntroScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFIntroScene.m; sourceTree = "<group>"; };
-		30EB6CC2199E859F00B01CA9 /* CBMoreAppsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMoreAppsButton.h; sourceTree = "<group>"; };
-		30EB6CC3199E859F00B01CA9 /* CBNewsfeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBNewsfeed.h; sourceTree = "<group>"; };
-		30EB6CC4199E859F00B01CA9 /* CBNewsfeedUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBNewsfeedUI.h; sourceTree = "<group>"; };
-		30EB6CC5199E859F00B01CA9 /* CBPostInstallAnalyticsTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPostInstallAnalyticsTracker.h; sourceTree = "<group>"; };
-		30EB6CC6199E859F00B01CA9 /* CBStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBStory.h; sourceTree = "<group>"; };
-		30EB6CC7199E859F00B01CA9 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
-		30EB6CC8199E859F00B01CA9 /* Chartboost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chartboost.h; sourceTree = "<group>"; };
-		30EB6CC9199E859F00B01CA9 /* libChartboost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libChartboost.a; sourceTree = "<group>"; };
-		30EB6CCA199E859F00B01CA9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		30EB6CCE199E85E100B01CA9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		30EB6CD0199E860400B01CA9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		30EB6CD2199E860B00B01CA9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		30EB6CD5199E8CE100B01CA9 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
 		30EB6CD7199E8D1200B01CA9 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		30EB6CD9199E8D3A00B01CA9 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		30EB6CDB199E8D4600B01CA9 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
@@ -564,6 +566,7 @@
 			files = (
 				30EB6CE0199E8D8900B01CA9 /* Social.framework in Frameworks */,
 				30EB6CDE199E8D6800B01CA9 /* MediaPlayer.framework in Frameworks */,
+				309B0240199F814000FE9668 /* AdColony in Frameworks */,
 				30EB6CDC199E8D4600B01CA9 /* EventKitUI.framework in Frameworks */,
 				30EB6CDA199E8D3A00B01CA9 /* EventKit.framework in Frameworks */,
 				30EB6CD1199E860400B01CA9 /* CoreMedia.framework in Frameworks */,
@@ -574,11 +577,10 @@
 				3053ADAF199D869C007DC626 /* CoreTelephony.framework in Frameworks */,
 				3053ADAD199D84F8007DC626 /* SystemConfiguration.framework in Frameworks */,
 				3053ADAB199D84E8007DC626 /* StoreKit.framework in Frameworks */,
-				30EB6CD6199E8CE100B01CA9 /* AdColony.framework in Frameworks */,
 				3053ADA9199D84DA007DC626 /* MessageUI.framework in Frameworks */,
+				309B023A199F803100FE9668 /* libChartboost.a in Frameworks */,
 				3053ADA7199D84C9007DC626 /* AVFoundation.framework in Frameworks */,
 				3053ADA5199D84B5007DC626 /* AudioToolbox.framework in Frameworks */,
-				30EB6CCC199E859F00B01CA9 /* libChartboost.a in Frameworks */,
 				30FD128A1992F3C40055705F /* CoreAudio.framework in Frameworks */,
 				30BEC84F197B1E600069093E /* CoreGraphics.framework in Frameworks */,
 				30BEC851197B1E600069093E /* UIKit.framework in Frameworks */,
@@ -1202,6 +1204,15 @@
 			path = iPhone;
 			sourceTree = "<group>";
 		};
+		309B023D199F814000FE9668 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				309B023E199F814000FE9668 /* AdColony.h */,
+				309B023F199F814000FE9668 /* AdColonyNativeAdView.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		30BEC840197B1E5F0069093E = {
 			isa = PBXGroup;
 			children = (
@@ -1332,15 +1343,15 @@
 		30EB6CC1199E857700B01CA9 /* ChartBoost */ = {
 			isa = PBXGroup;
 			children = (
-				30EB6CC2199E859F00B01CA9 /* CBMoreAppsButton.h */,
-				30EB6CC3199E859F00B01CA9 /* CBNewsfeed.h */,
-				30EB6CC4199E859F00B01CA9 /* CBNewsfeedUI.h */,
-				30EB6CC5199E859F00B01CA9 /* CBPostInstallAnalyticsTracker.h */,
-				30EB6CC6199E859F00B01CA9 /* CBStory.h */,
-				30EB6CC7199E859F00B01CA9 /* CHANGELOG.md */,
-				30EB6CC8199E859F00B01CA9 /* Chartboost.h */,
-				30EB6CC9199E859F00B01CA9 /* libChartboost.a */,
-				30EB6CCA199E859F00B01CA9 /* README.md */,
+				309B0230199F803100FE9668 /* CBMoreAppsButton.h */,
+				309B0231199F803100FE9668 /* CBNewsfeed.h */,
+				309B0232199F803100FE9668 /* CBNewsfeedUI.h */,
+				309B0233199F803100FE9668 /* CBPostInstallAnalyticsTracker.h */,
+				309B0234199F803100FE9668 /* CBStory.h */,
+				309B0235199F803100FE9668 /* CHANGELOG.md */,
+				309B0236199F803100FE9668 /* Chartboost.h */,
+				309B0237199F803100FE9668 /* libChartboost.a */,
+				309B0238199F803100FE9668 /* README.md */,
 			);
 			name = ChartBoost;
 			sourceTree = "<group>";
@@ -1348,7 +1359,8 @@
 		30EB6CD4199E8CBB00B01CA9 /* AdColony */ = {
 			isa = PBXGroup;
 			children = (
-				30EB6CD5199E8CE100B01CA9 /* AdColony.framework */,
+				309B023C199F814000FE9668 /* AdColony */,
+				309B023D199F814000FE9668 /* Headers */,
 			);
 			name = AdColony;
 			sourceTree = "<group>";
@@ -1460,6 +1472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				301093D1197BCDC300AA2295 /* Fox-laughter-frame-18@2x.png in Resources */,
+				309B0239199F803100FE9668 /* CHANGELOG.md in Resources */,
 				30109410197C27F100AA2295 /* icon_mystie_80x80.png in Resources */,
 				30109369197BCDC300AA2295 /* cloud-6@2x.png in Resources */,
 				301093BE197BCDC300AA2295 /* Fox-blinks-frames-05@2x.png in Resources */,
@@ -1512,6 +1525,7 @@
 				30109387197BCDC300AA2295 /* Fire-15@2x.png in Resources */,
 				301093BD197BCDC300AA2295 /* Fox-blinks-frames-04@2x.png in Resources */,
 				301093CF197BCDC300AA2295 /* Fox-laughter-frame-16@2x.png in Resources */,
+				309B023B199F803100FE9668 /* README.md in Resources */,
 				301093BC197BCDC300AA2295 /* Fox-blinks-frames-03@2x.png in Resources */,
 				30109385197BCDC300AA2295 /* Fire-13@2x.png in Resources */,
 				30109397197BCDC300AA2295 /* Ghost-5@2x.png in Resources */,
@@ -1520,7 +1534,6 @@
 				301093B0197BCDC300AA2295 /* IPad_button_1@2x.png in Resources */,
 				301093B3197BCDC300AA2295 /* IPad_button_4@2x.png in Resources */,
 				3010936F197BCDC300AA2295 /* parachute_6@2x.png in Resources */,
-				30EB6CCB199E859F00B01CA9 /* CHANGELOG.md in Resources */,
 				301093D2197BCDC300AA2295 /* Fox-laughter-frame-19@2x.png in Resources */,
 				30109374197BCDC300AA2295 /* parachute_5@2x.png in Resources */,
 				3010937B197BCDC300AA2295 /* hit_the_ground.mp3 in Resources */,
@@ -1603,7 +1616,6 @@
 				30109393197BCDC300AA2295 /* jet_away.mp3 in Resources */,
 				301093E2197BCDC300AA2295 /* linkSpecial-eng@2x.png in Resources */,
 				30109398197BCDC300AA2295 /* Ghost-6@2x.png in Resources */,
-				30EB6CCD199E859F00B01CA9 /* README.md in Resources */,
 				30109394197BCDC300AA2295 /* Ghost-2@2x.png in Resources */,
 				30109386197BCDC300AA2295 /* Fire-14@2x.png in Resources */,
 				301093D9197BCDC300AA2295 /* fox_body@2x.png in Resources */,
@@ -1832,12 +1844,18 @@
 					"$(PROJECT_DIR)/Mystie",
 					the,
 					Fox,
+					"$(PROJECT_DIR)/Mystie",
+					the,
+					Fox,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";
 				INFOPLIST_FILE = "Mystie the Fox/Mystie the Fox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Mystie",
+					the,
+					Fox,
 					"$(PROJECT_DIR)/Mystie",
 					the,
 					Fox,
@@ -1862,12 +1880,18 @@
 					"$(PROJECT_DIR)/Mystie",
 					the,
 					Fox,
+					"$(PROJECT_DIR)/Mystie",
+					the,
+					Fox,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";
 				INFOPLIST_FILE = "Mystie the Fox/Mystie the Fox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Mystie",
+					the,
+					Fox,
 					"$(PROJECT_DIR)/Mystie",
 					the,
 					Fox,

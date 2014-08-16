@@ -107,7 +107,7 @@
     SKAction *soundSequence = [SKAction sequence:@[catMeow, catHelicopterTwo]];
     [self runAction:sequence];
     [self runAction:soundSequence];
-    self.speed = self.speed *2.0f;
+//    self.speed = self.speed *2.0f;
     
     
 }
