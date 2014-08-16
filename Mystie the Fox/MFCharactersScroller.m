@@ -146,7 +146,7 @@
         BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
         BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
         
-        if (IAPurchased||isVideoWathched) {
+//        if (IAPurchased||isVideoWathched) {
             if ([name isEqualToString:@"button_4"]){
                 character = [[MFUfo alloc] initWithParent:self.parent];
             }else if ([name isEqualToString:@"button_5"]){
@@ -156,49 +156,49 @@
             }else if ([name isEqualToString:@"button_7"]){
                 character = [[MFCloud alloc] initWithParent:self.parent];
             }
-        }else{
-            NSString *message;
-            NSString *watchVideo;
-            NSString *unlock;
-            NSString *restore;
-            NSString *cancel;
-            NSString *language = [MFLanguage sharedLanguage].language;
-            if([language isEqualToString:@"ru"]){
-                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-                    
-                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
-                    watchVideo=@"Посмотреть видео";
-                    unlock=@"Разблокировать персонажей";
-                    restore=@"Восстановить";
-                    cancel = @"Отмена";
-                }else{
-                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
-                    unlock=@"Продолжить";
-                    restore=@"Восстановить";
-                    cancel = @"Отмена";
-                }
-            }else{
-                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
-                    watchVideo=@"Watch a video";
-                    unlock=@"Unlock all forever";
-                    restore=@"Restore";
-                    cancel = @"Cancel";
-                }else{
-                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
-                    unlock=@"Continue";
-                    restore=@"Restore";
-                    cancel = @"Cancel";
-                }
-            }
-            UIAlertView *alertView;
-            if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:watchVideo,unlock,restore, nil];
-            }else{
-                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:unlock,restore, nil];
-            }
-            [alertView show];
-        }
+//        }else{
+//            NSString *message;
+//            NSString *watchVideo;
+//            NSString *unlock;
+//            NSString *restore;
+//            NSString *cancel;
+//            NSString *language = [MFLanguage sharedLanguage].language;
+//            if([language isEqualToString:@"ru"]){
+//                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+//                    
+//                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
+//                    watchVideo=@"Посмотреть видео";
+//                    unlock=@"Разблокировать персонажей";
+//                    restore=@"Восстановить";
+//                    cancel = @"Отмена";
+//                }else{
+//                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
+//                    unlock=@"Продолжить";
+//                    restore=@"Восстановить";
+//                    cancel = @"Отмена";
+//                }
+//            }else{
+//                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+//                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
+//                    watchVideo=@"Watch a video";
+//                    unlock=@"Unlock all forever";
+//                    restore=@"Restore";
+//                    cancel = @"Cancel";
+//                }else{
+//                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
+//                    unlock=@"Continue";
+//                    restore=@"Restore";
+//                    cancel = @"Cancel";
+//                }
+//            }
+//            UIAlertView *alertView;
+//            if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+//                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:watchVideo,unlock,restore, nil];
+//            }else{
+//                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:unlock,restore, nil];
+//            }
+//            [alertView show];
+//        }
     }
 if (name!=nil&& character!=nil) {
         
