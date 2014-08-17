@@ -1841,27 +1841,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: ROMAN GAL (LKUFD2QJ3V)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
+					"$(PROJECT_DIR)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";
 				INFOPLIST_FILE = "Mystie the Fox/Mystie the Fox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
+					"$(PROJECT_DIR)/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1877,27 +1864,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: ROMAN GAL (LKUFD2QJ3V)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
+					"$(PROJECT_DIR)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";
 				INFOPLIST_FILE = "Mystie the Fox/Mystie the Fox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
-					"$(PROJECT_DIR)/Mystie",
-					the,
-					Fox,
+					"$(PROJECT_DIR)/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
