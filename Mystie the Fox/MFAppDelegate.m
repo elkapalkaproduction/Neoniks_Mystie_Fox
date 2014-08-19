@@ -82,12 +82,24 @@
 	NSLog(@"AdColony zone %@ reward %i %i %@", zoneID, success, amount, currencyName);
 	
 	if (success) {
+        [MFAdColony sharedAdColony].isSecondZoneWatched =YES;
+        
 		NSUserDefaults* storage = [NSUserDefaults standardUserDefaults];
 		
-        [storage setBool:YES forKey:@"isVideoWatched"];
+//        [storage setBool:YES forKey:@"isVideoWatched"];
+        
+        NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+        dayComponent.day = 1;
+        
+        NSCalendar *theCalendar = [NSCalendar currentCalendar];
+        NSDate *expireDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+        
+        [storage setObject:expireDate forKey:@"expireDate"];
         [storage synchronize];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIsVideoWatched" object:nil];
 		
-
+        
 	} else {
 //		[[NSNotificationCenter defaultCenter] postNotificationName:@"MFZoneOff" object:nil];
 	}

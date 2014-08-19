@@ -13,6 +13,8 @@
 #import "MFFirstPageScene.h"
 #import "MFSpecialPage.h"
 
+#import "MFAdColony.h"
+
 @implementation MFViewController
 
 - (void)viewDidLoad
@@ -34,18 +36,26 @@
 }
 
 
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
+
 - (BOOL)shouldAutorotate
 {
-    return YES;
+//    return YES;
+    return NO;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return UIInterfaceOrientationMaskAllButUpsideDown;
-    } else {
-        return UIInterfaceOrientationMaskAll;
-    }
+    
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return UIInterfaceOrientationMaskPortrait;
+//    } else {
+//        return UIInterfaceOrientationMaskAll;
+//    }
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -69,6 +79,17 @@
             destinationVC.parentVC =self;
         }
     }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    } else {
+        return YES;
+    }
+//    return NO;
 }
 
 

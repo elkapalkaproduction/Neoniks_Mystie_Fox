@@ -20,12 +20,18 @@
 #import "MFCat.h"
 #import "MFCloud.h"
 
+
 //#import <AdColony/AdColony.h>
 #import "AdColony.h"
+#import "MKStoreManager.h"
 
-@interface MFCharactersScroller ()
+@interface MFCharactersScroller () <AdColonyAdDelegate>
 
 @property (nonatomic) int currentPosition;
+
+@property (strong,nonatomic) NSMutableArray * arrayWithProducts;
+
+@property(strong,nonatomic) UIAlertView *alertView;
 
 @end
 
@@ -38,7 +44,11 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
-        BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
+//        BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
+        
+        NSDate *expireDate =[defaults objectForKey:@"expireDate"];
+        NSDate *now = [NSDate date];
+        NSComparisonResult result=[expireDate compare:now];
         
         self.buttons = [[NSMutableArray alloc] init];
         self.currentPosition=0;
@@ -54,7 +64,7 @@
                 
                 if (i>3) {
                     button.color = [UIColor blackColor];
-                    if (IAPurchased||isVideoWathched) {
+                    if (IAPurchased||(result==NSOrderedDescending)) {
                         button.colorBlendFactor=0.0;
                     }else{
                         button.colorBlendFactor=0.6;
@@ -77,7 +87,7 @@
                 
                 if (i>3) {
                     button.color = [UIColor blackColor];
-                    if (IAPurchased||isVideoWathched) {
+                    if (IAPurchased||(result==NSOrderedDescending)) {
                         button.colorBlendFactor=0.0;
                     }else{
                         button.colorBlendFactor=0.6;
@@ -128,6 +138,14 @@
 
 -(void)characterButtonPressed:(NSString *) name{
     MFCharacter *character;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *expireDate =[defaults objectForKey:@"expireDate"];
+    NSDate *now = [NSDate date];
+    NSComparisonResult result=[expireDate compare:now];
+    
+    BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
+//    BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
+    
     if ([name isEqualToString:@"button_0"]) {
         character = [[MFBug alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_1"]){
@@ -136,17 +154,9 @@
         character = [[MFDragon alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_3"]){
         character = [[MFGhost alloc] initWithParent:self.parent];
-//        [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
-//                        withDelegate:self
-//                    withV4VCPrePopup:NO
-//                    andV4VCPostPopup:NO];
     }else {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
-        BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
-        BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
-        
-//        if (IAPurchased||isVideoWathched) {
+        if (IAPurchased||(result==NSOrderedDescending)) {
             if ([name isEqualToString:@"button_4"]){
                 character = [[MFUfo alloc] initWithParent:self.parent];
             }else if ([name isEqualToString:@"button_5"]){
@@ -156,49 +166,48 @@
             }else if ([name isEqualToString:@"button_7"]){
                 character = [[MFCloud alloc] initWithParent:self.parent];
             }
-//        }else{
-//            NSString *message;
-//            NSString *watchVideo;
-//            NSString *unlock;
-//            NSString *restore;
-//            NSString *cancel;
-//            NSString *language = [MFLanguage sharedLanguage].language;
-//            if([language isEqualToString:@"ru"]){
-//                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-//                    
-//                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
-//                    watchVideo=@"Посмотреть видео";
-//                    unlock=@"Разблокировать персонажей";
-//                    restore=@"Восстановить";
-//                    cancel = @"Отмена";
-//                }else{
-//                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
-//                    unlock=@"Продолжить";
-//                    restore=@"Восстановить";
-//                    cancel = @"Отмена";
-//                }
-//            }else{
-//                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-//                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
-//                    watchVideo=@"Watch a video";
-//                    unlock=@"Unlock all forever";
-//                    restore=@"Restore";
-//                    cancel = @"Cancel";
-//                }else{
-//                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
-//                    unlock=@"Continue";
-//                    restore=@"Restore";
-//                    cancel = @"Cancel";
-//                }
-//            }
-//            UIAlertView *alertView;
-//            if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-//                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:watchVideo,unlock,restore, nil];
-//            }else{
-//                alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:unlock,restore, nil];
-//            }
-//            [alertView show];
-//        }
+        }else{
+            NSString *message;
+            NSString *watchVideo;
+            NSString *unlock;
+            NSString *restore;
+            NSString *cancel;
+            NSString *language = [MFLanguage sharedLanguage].language;
+            if([language isEqualToString:@"ru"]){
+                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+                    
+                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
+                    watchVideo=@"Посмотреть видео";
+                    unlock=@"Разблокировать персонажей";
+                    restore=@"Восстановить";
+                    cancel = @"Отмена";
+                }else{
+                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
+                    unlock=@"Продолжить";
+                    restore=@"Восстановить";
+                    cancel = @"Отмена";
+                }
+            }else{
+                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
+                    watchVideo=@"Watch a video";
+                    unlock=@"Unlock all forever";
+                    restore=@"Restore";
+                    cancel = @"Cancel";
+                }else{
+                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
+                    unlock=@"Continue";
+                    restore=@"Restore";
+                    cancel = @"Cancel";
+                }
+            }
+            if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+                self.alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:watchVideo,unlock,restore, nil];
+            }else{
+                self.alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:unlock,restore, nil];
+            }
+            [self.alertView show];
+        }
     }
 if (name!=nil&& character!=nil) {
         
@@ -208,15 +217,73 @@ if (name!=nil&& character!=nil) {
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    if (alertView.numberOfButtons==4) {
-        if (buttonIndex==1) {
-            [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
-                            withDelegate:self
-                        withV4VCPrePopup:NO
-                        andV4VCPostPopup:NO];
+    if (alertView ==self.alertView) {
+        if (alertView.numberOfButtons==4) {
+            if (buttonIndex==1) {
+                [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
+                                withDelegate:self.parent
+                            withV4VCPrePopup:NO
+                            andV4VCPostPopup:NO];
+                
+            }else if (buttonIndex==2){
+                [self buy];
+            }else if(buttonIndex ==3){
+                [self recover];
+            }
+        }else{
+            if (buttonIndex==1) {
+                [self buy];
+            }else if(buttonIndex ==2){
+                [self recover];
+            }
         }
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIAPPurchased" object:nil];
     }
 }
 
+-(void)recover{
+    self.arrayWithProducts=[MKStoreManager sharedManager].purchasableObjects;
+    UIAlertView * alertForSucces = [[UIAlertView alloc] initWithTitle:@"Восстановление завершено" message:@"Восстановление завершено. Приятного использования" delegate:self cancelButtonTitle:@"Спасибо" otherButtonTitles:nil, nil];
+    [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
+        for (SKProduct *product in self.arrayWithProducts){
+            if([MKStoreManager isFeaturePurchased:product.productIdentifier]){
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setBool:YES forKey:@"IAPurchased"];
+                [defaults synchronize];
+            }
+        }
+        [alertForSucces show];
+    }onError:^(NSError *error){
+        {
+            NSLog(@"%d code" , error.code );
+            NSDictionary *dictWithUserInfo = error.userInfo;
+            NSLog(@"%@ user info" , dictWithUserInfo[NSLocalizedDescriptionKey]);
+            UIAlertView * alertForError = [[UIAlertView alloc] initWithTitle:@"У вас нет покупок" message:@"Купите что-нибудь" delegate:self cancelButtonTitle:@"Спасибо" otherButtonTitles:nil, nil];
+            [alertForError show];
+        }
+        
+    }];
+}
+
+-(void)buy{
+    self.arrayWithProducts=[MKStoreManager sharedManager].purchasableObjects;
+    [[MKStoreManager sharedManager] buyFeature:((SKProduct*)[self.arrayWithProducts firstObject]).productIdentifier
+                                    onComplete:^(NSString* purchasedFeature,
+                                                 NSData* purchasedReceipt,
+                                                 NSArray* availableDownloads)
+     {
+         NSLog(@"Purchased: %@", purchasedFeature);
+         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+         
+         [defaults setBool:YES forKey:@"IAPurchased"];
+         [defaults synchronize];
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIAPPurchased" object:nil];
+     }
+                                   onCancelled:^
+     {
+         NSLog(@"User Cancelled Transaction");
+     }];
+}
 
 @end

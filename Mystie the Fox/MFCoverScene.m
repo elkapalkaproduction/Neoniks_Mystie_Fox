@@ -208,8 +208,15 @@
     
     [self.bannerView loadRequest:[GADRequest request]];
     
-    if([MFAdColony sharedAdColony].isFirstZoneLoaded){
-        [AdColony playVideoAdForZone:@"vz3a0c719cb27b400cb1" withDelegate:nil];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *expireDate =[defaults objectForKey:@"expireDate"];
+    NSDate *now = [NSDate date];
+    NSComparisonResult result=[expireDate compare:now];
+    BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
+    if (!(result ==NSOrderedDescending||IAPurchased)) {
+        if([MFAdColony sharedAdColony].isFirstZoneLoaded){
+            [AdColony playVideoAdForZone:@"vz3a0c719cb27b400cb1" withDelegate:nil];
+        }
     }
 }
 

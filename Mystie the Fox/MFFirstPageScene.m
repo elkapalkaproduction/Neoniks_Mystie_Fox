@@ -59,6 +59,9 @@
 
 -(instancetype)initWithSize:(CGSize)size{
     if (self=[super initWithSize:size]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateScroller) name:@"MFIsVideoWatched" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateScroller) name:@"MFIAPPurchased" object:nil];
+        
         NSString * backgroundName = @"";
         //        NSString * wingsNodeName = @"";
         NSString * siteNodeName = @"";
@@ -100,7 +103,7 @@
         }else{
             self.siteNode.position = CGPointMake(CGRectGetMidX(self.frame), 40);
         }
-        self.siteNode.name=siteNodeName;
+        self.siteNode.name=@"siteNode";
         [self addChild:self.siteNode];
         
         self.moreNode =[SKSpriteNode spriteNodeWithImageNamed:moreNodeName];
@@ -280,6 +283,9 @@
         }else if ([node.name isEqualToString:@"more"]){
             [self runAction:self.playClickSound];
             [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
+        }else if([node.name isEqualToString:@"siteNode"]){
+            NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
+            [[UIApplication sharedApplication] openURL:url];
         }
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
@@ -379,5 +385,34 @@
         }
     }
 }
+
+#pragma mark - ad colony delegate methods
+-(void)onAdColonyAdAttemptFinished:(BOOL)shown inZone:(NSString *)zoneID
+{
+//    ((SKScene*)self.parent).view.paused = NO;
+    self.view.paused=NO;
+    
+    
+    
+}
+-(void)onAdColonyAdStartedInZone:(NSString *)zoneID
+{
+//    ((SKScene*)self.parent).view.paused = YES;
+    self.view.paused=YES;
+}
+
+
+-(void)updateScroller{
+    [self.characterScroller removeFromParent];
+    self.characterScroller = [[MFCharactersScroller alloc] init];
+    [self addChild:self.characterScroller];
+}
+
+-(void)willMoveFromView:(SKView *)view{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MFIsVideoWatched" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MFIAPPurchased" object:nil];
+}
+
+
 
 @end

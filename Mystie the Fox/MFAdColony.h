@@ -15,4 +15,6 @@
 @property(nonatomic)BOOL isFirstZoneLoaded;
 @property(nonatomic)BOOL isSecondZoneLoaded;
 
+@property(nonatomic) BOOL isSecondZoneWatched;
+
 @end
