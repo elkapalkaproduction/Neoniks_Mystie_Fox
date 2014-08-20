@@ -23,8 +23,7 @@
 
     // Configure the view.
     SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+
     
     SKScene *scene;
     scene = [MFIntroScene sceneWithSize:skView.bounds.size];
