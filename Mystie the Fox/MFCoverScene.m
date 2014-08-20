@@ -221,9 +221,23 @@
     BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
     if (!(result ==NSOrderedDescending||IAPurchased)) {
         if([MFAdColony sharedAdColony].isFirstZoneLoaded){
-            [AdColony playVideoAdForZone:@"vz3a0c719cb27b400cb1" withDelegate:nil];
+            [AdColony playVideoAdForZone:@"vz3a0c719cb27b400cb1" withDelegate:self];
         }
     }
+}
+
+-(void)onAdColonyAdAttemptFinished:(BOOL)shown inZone:(NSString *)zoneID
+{
+    //    ((SKScene*)self.parent).view.paused = NO;
+    self.view.paused=NO;
+    
+    
+    
+}
+-(void)onAdColonyAdStartedInZone:(NSString *)zoneID
+{
+    //    ((SKScene*)self.parent).view.paused = YES;
+    self.view.paused=YES;
 }
 
 
