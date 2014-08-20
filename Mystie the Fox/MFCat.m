@@ -22,6 +22,8 @@
 @property (strong, nonatomic) AVAudioPlayer * catMeow;
 
 
+
+
 @end
 
 @implementation MFCat
@@ -57,6 +59,11 @@
         self.position = [self rightRandomPosition:parent];
         self.move = [self createMoveAction:parent];
         
+        self.textures = [[NSMutableArray alloc] init];
+        for (int i = 0; i<4; i++) {
+            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cat-%d.png",i+1]];
+            [self.textures addObject:texture];
+        }
     }
     return self;
 }
@@ -94,16 +101,19 @@
         [self.catMeow prepareToPlay];
         [self.catMeow play];
     }];
-    NSMutableArray * textures=[[NSMutableArray alloc] init];
-    for (int i = 0; i<4; i++) {
-        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cat-%d.png",i+1]];
-        [textures addObject:texture];
-    }
+//    NSMutableArray * textures=[[NSMutableArray alloc] init];
+//    for (int i = 0; i<4; i++) {
+//        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cat-%d.png",i+1]];
+//        [textures addObject:texture];
+//    }
     float timePerFrame = 0.15;
-    SKAction * catAnimation = [SKAction animateWithTextures:textures timePerFrame:timePerFrame];
+    SKAction * catAnimation = [SKAction animateWithTextures:self.textures timePerFrame:timePerFrame];
     SKAction * wait = [SKAction waitForDuration:timePerFrame *3];
     SKAction *reverseCatAnimation = [catAnimation reversedAction];
-    SKAction *sequence = [SKAction sequence:@[catAnimation,wait,reverseCatAnimation]];
+    SKAction *speed = [SKAction speedBy:2 duration:0];
+    
+    SKAction *sequence = [SKAction sequence:@[speed,catAnimation,wait,reverseCatAnimation]];
+    
     SKAction *soundSequence = [SKAction sequence:@[catMeow, catHelicopterTwo]];
     [self runAction:sequence];
     [self runAction:soundSequence];

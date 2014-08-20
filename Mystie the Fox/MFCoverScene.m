@@ -185,8 +185,14 @@
                 
                 [vc performSegueWithIdentifier:@"specialPageSegue" sender:vc];
             }else if([node.name isEqualToString:@"siteNode"]){
-                NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
-                [[UIApplication sharedApplication] openURL:url];
+                NSString *language = [MFLanguage sharedLanguage].language;
+                if ([language isEqualToString:@"ru"]) {
+                    NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
+                    [[UIApplication sharedApplication] openURL:url];
+                }else{
+                    NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
+                    [[UIApplication sharedApplication] openURL:url];
+                }
             }
             [self runAction:sound];
             

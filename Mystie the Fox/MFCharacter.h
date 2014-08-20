@@ -14,6 +14,8 @@
 
 @property (strong,nonatomic) SKAction * removeNode;
 
+@property(strong,nonatomic) NSMutableArray * textures;
+
 -(instancetype) initWithName:(NSString*)name;
 
 -(instancetype) initWithName:(NSString*)name parent:(SKNode*)parent;

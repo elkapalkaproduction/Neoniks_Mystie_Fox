@@ -40,6 +40,12 @@
         self.position = [self rightRandomPosition:parent];
         self.move = [self createMoveAction:parent];
         
+        self.textures=[[NSMutableArray alloc] init];
+        for (int i = 0; i<6; i++) {
+            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Ghost-%d.png",i+1]];
+            [self.textures addObject:texture];
+        }
+        
     }
     return self;
 }
@@ -66,12 +72,12 @@
 
 -(void)taped{
     [self.ghostFlying stop];
-    NSMutableArray * textures=[[NSMutableArray alloc] init];
-    for (int i = 0; i<6; i++) {
-        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Ghost-%d.png",i+1]];
-        [textures addObject:texture];
-    }
-    SKAction *holeAction= [SKAction animateWithTextures:textures timePerFrame:0.1];
+//    NSMutableArray * textures=[[NSMutableArray alloc] init];
+//    for (int i = 0; i<6; i++) {
+//        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Ghost-%d.png",i+1]];
+//        [textures addObject:texture];
+//    }
+    SKAction *holeAction= [SKAction animateWithTextures:self.textures timePerFrame:0.1];
     SKAction *ghostHole = [SKAction runBlock:^{
         [self.ghostHole play];
     }];

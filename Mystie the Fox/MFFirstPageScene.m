@@ -284,8 +284,14 @@
             [self runAction:self.playClickSound];
             [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
         }else if([node.name isEqualToString:@"siteNode"]){
-            NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
-            [[UIApplication sharedApplication] openURL:url];
+            NSString *language = [MFLanguage sharedLanguage].language;
+            if ([language isEqualToString:@"ru"]) {
+                NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
+                [[UIApplication sharedApplication] openURL:url];
+            }else{
+                NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
+                [[UIApplication sharedApplication] openURL:url];
+            }
         }
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {

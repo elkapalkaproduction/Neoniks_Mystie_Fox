@@ -40,6 +40,12 @@
         self.position = [self rightRandomPosition:parent];
         self.move = [self createMoveAction:parent];
         
+        self.textures = [[NSMutableArray alloc] init];
+        for (int i = 0; i<6; i++) {
+            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cloud-%d.png",i+1]];
+            [self.textures addObject:texture];
+        }
+        
     }
     return self;
 }
@@ -69,18 +75,18 @@
         [self.cloudThunder prepareToPlay];
         [self.cloudThunder play];
     }];
-    NSMutableArray * textures=[[NSMutableArray alloc] init];
-    for (int i = 0; i<6; i++) {
-        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cloud-%d.png",i+1]];
-        [textures addObject:texture];
-    }
-    SKTexture *texture2 = [[textures objectAtIndex:1] copy];
-    [textures addObject:texture2];
-    SKTexture *texture = [[textures objectAtIndex:0] copy];
-    [textures addObject:texture];
+//    NSMutableArray * textures=[[NSMutableArray alloc] init];
+//    for (int i = 0; i<6; i++) {
+//        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"cloud-%d.png",i+1]];
+//        [textures addObject:texture];
+//    }
+    SKTexture *texture2 = [[self.textures objectAtIndex:1] copy];
+    [self.textures addObject:texture2];
+    SKTexture *texture = [[self.textures objectAtIndex:0] copy];
+    [self.textures addObject:texture];
     float timePerFrame = 0.1;
     
-    SKAction *animate = [SKAction animateWithTextures:textures timePerFrame:timePerFrame];
+    SKAction *animate = [SKAction animateWithTextures:self.textures timePerFrame:timePerFrame];
     SKSpriteNode * whiteScreen = [SKSpriteNode spriteNodeWithImageNamed:@"white_background.png"];
     whiteScreen.size = self.parent.frame.size;
     whiteScreen.position = CGPointMake(CGRectGetMidX(self.parent.frame), CGRectGetMidY(self.parent.frame));

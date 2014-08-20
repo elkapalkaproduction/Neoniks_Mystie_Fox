@@ -58,6 +58,13 @@
         [self.wings runAction:foreverSequence];
         self.removeNode = [SKAction removeFromParent];
         self.move = [self createMoveAction:parent];
+        
+        self.textures=[[NSMutableArray alloc] init];
+        for (int i = 0; i<4; i++) {
+            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"mosquito-%d.png",i+1]];
+            [self.textures addObject:texture];
+        }
+
     }
     return self;
 }
@@ -87,12 +94,12 @@
         [self.mosquitoLightOn prepareToPlay];
         [self.mosquitoLightOn play];
     }];
-    NSMutableArray * textures=[[NSMutableArray alloc] init];
-    for (int i = 0; i<4; i++) {
-        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"mosquito-%d.png",i+1]];
-        [textures addObject:texture];
-    }
-    SKAction * lightOnAnimation = [SKAction animateWithTextures:textures timePerFrame:0.08];
+//    NSMutableArray * textures=[[NSMutableArray alloc] init];
+//    for (int i = 0; i<4; i++) {
+//        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"mosquito-%d.png",i+1]];
+//        [textures addObject:texture];
+//    }
+    SKAction * lightOnAnimation = [SKAction animateWithTextures:self.textures timePerFrame:0.08];
     if (!self.isTapped) {
         self.isTapped =YES;
         SKAction * group = [SKAction group:@[lightOnAnimation, mosquitoLightOn]];

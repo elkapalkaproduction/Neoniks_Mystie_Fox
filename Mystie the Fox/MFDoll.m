@@ -47,6 +47,12 @@
         self.position=[self topRandomPosition:parent];
         [self loadSounds];
         self.move = [self createMoveAction:parent];
+        
+        self.textures=[[NSMutableArray alloc] init];
+        for (int i = 0; i<8; i++) {
+            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"parachute_%d.png",i+1]];
+            [self.textures addObject:texture];
+        }
     }
     return self;
 }
@@ -74,11 +80,11 @@
     if (!self.isParachuteOpened) {
         [self.dollFalling stop];
         [self removeAllActions];
-        NSMutableArray * textures=[[NSMutableArray alloc] init];
-        for (int i = 0; i<8; i++) {
-            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"parachute_%d.png",i+1]];
-            [textures addObject:texture];
-        }
+//        NSMutableArray * textures=[[NSMutableArray alloc] init];
+//        for (int i = 0; i<8; i++) {
+//            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"parachute_%d.png",i+1]];
+//            [textures addObject:texture];
+//        }
         CGSize parachuteSize ;
         if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPad) {
             parachuteSize = CGSizeMake(165, 180);
@@ -90,7 +96,7 @@
         parachute.anchorPoint = CGPointMake(0.5, 0);
         parachute.position =CGPointMake(0, self.doll.size.height*3/4);
         [self addChild:parachute];
-        SKAction *parachuteOpening= [SKAction animateWithTextures:textures timePerFrame:0.05];
+        SKAction *parachuteOpening= [SKAction animateWithTextures:self.textures timePerFrame:0.05];
         SKAction * laughtSound = [SKAction runBlock:^{
             [self.dollLaught play];
             self.parachuteOpened =YES;

@@ -37,23 +37,24 @@
     NSString * imageName=@"";
     NSString * moreImageName =@"";
     NSString * playImageName=@"";
-    NSString * linkImageName=@"";
+    NSString * siteImageName=@"";
 
     NSString *language = [MFLanguage sharedLanguage].language;
     if ([language isEqualToString:@"ru"]) {
         imageName=@"iPade_page2-rus.png";
         moreImageName=@"moreSpecial-rus.png";
         playImageName=@"playSpecial-rus.png";
-        linkImageName=@"linkSpecial-rus.png";
+        siteImageName=@"linkSpecial-rus.png";
     }else{
         imageName=@"iPade_page2-eng.png";
         moreImageName=@"moreSpecial-eng.png";
         playImageName=@"playSpecial-eng.png";
-        linkImageName=@"linkSpecial-eng.png";
+        siteImageName=@"linkSpecial-eng.png";
     }
     UIImage * image = [UIImage imageNamed:imageName];
     UIImage * playImage = [UIImage imageNamed:playImageName];
     UIImage * moreImage = [UIImage imageNamed:moreImageName];
+    UIImage * siteImage = [UIImage imageNamed:siteImageName];
     
     
     
@@ -90,6 +91,14 @@
     moreImageView.userInteractionEnabled =YES;
     moreImageView.frame = CGRectMake(232*positionRatio, (757*positionRatio-moreImageView.frame.size.height/ratio),moreImageView.frame.size.width/ratio, moreImageView.frame.size.height/ratio);
     [self.scrollView addSubview:moreImageView];
+    
+    UIImageView *siteImageView = [[UIImageView alloc] initWithImage:siteImage];
+    siteImageView.userInteractionEnabled=YES;
+    siteImageView.frame =CGRectMake(92*positionRatio, (375*positionRatio-siteImageView.frame.size.height/ratio),siteImageView.frame.size.width/ratio, siteImageView.frame.size.height/ratio);
+    [self.scrollView addSubview:siteImageView];
+    
+    UITapGestureRecognizer * siteGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSite:)];
+    [siteImageView addGestureRecognizer:siteGesture];
     
     UITapGestureRecognizer * moreGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMore:)];
     [moreImageView addGestureRecognizer:moreGesture];
@@ -140,6 +149,18 @@
     }
     [self.clickSound prepareToPlay];
     [self.clickSound play];
+}
+
+-(void)showSite:(id)object{
+    [self click];
+    NSString *language = [MFLanguage sharedLanguage].language;
+    if ([language isEqualToString:@"ru"]) {
+        NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
+        [[UIApplication sharedApplication] openURL:url];
+    }else{
+        NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 /*

@@ -45,6 +45,12 @@
         self.position=[self rightRandomPosition:parent];
         
         self.move = [self createMoveAction:parent];
+        
+        self.textures=[[NSMutableArray alloc] init];
+        for (int i = 0; i<16; i++) {
+            SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Fire-%d.png",i+1]];
+            [self.textures addObject:texture];
+        }
     }
     return self;
 }
@@ -85,11 +91,11 @@
     [super taped];
     self.dragon.name =nil;
     [self.dragonSound stop];
-    NSMutableArray * textures=[[NSMutableArray alloc] init];
-    for (int i = 0; i<16; i++) {
-        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Fire-%d.png",i+1]];
-        [textures addObject:texture];
-    }
+//    NSMutableArray * textures=[[NSMutableArray alloc] init];
+//    for (int i = 0; i<16; i++) {
+//        SKTexture *texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Fire-%d.png",i+1]];
+//        [textures addObject:texture];
+//    }
     CGSize fireSize ;
     if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPad) {
         fireSize = CGSizeMake(250, 105);
@@ -100,7 +106,7 @@
     self.fire.anchorPoint =CGPointMake(0, 0.5);
     self.fire.position =CGPointMake(-self.size.width/2, -self.size.height/16*3);
     [self addChild:self.fire];
-    SKAction *fireAction = [SKAction animateWithTextures:textures timePerFrame:0.05 resize:NO restore:YES];
+    SKAction *fireAction = [SKAction animateWithTextures:self.textures timePerFrame:0.05 resize:NO restore:YES];
     SKAction *sound = [SKAction runBlock:^{
         [self.dragonFire play];
     }];
