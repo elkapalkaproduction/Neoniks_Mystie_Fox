@@ -12,15 +12,14 @@
 
 #import "MKStoreManager.h"
 #import "Chartboost.h"
+#import "GAI.h"
 
 
 @implementation MFAppDelegate 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [MFSounds sharedSound];
-    [MKStoreManager sharedManager];
-    [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e"] delegate:self logging:YES];
+    [self frameworksSettings];
     
     [self.window makeKeyAndVisible];
     
@@ -105,7 +104,6 @@
 	}
 }
 
-#pragma mark -
 #pragma mark AdColony ad fill
 
 - ( void ) onAdColonyAdAvailabilityChange:(BOOL)available inZone:(NSString*) zoneID {
@@ -119,6 +117,25 @@
 	}
 }
 
+#pragma mark - frameworks settings
 
+-(void)frameworksSettings{
+    [MFSounds sharedSound];
+    [MKStoreManager sharedManager];
+    [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e"] delegate:self logging:YES];
+    
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    // Initialize tracker. Replace with your tracking ID.
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-54008191-3"];
+    
+}
 
 @end
