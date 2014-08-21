@@ -229,7 +229,7 @@
     BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
     if (!(result ==NSOrderedDescending||IAPurchased)) {
         if([MFAdColony sharedAdColony].isFirstZoneLoaded){
-            [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:[self.view nextResponder]];
+            [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:[self.view nextResponder] zone:@"vz3a0c719cb27b400cb1"];
         }else if ([MFAdColony sharedAdColony].isInterstitialRequestLoaded) {
             [[MFAdColony sharedAdColony] showGADInterstitialWithParent:[self.view nextResponder]];
         }

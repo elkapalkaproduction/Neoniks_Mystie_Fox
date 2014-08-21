@@ -112,6 +112,8 @@
             [MFAdColony sharedAdColony].isFirstZoneLoaded=YES;
         }else if ([zoneID isEqualToString:@"vz16512e0b8a19467b8e"]){
             [MFAdColony sharedAdColony].isSecondZoneLoaded=YES;
+        }else if([zoneID isEqualToString:@"vz38df8ea2870f41d48e"]){
+            [MFAdColony sharedAdColony].isThirdZoneLaoded =YES;
         }
 		
 	}else{
@@ -119,6 +121,8 @@
             [MFAdColony sharedAdColony].isFirstZoneLoaded=NO;
         }else if ([zoneID isEqualToString:@"vz16512e0b8a19467b8e"]){
             [MFAdColony sharedAdColony].isSecondZoneLoaded=NO;
+        }else if([zoneID isEqualToString:@"vz38df8ea2870f41d48e"]){
+            [MFAdColony sharedAdColony].isThirdZoneLaoded =NO;
         }
     }
 }
@@ -128,7 +132,7 @@
 -(void)frameworksSettings{
     [MFSounds sharedSound];
     [MKStoreManager sharedManager];
-    [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e"] delegate:self logging:YES];
+    [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e",@"vz38df8ea2870f41d48e"] delegate:self logging:YES];
     
     // Optional: automatically send uncaught exceptions to Google Analytics.
     [GAI sharedInstance].trackUncaughtExceptions = YES;

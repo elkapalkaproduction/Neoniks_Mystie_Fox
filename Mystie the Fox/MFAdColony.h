@@ -15,6 +15,7 @@
 
 @property(nonatomic)BOOL isFirstZoneLoaded;
 @property(nonatomic)BOOL isSecondZoneLoaded;
+@property(nonatomic) BOOL isThirdZoneLaoded;
 
 @property(nonatomic) BOOL isSecondZoneWatched;
 
@@ -25,6 +26,6 @@
 @property (nonatomic)BOOL isInterstitialRequestLoaded;
 
 -(void) showGADInterstitialWithParent:(UIViewController *)parent;
--(void)playAdColonyVidioWithParent:(UIViewController*)parent;
+-(void)playAdColonyVidioWithParent:(UIViewController*)parent zone:(NSString*)zone;
 
 @end

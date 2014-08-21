@@ -24,6 +24,7 @@
 //#import <AdColony/AdColony.h>
 #import "AdColony.h"
 #import "MKStoreManager.h"
+#import "MFAdColony.h"
 
 @interface MFCharactersScroller () <AdColonyAdDelegate>
 
@@ -283,6 +284,11 @@ if (name!=nil&& character!=nil) {
                                    onCancelled:^
      {
          NSLog(@"User Cancelled Transaction");
+         if([MFAdColony sharedAdColony].isThirdZoneLaoded){
+             [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:[((SKScene*)self.parent).view nextResponder] zone:@"vz38df8ea2870f41d48e"];
+         }else if ([MFAdColony sharedAdColony].isInterstitialRequestLoaded) {
+             [[MFAdColony sharedAdColony] showGADInterstitialWithParent:[((SKScene *)self.parent).view nextResponder]];
+         }
      }];
 }
 

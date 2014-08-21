@@ -68,6 +68,7 @@
 
 -(void)onAdColonyAdAttemptFinished:(BOOL)shown inZone:(NSString *)zoneID
 {
+    NSLog(@"%@ self.parentForAc", self.parentForAC);
     ((SKView*)self.parentForAC.view).paused=NO;
 }
 -(void)onAdColonyAdStartedInZone:(NSString *)zoneID
@@ -75,9 +76,9 @@
     ((SKView*)self.parentForAC.view).paused=YES;
 }
 
--(void)playAdColonyVidioWithParent:(UIViewController *)parent{
+-(void)playAdColonyVidioWithParent:(UIViewController *)parent zone:(NSString *) zone{
     self.parentForAC=parent;
-    [AdColony playVideoAdForZone:@"vz3a0c719cb27b400cb1" withDelegate:self];
+    [AdColony playVideoAdForZone:zone withDelegate:self];
 }
 
 @end
