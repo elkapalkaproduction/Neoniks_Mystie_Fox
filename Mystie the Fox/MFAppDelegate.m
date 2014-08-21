@@ -114,7 +114,13 @@
             [MFAdColony sharedAdColony].isSecondZoneLoaded=YES;
         }
 		
-	}
+	}else{
+        if ([zoneID isEqualToString:@"vz3a0c719cb27b400cb1"]) {
+            [MFAdColony sharedAdColony].isFirstZoneLoaded=NO;
+        }else if ([zoneID isEqualToString:@"vz16512e0b8a19467b8e"]){
+            [MFAdColony sharedAdColony].isSecondZoneLoaded=NO;
+        }
+    }
 }
 
 #pragma mark - frameworks settings
@@ -135,6 +141,8 @@
     
     // Initialize tracker. Replace with your tracking ID.
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-54008191-3"];
+    
+    [MFAdColony sharedAdColony];
     
 }
 

@@ -16,6 +16,7 @@
 //#import <AdColony/AdColony.h>
 #import "AdColony.h"
 #import "MFAdColony.h"
+#import "GADInterstitial.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -36,6 +37,7 @@
 //Ads
 
 @property (strong,nonatomic) GADBannerView *bannerView;
+@property (strong,nonatomic) GADInterstitial *interstitialView;
 
 @end
 
@@ -43,6 +45,12 @@
 
 -(instancetype)initWithSize:(CGSize)size{
     if(self=[super initWithSize:size]){
+        
+//        self.interstitialView = [[GADInterstitial alloc] init];
+//        self.interstitialView.delegate=self;
+//        self.interstitialView.adUnitID = @"ca-app-pub-1480731978958686/7886942590";
+//        [self.interstitialView loadRequest:[GADRequest request]];
+        
         
         NSString * backgroundName = @"";
         NSString * mystieTheFoxNodeName = @"";
@@ -221,24 +229,15 @@
     BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
     if (!(result ==NSOrderedDescending||IAPurchased)) {
         if([MFAdColony sharedAdColony].isFirstZoneLoaded){
-            [AdColony playVideoAdForZone:@"vz3a0c719cb27b400cb1" withDelegate:self];
+            [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:[self.view nextResponder]];
+        }else if ([MFAdColony sharedAdColony].isInterstitialRequestLoaded) {
+            [[MFAdColony sharedAdColony] showGADInterstitialWithParent:[self.view nextResponder]];
         }
     }
 }
 
--(void)onAdColonyAdAttemptFinished:(BOOL)shown inZone:(NSString *)zoneID
-{
-    //    ((SKScene*)self.parent).view.paused = NO;
-    self.view.paused=NO;
-    
-    
-    
-}
--(void)onAdColonyAdStartedInZone:(NSString *)zoneID
-{
-    //    ((SKScene*)self.parent).view.paused = YES;
-    self.view.paused=YES;
-}
+
+
 
 
 @end

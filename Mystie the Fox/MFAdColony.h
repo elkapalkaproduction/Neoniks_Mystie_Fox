@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GADInterstitial.h"
 
 @interface MFAdColony : NSObject
 
@@ -16,5 +17,14 @@
 @property(nonatomic)BOOL isSecondZoneLoaded;
 
 @property(nonatomic) BOOL isSecondZoneWatched;
+
+@property (weak,nonatomic) UIViewController * parentForGA;
+@property (weak,nonatomic) UIViewController * parentForAC;
+
+@property (strong,nonatomic) GADInterstitial *interstitialView;
+@property (nonatomic)BOOL isInterstitialRequestLoaded;
+
+-(void) showGADInterstitialWithParent:(UIViewController *)parent;
+-(void)playAdColonyVidioWithParent:(UIViewController*)parent;
 
 @end
