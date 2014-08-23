@@ -9,7 +9,11 @@
 #import "MFSpecialPage.h"
 #import "MFLanguage.h"
 #import "MFFirstPageScene.h"
+
+#ifdef MystieFree
 #import "Chartboost.h"
+#endif
+
 #import <AVFoundation/AVFoundation.h>
 
 
@@ -131,7 +135,9 @@
 
 -(void)showMore:(id)object{
     [self click];
+#ifdef MystieFree
     [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
+#endif
 }
 
 

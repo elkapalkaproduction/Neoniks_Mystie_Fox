@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#ifdef MystieFree
 #import "GADInterstitial.h"
+#endif
 
 @interface MFAdColony : NSObject
 
@@ -21,8 +23,9 @@
 
 @property (weak,nonatomic) UIViewController * parentForGA;
 @property (weak,nonatomic) UIViewController * parentForAC;
-
+#ifdef MystieFree
 @property (strong,nonatomic) GADInterstitial *interstitialView;
+#endif
 @property (nonatomic)BOOL isInterstitialRequestLoaded;
 
 -(void) showGADInterstitialWithParent:(UIViewController *)parent;

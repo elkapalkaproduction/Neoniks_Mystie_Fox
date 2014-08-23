@@ -20,7 +20,11 @@
 #import "MFCat.h"
 #import "MFCloud.h"
 
+#ifdef MystieFree
 #import "Chartboost.h"
+#endif
+
+#import "MFSpecialPage.h"
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
 @interface MFFirstPageScene ()
@@ -63,7 +67,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateScroller) name:@"MFIAPPurchased" object:nil];
         
         NSString * backgroundName = @"";
-        //        NSString * wingsNodeName = @"";
         NSString * siteNodeName = @"";
         NSString * moreNodeName =@"";
         
@@ -73,13 +76,10 @@
         
         NSString *language = [MFLanguage sharedLanguage].language;
         if ([language isEqualToString:@"ru"]) {
-            //            backgroundName = @"iPade_startup-screen_rus.png";
             backgroundName = ASSET_BY_SCREEN_HEIGHT(@"page1_background-568h.png", @"page1_background.png");
             siteNodeName = @"site_rus.png";
             moreNodeName = @"more-rus.png";
         }else{
-            //            backgroundName = @"iPad_startup-screen_eng.png";
-            
             backgroundName = ASSET_BY_SCREEN_HEIGHT(@"page1_background-568h.png", @"page1_background.png");
             siteNodeName = @"site_eng.png";
             moreNodeName = @"more-eng.png";
@@ -132,16 +132,15 @@
             foxNodeName = @"fox_body.png";
             self.foxNode = [[SKSpriteNode alloc] initWithImageNamed:foxNodeName];
             float foxRatio = [MFImageCropper spriteRatio:self.foxNode];
-            self.foxNode.size = CGSizeMake(129, 129*foxRatio);//258
-            //        self.foxNode.position=CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
-            self.foxNode.position =CGPointMake(270/2, 223.5);//self.size.height-689/2);//639
+            self.foxNode.size = CGSizeMake(129, 129*foxRatio);
+            self.foxNode.position =CGPointMake(270/2, 223.5);
             [self addChild:self.foxNode];
             
             eyesNodeName = @"Fox-blinks-frames-01.png";
             self.eyesNode =[[SKSpriteNode alloc] initWithImageNamed:eyesNodeName];
             float eyesRatio = [MFImageCropper spriteRatio:self.eyesNode];
             self.eyesNode.size = CGSizeMake(173/2, 173/2*eyesRatio);
-            self.eyesNode.position =CGPointMake(277.5/2+4, 252.5);//(425.5+80)/2);//self.size.height- (609.5+18)/2);
+            self.eyesNode.position =CGPointMake(277.5/2+4, 252.5);
             [self addChild:self.eyesNode];
             
             
@@ -157,16 +156,15 @@
             foxNodeName = @"fox_body.png";
             self.foxNode = [[SKSpriteNode alloc] initWithImageNamed:foxNodeName];
             float foxRatio = [MFImageCropper spriteRatio:self.foxNode];
-            self.foxNode.size = CGSizeMake(285.5, 285.5*foxRatio);//CGSizeMake(1536/(320/129)/2, 1536/(320/129)/2*foxRatio);//258
-            //        self.foxNode.position=CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
-            self.foxNode.position =CGPointMake(642.5/2, self.size.height-1011/2);//CGPointMake(270/2, 223.5);//self.size.height-689/2);//639
+            self.foxNode.size = CGSizeMake(285.5, 285.5*foxRatio);
+            self.foxNode.position =CGPointMake(642.5/2, self.size.height-1011/2);
             [self addChild:self.foxNode];
             
             eyesNodeName = @"Fox-blinks-frames-01.png";
             self.eyesNode =[[SKSpriteNode alloc] initWithImageNamed:eyesNodeName];
             float eyesRatio = [MFImageCropper spriteRatio:self.eyesNode];
             self.eyesNode.size = CGSizeMake(191.5, 191.5*eyesRatio);
-            self.eyesNode.position =CGPointMake(339.5, 585.5);//(425.5+80)/2);//self.size.height- (609.5+18)/2);
+            self.eyesNode.position =CGPointMake(339.5, 585.5);
             [self addChild:self.eyesNode];
         }
         
@@ -178,7 +176,6 @@
         for (int i = 0; i<22; i++) {
             SKTexture *texture =[SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Fox-laughter-frame-%d",i+1]];
             [laughterArray addObject:texture];
-            //        [openEyesArray insertObject:texture atIndex:0];
         }
         
         SKAction * laughter = [SKAction animateWithTextures:[laughterArray copy] timePerFrame:0.1377];
@@ -192,23 +189,6 @@
         self.characterScroller = [[MFCharactersScroller alloc] init];
         [self addChild:self.characterScroller];
         
-//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//            
-//            SKSpriteNode * leftArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-left.png"];
-//            float arrowRatio = [MFImageCropper spriteRatio:leftArrow];
-//            leftArrow.size = CGSizeMake(50/arrowRatio, 50);
-//            leftArrow.position = CGPointMake(leftArrow.size.width/2, 80);
-//            leftArrow.name =@"leftArrow";
-//            [self addChild:leftArrow];
-//            
-//            SKSpriteNode * rightArrow = [[SKSpriteNode alloc] initWithImageNamed:@"arrow-right.png"];
-//            rightArrow.size = CGSizeMake(50/arrowRatio, 50);
-//            rightArrow.position = CGPointMake(self.size.width-rightArrow.size.width/2, 80);
-//            rightArrow.name = @"rightArrow";
-//            [self addChild:rightArrow];
-//        }
-        
-        
         self.playClickSound =[SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
     }
     
@@ -221,11 +201,9 @@
     for (int i = 0; i<6; i++) {
         SKTexture *texture =[SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Fox-blinks-frames-0%d",i+1]];
         [closeEyesArray addObject:texture];
-//        [openEyesArray insertObject:texture atIndex:0];
     }
     
     SKAction * closeEyes = [SKAction animateWithTextures:[closeEyesArray copy] timePerFrame:0.07];
-//    SKAction * openEyes = [SKAction animateWithTextures:openEyesArray timePerFrame:1];
     SKAction * openEyes = [closeEyes reversedAction];
     SKAction * wait = [SKAction waitForDuration:7];
     SKAction * blink = [SKAction sequence:@[wait, closeEyes, openEyes]];
@@ -282,7 +260,13 @@
             [node runAction:self.tailRotation];
         }else if ([node.name isEqualToString:@"more"]){
             [self runAction:self.playClickSound];
+#ifdef MystieFree
             [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
+#else
+            __weak UIViewController * vc=(UIViewController*)[self.view nextResponder];
+            
+            [vc performSegueWithIdentifier:@"specialPageSegue" sender:vc];
+#endif
         }else if([node.name isEqualToString:@"siteNode"]){
             NSString *language = [MFLanguage sharedLanguage].language;
             if ([language isEqualToString:@"ru"]) {
@@ -395,7 +379,6 @@
 #pragma mark - ad colony delegate methods
 -(void)onAdColonyAdAttemptFinished:(BOOL)shown inZone:(NSString *)zoneID
 {
-//    ((SKScene*)self.parent).view.paused = NO;
     self.view.paused=NO;
     
     
@@ -403,7 +386,6 @@
 }
 -(void)onAdColonyAdStartedInZone:(NSString *)zoneID
 {
-//    ((SKScene*)self.parent).view.paused = YES;
     self.view.paused=YES;
 }
 

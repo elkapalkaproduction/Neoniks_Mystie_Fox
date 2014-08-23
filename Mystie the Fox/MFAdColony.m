@@ -8,8 +8,9 @@
 
 #import "MFAdColony.h"
 #import <SpriteKit/SpriteKit.h>
+#ifdef MystieFree
 #import "AdColony.h"
-
+#endif
 @implementation MFAdColony
 
 +(instancetype) sharedAdColony{
@@ -25,18 +26,19 @@
 
 -(instancetype) init{
     if (self==[super init]) {
-        
+#ifdef MystieFree
         self.interstitialView = [[GADInterstitial alloc] init];
         self.interstitialView.delegate=self;
         self.interstitialView.adUnitID = @"ca-app-pub-1480731978958686/7886942590";
         [self.interstitialView loadRequest:[GADRequest request]];
-
+#endif
+        
         
     }
     return self;
 }
 #pragma mark - GA
-
+#ifdef MystieFree
 - (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial{
 //    [self.interstitialView presentFromRootViewController:[self.view nextResponder]];
     self.isInterstitialRequestLoaded=YES;
@@ -80,5 +82,6 @@
     self.parentForAC=parent;
     [AdColony playVideoAdForZone:zone withDelegate:self];
 }
+#endif
 
 @end

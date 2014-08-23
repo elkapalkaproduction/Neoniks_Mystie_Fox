@@ -20,13 +20,14 @@
 #import "MFCat.h"
 #import "MFCloud.h"
 
-
-//#import <AdColony/AdColony.h>
-#import "AdColony.h"
 #import "MKStoreManager.h"
-#import "MFAdColony.h"
 
-@interface MFCharactersScroller () <AdColonyAdDelegate>
+#ifdef MystieFree
+#import "AdColony.h"
+#import "MFAdColony.h"
+#endif
+
+@interface MFCharactersScroller ()
 
 @property (nonatomic) int currentPosition;
 
@@ -221,11 +222,12 @@ if (name!=nil&& character!=nil) {
     if (alertView ==self.alertView) {
         if (alertView.numberOfButtons==4) {
             if (buttonIndex==1) {
+#ifdef MystieFree
                 [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
                                 withDelegate:self.parent
                             withV4VCPrePopup:NO
                             andV4VCPostPopup:NO];
-                
+#endif
             }else if (buttonIndex==2){
                 [self buy];
             }else if(buttonIndex ==3){

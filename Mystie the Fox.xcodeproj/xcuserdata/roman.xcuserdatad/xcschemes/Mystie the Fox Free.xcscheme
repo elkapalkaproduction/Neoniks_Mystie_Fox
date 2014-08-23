@@ -38,6 +38,26 @@
                ReferencedContainer = "container:Mystie the Fox.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "304A7A2019A8CA780004B2EF"
+               BuildableName = "MystieTheFoxPaidTests.xctest"
+               BlueprintName = "MystieTheFoxPaidTests"
+               ReferencedContainer = "container:Mystie the Fox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "304A7B2F19A8CBF30004B2EF"
+               BuildableName = "Mystie the FoxTests copy.xctest"
+               BlueprintName = "Mystie the FoxTests Paid"
+               ReferencedContainer = "container:Mystie the Fox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

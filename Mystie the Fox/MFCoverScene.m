@@ -12,11 +12,12 @@
 #import "MFFirstPageScene.h"
 #import "MFSpecialPage.h"
 
+#ifdef MystieFree
 #import "GADBannerView.h"
-//#import <AdColony/AdColony.h>
 #import "AdColony.h"
 #import "MFAdColony.h"
 #import "GADInterstitial.h"
+#endif
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
 
@@ -35,9 +36,10 @@
 
 
 //Ads
-
+#ifdef MystieFree
 @property (strong,nonatomic) GADBannerView *bannerView;
 @property (strong,nonatomic) GADInterstitial *interstitialView;
+#endif
 
 @end
 
@@ -45,12 +47,6 @@
 
 -(instancetype)initWithSize:(CGSize)size{
     if(self=[super initWithSize:size]){
-        
-//        self.interstitialView = [[GADInterstitial alloc] init];
-//        self.interstitialView.delegate=self;
-//        self.interstitialView.adUnitID = @"ca-app-pub-1480731978958686/7886942590";
-//        [self.interstitialView loadRequest:[GADRequest request]];
-        
         
         NSString * backgroundName = @"";
         NSString * mystieTheFoxNodeName = @"";
@@ -65,7 +61,6 @@
         
         NSString *language = [MFLanguage sharedLanguage].language;
         if ([language isEqualToString:@"ru"]) {
-//            backgroundName = @"iPade_startup-screen_rus.png";
             if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPad) {
                 backgroundName = @"iPade_startup-screen_rus.png";
             }else{
@@ -76,7 +71,6 @@
             whoIsNodeName = @"Who-is-Mystie-rus.png";
             siteNodeName = @"site_rus.png";
         }else{
-//            backgroundName = @"iPad_startup-screen_eng.png";
             if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPad) {
                 backgroundName =@"iPad_startup-screen_eng.png";
             }else{
@@ -92,7 +86,6 @@
         self.background = [[SKSpriteNode alloc] initWithImageNamed:backgroundName];
         float backgroundRatio = [MFImageCropper spriteRatio:self.background];
 
-//        self.background.size = self.size;
         self.background.position=CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:self.background];
         
@@ -211,6 +204,7 @@
 }
 
 -(void)didMoveToView:(SKView *)view{
+#ifdef MystieFree
     self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
     
     self.bannerView.adUnitID = @"ca-app-pub-1480731978958686/9867510198";
@@ -234,6 +228,8 @@
             [[MFAdColony sharedAdColony] showGADInterstitialWithParent:[self.view nextResponder]];
         }
     }
+#endif
+    
 }
 
 

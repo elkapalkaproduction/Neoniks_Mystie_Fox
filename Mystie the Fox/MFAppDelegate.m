@@ -8,10 +8,13 @@
 
 #import "MFAppDelegate.h"
 #import "MFSounds.h"
+
+#ifdef MystieFree
 #import "MFAdColony.h"
+#import "Chartboost.h"
+#endif
 
 #import "MKStoreManager.h"
-#import "Chartboost.h"
 #import "GAI.h"
 
 
@@ -62,7 +65,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+#ifdef MystieFree
     [Chartboost startWithAppId:@"53e858d01873da2f5f619e43" appSignature:@"3fa1918953a2213d56b22b93db70bb9d8ff2ae09" delegate:self];
+#endif
     
 }
 
@@ -76,6 +81,8 @@
 - (void)startupAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     [self.splashView removeFromSuperview];
 }
+
+#ifdef MystieFree
 
 - ( void ) onAdColonyV4VCReward:(BOOL)success currencyName:(NSString*)currencyName currencyAmount:(int)amount inZone:(NSString*)zoneID {
 	NSLog(@"AdColony zone %@ reward %i %i %@", zoneID, success, amount, currencyName);
@@ -104,7 +111,7 @@
 	}
 }
 
-#pragma mark AdColony ad fill
+
 
 - ( void ) onAdColonyAdAvailabilityChange:(BOOL)available inZone:(NSString*) zoneID {
 	if(available) {
@@ -127,13 +134,16 @@
     }
 }
 
+#endif
+
 #pragma mark - frameworks settings
 
 -(void)frameworksSettings{
     [MFSounds sharedSound];
     [MKStoreManager sharedManager];
+#ifdef MystieFree
     [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e",@"vz38df8ea2870f41d48e"] delegate:self logging:YES];
-    
+#endif
     // Optional: automatically send uncaught exceptions to Google Analytics.
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     
@@ -145,9 +155,10 @@
     
     // Initialize tracker. Replace with your tracking ID.
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-54008191-3"];
-    
+#ifdef MystieFree
     [MFAdColony sharedAdColony];
-    
+#endif
+
 }
 
 @end
