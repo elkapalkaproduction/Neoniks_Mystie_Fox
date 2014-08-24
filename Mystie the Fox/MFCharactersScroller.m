@@ -42,15 +42,16 @@
 
 -(instancetype) init{
     if (self = [super init]) {
-        
+#ifdef MystieFree
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
-//        BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
+        //        BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
         
         NSDate *expireDate =[defaults objectForKey:@"expireDate"];
         NSDate *now = [NSDate date];
         NSComparisonResult result=[expireDate compare:now];
+#endif
         
         self.buttons = [[NSMutableArray alloc] init];
         self.currentPosition=0;
@@ -66,11 +67,15 @@
                 
                 if (i>3) {
                     button.color = [UIColor blackColor];
+#ifdef MystieFree
                     if (IAPurchased||(result==NSOrderedDescending)) {
                         button.colorBlendFactor=0.0;
                     }else{
                         button.colorBlendFactor=0.6;
                     }
+#else
+                    button.colorBlendFactor=0.0;
+#endif
                 }
                 
                 [self addChild:button];
@@ -89,11 +94,15 @@
                 
                 if (i>3) {
                     button.color = [UIColor blackColor];
+#ifdef MystieFree
                     if (IAPurchased||(result==NSOrderedDescending)) {
                         button.colorBlendFactor=0.0;
                     }else{
                         button.colorBlendFactor=0.6;
                     }
+#else
+                    button.colorBlendFactor=0.0;
+#endif
                 }
                 
                 [self addChild:button];
@@ -140,13 +149,15 @@
 
 -(void)characterButtonPressed:(NSString *) name{
     MFCharacter *character;
+#ifdef MystieFree
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDate *expireDate =[defaults objectForKey:@"expireDate"];
     NSDate *now = [NSDate date];
     NSComparisonResult result=[expireDate compare:now];
     
     BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
-//    BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
+#endif
+    //    BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
     
     if ([name isEqualToString:@"button_0"]) {
         character = [[MFBug alloc] initWithParent:self.parent];
@@ -157,8 +168,9 @@
     }else if ([name isEqualToString:@"button_3"]){
         character = [[MFGhost alloc] initWithParent:self.parent];
     }else {
-        
+#ifdef MystieFree
         if (IAPurchased||(result==NSOrderedDescending)) {
+#endif
             if ([name isEqualToString:@"button_4"]){
                 character = [[MFUfo alloc] initWithParent:self.parent];
             }else if ([name isEqualToString:@"button_5"]){
@@ -168,6 +180,7 @@
             }else if ([name isEqualToString:@"button_7"]){
                 character = [[MFCloud alloc] initWithParent:self.parent];
             }
+#ifdef MystieFree
         }else{
             NSString *message;
             NSString *watchVideo;
@@ -203,15 +216,18 @@
                     cancel = @"Cancel";
                 }
             }
+            
             if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
                 self.alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:watchVideo,unlock,restore, nil];
             }else{
                 self.alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:unlock,restore, nil];
             }
             [self.alertView show];
+            
         }
+#endif
     }
-if (name!=nil&& character!=nil) {
+    if (name!=nil&& character!=nil) {
         
         [self.parent addChild:character];
         [character runAction:character.move];

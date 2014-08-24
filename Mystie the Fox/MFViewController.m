@@ -12,6 +12,7 @@
 #import "MFIntroScene.h"
 #import "MFFirstPageScene.h"
 #import "MFSpecialPage.h"
+#import "MFCoverScene.h"
 
 #import "MFAdColony.h"
 
@@ -69,6 +70,19 @@
         scene.scaleMode =SKSceneScaleModeAspectFill;
         [skView presentScene:scene];
     }
+}
+
+-(IBAction)unwindToStart:(UIStoryboardSegue *)segue {
+    SKView * skView = (SKView *)self.view;
+    if([skView.scene isKindOfClass:[MFFirstPageScene class]]){
+        __weak MFFirstPageScene *firstScene = (MFFirstPageScene*)skView.scene;
+        [firstScene.leftArrow removeFromSuperview];
+        [firstScene.rightArrow removeFromSuperview];
+    }
+    SKScene *scene;
+    scene = [MFCoverScene sceneWithSize:skView.bounds.size];
+    scene.scaleMode =SKSceneScaleModeAspectFill;
+    [skView presentScene:scene];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

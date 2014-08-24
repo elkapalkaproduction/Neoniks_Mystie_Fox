@@ -137,6 +137,8 @@
     [self click];
 #ifdef MystieFree
     [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
+#else
+    [self performSegueWithIdentifier:@"unwindToStart:" sender:self];
 #endif
 }
 

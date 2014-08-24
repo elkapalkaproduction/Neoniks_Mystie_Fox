@@ -1883,10 +1883,13 @@
 				ORGANIZATIONNAME = Roman;
 				TargetAttributes = {
 					304A7A3519A8CBF00004B2EF = {
-						DevelopmentTeam = 94G97SK366;
+						DevelopmentTeam = BWUASF94W7;
 					};
 					304A7B2F19A8CBF30004B2EF = {
 						TestTargetID = 304A7A3519A8CBF00004B2EF;
+					};
+					30BEC848197B1E5F0069093E = {
+						DevelopmentTeam = BWUASF94W7;
 					};
 					30BEC873197B1E600069093E = {
 						TestTargetID = 30BEC848197B1E5F0069093E;
@@ -2485,7 +2488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Pavel Mamaev (94G97SK366)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -2502,6 +2505,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Mystie the Fox Paid";
+				PROVISIONING_PROFILE = "1B3C4035-2F2C-4AE9-AF49-BECDBCD625CE";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2511,7 +2515,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Pavel Mamaev (94G97SK366)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -2528,6 +2532,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Mystie the Fox Paid";
+				PROVISIONING_PROFILE = "1B3C4035-2F2C-4AE9-AF49-BECDBCD625CE";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2653,7 +2658,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ROMAN GAL (LKUFD2QJ3V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -2671,6 +2676,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1B3C4035-2F2C-4AE9-AF49-BECDBCD625CE";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2680,7 +2686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ROMAN GAL (LKUFD2QJ3V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -2698,6 +2704,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1B3C4035-2F2C-4AE9-AF49-BECDBCD625CE";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
