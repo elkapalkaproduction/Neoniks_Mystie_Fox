@@ -188,11 +188,15 @@
             }else if([node.name isEqualToString:@"siteNode"]){
                 NSString *language = [MFLanguage sharedLanguage].language;
                 if ([language isEqualToString:@"ru"]) {
+                    #ifdef MystieFree
                     NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
                     [[UIApplication sharedApplication] openURL:url];
+                    #endif
                 }else{
+                    #ifdef MystieFree
                     NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
                     [[UIApplication sharedApplication] openURL:url];
+                    #endif
                 }
             }
             [self runAction:sound];
