@@ -287,27 +287,21 @@
 
 -(void)buy{
     self.arrayWithProducts=[MKStoreManager sharedManager].purchasableObjects;
-    [[MKStoreManager sharedManager] buyFeature:((SKProduct*)[self.arrayWithProducts firstObject]).productIdentifier
-                                    onComplete:^(NSString* purchasedFeature,
-                                                 NSData* purchasedReceipt,
-                                                 NSArray* availableDownloads)
-     {
-         NSLog(@"Purchased: %@", purchasedFeature);
-         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-         
-         [defaults setBool:YES forKey:@"IAPurchased"];
-         [defaults synchronize];
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIAPPurchased" object:nil];
-     }
-                                   onCancelled:^
-     {
-         NSLog(@"User Cancelled Transaction");
-         if([MFAdColony sharedAdColony].isThirdZoneLaoded){
-             [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:[((SKScene*)self.parent).view nextResponder] zone:@"vz38df8ea2870f41d48e"];
-         }else if ([MFAdColony sharedAdColony].isInterstitialRequestLoaded) {
-             [[MFAdColony sharedAdColony] showGADInterstitialWithParent:[((SKScene *)self.parent).view nextResponder]];
-         }
-     }];
+    [[MKStoreManager sharedManager] buyFeature:((SKProduct*)[self.arrayWithProducts firstObject]).productIdentifier onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt) {
+        NSLog(@"Purchased: %@", purchasedFeature);
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        [defaults setBool:YES forKey:@"IAPurchased"];
+        [defaults synchronize];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIAPPurchased" object:nil];
+    } onCancelled:^{
+        NSLog(@"User Cancelled Transaction");
+        if([MFAdColony sharedAdColony].isThirdZoneLaoded){
+            [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:[((SKScene*)self.parent).view nextResponder] zone:@"vz38df8ea2870f41d48e"];
+        }else if ([MFAdColony sharedAdColony].isInterstitialRequestLoaded) {
+            [[MFAdColony sharedAdColony] showGADInterstitialWithParent:[((SKScene *)self.parent).view nextResponder]];
+        }
+    }];
 }
 
 @end

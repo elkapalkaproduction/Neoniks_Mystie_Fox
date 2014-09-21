@@ -10,29 +10,29 @@
 	<string>Mystie the Fox</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>8913CDBD-3D5E-4541-856B-6A1C494A20CC</key>
+		<key>F32434541FEFF643400891F676A83EDCB36BFE4E</key>
 		<string>https://github.com/elkapalkaproduction/Neoniks_Mystie_Fox.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Mystie the Fox.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>8913CDBD-3D5E-4541-856B-6A1C494A20CC</key>
+		<key>F32434541FEFF643400891F676A83EDCB36BFE4E</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/elkapalkaproduction/Neoniks_Mystie_Fox.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>8913CDBD-3D5E-4541-856B-6A1C494A20CC</string>
+	<string>F32434541FEFF643400891F676A83EDCB36BFE4E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8913CDBD-3D5E-4541-856B-6A1C494A20CC</string>
+			<string>F32434541FEFF643400891F676A83EDCB36BFE4E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Neoniks_Mystie_Fox</string>
 		</dict>
