@@ -11,6 +11,20 @@
 #import "GADInterstitial.h"
 #endif
 
+NSString *const EVENT_MAIN_APP_STARTED;
+NSString *const EVENT_MAIN_WHO_IS_MISTY;
+NSString *const EVENT_MAIN_NEONIKS_WEBSITE;
+NSString *const EVENT_MAIN_START_CLICKED;
+NSString *const EVENT_WHO_IS_MISTY_PLAY;
+NSString *const EVENT_WHO_IS_MISTY_MORE;
+NSString *const EVENT_PLAY_MORE;
+NSString *const EVENT_PLAY_MISTY;
+NSString *const EVENT_PLAY_CHAR;
+NSString *const EVENT_IN_APP_YES;
+NSString *const EVENT_IN_APP_NO;
+NSString *const EVENT_VIDEO_YES;
+NSString *const EVENT_VIDEO_NO;
+
 @interface MFAdColony : NSObject
 
 +(instancetype) sharedAdColony;
@@ -30,5 +44,7 @@
 
 -(void) showGADInterstitialWithParent:(UIViewController *)parent;
 -(void)playAdColonyVidioWithParent:(UIViewController*)parent zone:(NSString*)zone;
+
+- (void)logEvent:(NSString *)event;
 
 @end

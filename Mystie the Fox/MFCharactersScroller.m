@@ -158,7 +158,7 @@
     BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
 #endif
     //    BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
-    
+    [[MFAdColony sharedAdColony] logEvent:[NSString stringWithFormat:@"%@%@", EVENT_PLAY_CHAR, [name stringByReplacingOccurrencesOfString:@"button_" withString:@"CHAR_"]]];
     if ([name isEqualToString:@"button_0"]) {
         character = [[MFBug alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_1"]){
@@ -183,47 +183,24 @@
 #ifdef MystieFree
         }else{
             NSString *message;
-            NSString *watchVideo;
-            NSString *unlock;
             NSString *restore;
-            NSString *cancel;
+            NSString *yesButton;
+            NSString *noButton;
             NSString *language = [MFLanguage sharedLanguage].language;
             if([language isEqualToString:@"ru"]){
-                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-                    
-                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
-                    watchVideo=@"Посмотреть видео";
-                    unlock=@"Разблокировать персонажей";
-                    restore=@"Восстановить";
-                    cancel = @"Отмена";
-                }else{
-                    message=@"Вы можете просмотреть рекламное видео и разблокировать персонажей на один день или разблокировать их навсегда.";
-                    unlock=@"Продолжить";
-                    restore=@"Восстановить";
-                    cancel = @"Отмена";
-                }
-            }else{
-                if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
-                    watchVideo=@"Watch a video";
-                    unlock=@"Unlock all forever";
-                    restore=@"Restore";
-                    cancel = @"Cancel";
-                }else{
-                    message=@"Would you like to watch a video and unlock all characters for one day, or unlock all characters forever?";
-                    unlock=@"Continue";
-                    restore=@"Restore";
-                    cancel = @"Cancel";
-                }
+                yesButton = @"Да";
+                noButton = @"Нет";
+                restore = @"Восстановить";
+                message = @"Октрыть всех персонажей на всегда за $0.99?";
+            } else {
+                yesButton = @"Yes";
+                noButton = @"No";
+                restore = @"Restore";
+                message = @"Unlock all characters forever for $0.99?";
             }
-            
-            if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
-                self.alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:watchVideo,unlock,restore, nil];
-            }else{
-                self.alertView = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:unlock,restore, nil];
-            }
-            [self.alertView show];
-            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:restore otherButtonTitles:yesButton, noButton, nil];
+            alert.tag = 1043;
+            [alert show];
         }
 #endif
     }
@@ -235,6 +212,14 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1043) {
+        [self inAppAlertViewAnalizeWithButtonPressed:buttonIndex];
+        return;
+    }
+    if (alertView.tag == 1533) {
+        [self adColonyUnlockAlertWithButtonPressed:buttonIndex];
+        return;
+    }
     if (alertView ==self.alertView) {
         if (alertView.numberOfButtons==4) {
             if (buttonIndex==1) {
@@ -261,6 +246,54 @@
     }
 }
 
+- (void)inAppAlertViewAnalizeWithButtonPressed:(NSInteger)buttonIndex {
+    if (buttonIndex == 2) {
+        [[MFAdColony sharedAdColony] logEvent:EVENT_IN_APP_NO];
+#ifdef MystieFree
+        NSString *message;
+        NSString *yesButton;
+        NSString *noButton;
+        NSString *language = [MFLanguage sharedLanguage].language;
+        if([language isEqualToString:@"ru"]){
+            yesButton = @"Да";
+            noButton = @"Нет";
+            message = @"Просмотреть рекламное видео и разблокировать персонажей на один день?";
+        } else {
+            yesButton = @"Yes";
+            noButton = @"No";
+            message = @"You can unlock all the characters for one day by watching this video:";
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:noButton otherButtonTitles:yesButton, nil];
+        alert.tag = 1533;
+        if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
+            [alert show];
+        }
+#endif
+    } else if (buttonIndex==1) {
+        [[MFAdColony sharedAdColony] logEvent:EVENT_IN_APP_YES];
+        [self buy];
+    }else if (buttonIndex ==0) {
+        [self recover];
+    }
+}
+
+
+- (void)adColonyUnlockAlertWithButtonPressed:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [[MFAdColony sharedAdColony] logEvent:EVENT_VIDEO_YES];
+#ifdef MystieFree
+        [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
+                        withDelegate:self.parent
+                    withV4VCPrePopup:NO
+                    andV4VCPostPopup:NO];
+#endif
+    } else if (buttonIndex == 0) {
+        [[MFAdColony sharedAdColony] logEvent:EVENT_VIDEO_NO];
+
+    }
+}
+
+
 -(void)recover{
     self.arrayWithProducts=[MKStoreManager sharedManager].purchasableObjects;
     UIAlertView * alertForSucces = [[UIAlertView alloc] initWithTitle:@"Восстановление завершено" message:@"Восстановление завершено. Приятного использования" delegate:self cancelButtonTitle:@"Спасибо" otherButtonTitles:nil, nil];
@@ -275,7 +308,7 @@
         [alertForSucces show];
     }onError:^(NSError *error){
         {
-            NSLog(@"%d code" , error.code );
+            NSLog(@"%ld code" , (long)error.code );
             NSDictionary *dictWithUserInfo = error.userInfo;
             NSLog(@"%@ user info" , dictWithUserInfo[NSLocalizedDescriptionKey]);
             UIAlertView * alertForError = [[UIAlertView alloc] initWithTitle:@"У вас нет покупок" message:@"Купите что-нибудь" delegate:self cancelButtonTitle:@"Спасибо" otherButtonTitles:nil, nil];

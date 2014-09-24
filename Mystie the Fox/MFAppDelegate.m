@@ -8,24 +8,34 @@
 
 #import "MFAppDelegate.h"
 #import "MFSounds.h"
+#import "MFAdColony.h"
 
 #ifdef MystieFree
-#import "MFAdColony.h"
 #import "Chartboost.h"
+#import <MobileAppTracker/MobileAppTracker.h>
+#import <AdSupport/AdSupport.h>
 #endif
 
 #import "MKStoreManager.h"
 #import "GAI.h"
 
 
-@implementation MFAppDelegate 
+@implementation MFAppDelegate
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+#ifdef MystieFree
+    [MobileAppTracker applicationDidOpenURL:[url absoluteString] sourceApplication:sourceApplication];
+#endif
+    return YES;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self frameworksSettings];
     
     [self.window makeKeyAndVisible];
-    
+    [[MFAdColony sharedAdColony] logEvent:EVENT_MAIN_APP_STARTED];
     self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
     self.splashView.image = [UIImage imageNamed:@"Default.png"];
     [_window addSubview:self.splashView];
@@ -67,6 +77,7 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 #ifdef MystieFree
     [Chartboost startWithAppId:@"53e858d01873da2f5f619e43" appSignature:@"3fa1918953a2213d56b22b93db70bb9d8ff2ae09" delegate:self];
+    [MobileAppTracker measureSession];
 #endif
     
 }
@@ -143,6 +154,10 @@
     [MKStoreManager sharedManager];
 #ifdef MystieFree
     [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e",@"vz38df8ea2870f41d48e"] delegate:self logging:YES];
+    [MobileAppTracker initializeWithMATAdvertiserId:@"20460"
+                                   MATConversionKey:@"e76deeecd77756a4861d9a10389124c7"];
+    [MobileAppTracker setAppleAdvertisingIdentifier:[[ASIdentifierManager sharedManager] advertisingIdentifier]
+                         advertisingTrackingEnabled:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
 #endif
     // Optional: automatically send uncaught exceptions to Google Analytics.
     [GAI sharedInstance].trackUncaughtExceptions = YES;

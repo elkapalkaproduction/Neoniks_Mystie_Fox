@@ -481,6 +481,8 @@
 		30EB6CE0199E8D8900B01CA9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CDF199E8D8900B01CA9 /* Social.framework */; };
 		30EB6CFA199EE4F600B01CA9 /* MFAdColony.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EB6CF9199EE4F600B01CA9 /* MFAdColony.m */; };
 		30FD128A1992F3C40055705F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FD12891992F3C40055705F /* CoreAudio.framework */; };
+		75ED838D19D34D8A009346EA /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75ED838C19D34D8A009346EA /* MobileAppTracker.framework */; };
+		75ED838F19D34E80009346EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75ED838E19D34E80009346EA /* FacebookSDK.framework */; };
 		75F87C8E19CF114600331D5A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F87C8019CF114600331D5A /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75F87C8F19CF114600331D5A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F87C8019CF114600331D5A /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75F87C9019CF114600331D5A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F87C8219CF114600331D5A /* NSData+Base64.m */; };
@@ -832,6 +834,8 @@
 		30EB6CF8199EE4F600B01CA9 /* MFAdColony.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAdColony.h; sourceTree = "<group>"; };
 		30EB6CF9199EE4F600B01CA9 /* MFAdColony.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAdColony.m; sourceTree = "<group>"; };
 		30FD12891992F3C40055705F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		75ED838C19D34D8A009346EA /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
+		75ED838E19D34E80009346EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		75F87C7F19CF114600331D5A /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		75F87C8019CF114600331D5A /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		75F87C8119CF114600331D5A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -897,6 +901,8 @@
 				303886F419A65A55001FFB09 /* libsqlite3.0.dylib in Frameworks */,
 				3053ADA3199D84A7007DC626 /* AdSupport.framework in Frameworks */,
 				30EB6CD3199E860B00B01CA9 /* CoreData.framework in Frameworks */,
+				75ED838F19D34E80009346EA /* FacebookSDK.framework in Frameworks */,
+				75ED838D19D34D8A009346EA /* MobileAppTracker.framework in Frameworks */,
 				3053ADAD199D84F8007DC626 /* SystemConfiguration.framework in Frameworks */,
 				303886F219A65825001FFB09 /* libz.dylib in Frameworks */,
 				30EB6CE0199E8D8900B01CA9 /* Social.framework in Frameworks */,
@@ -1583,6 +1589,8 @@
 		3053AD91199D83F8007DC626 /* 3-rd party libs */ = {
 			isa = PBXGroup;
 			children = (
+				75ED838E19D34E80009346EA /* FacebookSDK.framework */,
+				75ED838C19D34D8A009346EA /* MobileAppTracker.framework */,
 				75F87C7D19CF114600331D5A /* MKStoreKit */,
 				303886E619A65788001FFB09 /* Google Analytics */,
 				30EB6CD4199E8CBB00B01CA9 /* AdColony */,
@@ -2673,6 +2681,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Mystie",
+					the,
+					Fox,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";
@@ -2701,6 +2712,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Mystie",
+					the,
+					Fox,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";

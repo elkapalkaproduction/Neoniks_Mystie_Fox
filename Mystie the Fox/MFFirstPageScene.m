@@ -19,6 +19,7 @@
 #import "MFMosquito.h"
 #import "MFCat.h"
 #import "MFCloud.h"
+#import "MFAdColony.h"
 
 #ifdef MystieFree
 #import "Chartboost.h"
@@ -243,6 +244,7 @@
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
         if ([node.name isEqualToString:@"fox"]) {
+            [[MFAdColony sharedAdColony] logEvent:EVENT_PLAY_MISTY];
             if (!self.isLaughter) {
                 self.isLaughter=YES;
                 [self.eyesNode removeAllActions];
@@ -259,6 +261,7 @@
         }else if([node.name isEqualToString:@"tail"]){
             [node runAction:self.tailRotation];
         }else if ([node.name isEqualToString:@"more"]){
+            [[MFAdColony sharedAdColony] logEvent:EVENT_PLAY_MORE];
             [self runAction:self.playClickSound];
 #ifdef MystieFree
             [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];

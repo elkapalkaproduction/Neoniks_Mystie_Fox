@@ -9,6 +9,7 @@
 #import "MFSpecialPage.h"
 #import "MFLanguage.h"
 #import "MFFirstPageScene.h"
+#import "MFAdColony.h"
 
 #ifdef MystieFree
 #import "Chartboost.h"
@@ -129,12 +130,14 @@
 
 -(void)play:(id)object{
     [self click];
+    [[MFAdColony sharedAdColony] logEvent:EVENT_WHO_IS_MISTY_PLAY];
     self.parentVC.isNeededToPlay =YES;
     [self performSegueWithIdentifier:@"unwindToMain" sender:self];
 }
 
 -(void)showMore:(id)object{
     [self click];
+    [[MFAdColony sharedAdColony] logEvent:EVENT_WHO_IS_MISTY_MORE];
 #ifdef MystieFree
     [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
 #else
