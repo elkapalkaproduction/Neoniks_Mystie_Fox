@@ -77,6 +77,8 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 #ifdef MystieFree
     [Chartboost startWithAppId:@"53e858d01873da2f5f619e43" appSignature:@"3fa1918953a2213d56b22b93db70bb9d8ff2ae09" delegate:self];
+    [[Chartboost sharedChartboost] cacheMoreApps:CBLocationHomeScreen];
+    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
     [MobileAppTracker measureSession];
 #endif
     

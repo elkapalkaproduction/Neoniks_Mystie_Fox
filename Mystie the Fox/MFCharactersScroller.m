@@ -191,7 +191,7 @@
                 yesButton = @"Да";
                 noButton = @"Нет";
                 restore = @"Восстановить";
-                message = @"Октрыть всех персонажей на всегда за $0.99?";
+                message = @"Октрыть всех персонажей навсегда за $0.99?";
             } else {
                 yesButton = @"Yes";
                 noButton = @"No";
