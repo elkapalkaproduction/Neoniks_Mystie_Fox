@@ -141,7 +141,7 @@
 #ifdef MystieFree
     [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
 #else
-    [self performSegueWithIdentifier:@"unwindToStart:" sender:self];
+    [self dismissViewControllerAnimated:YES completion:nil];
 #endif
 }
 
