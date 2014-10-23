@@ -481,6 +481,11 @@
 		30EB6CE0199E8D8900B01CA9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EB6CDF199E8D8900B01CA9 /* Social.framework */; };
 		30EB6CFA199EE4F600B01CA9 /* MFAdColony.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EB6CF9199EE4F600B01CA9 /* MFAdColony.m */; };
 		30FD128A1992F3C40055705F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FD12891992F3C40055705F /* CoreAudio.framework */; };
+		45F5FB8219F96F810074EDBF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5FB8119F96F810074EDBF /* Parse.framework */; };
+		45F5FB8419F96FB10074EDBF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5FB8319F96FB10074EDBF /* CFNetwork.framework */; };
+		45F5FB8619F96FC30074EDBF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5FB8519F96FC30074EDBF /* CoreLocation.framework */; };
+		45F5FB8819F96FDB0074EDBF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5FB8719F96FDB0074EDBF /* MobileCoreServices.framework */; };
+		45F5FB8A19F96FEE0074EDBF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5FB8919F96FEE0074EDBF /* Security.framework */; };
 		75ED838D19D34D8A009346EA /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75ED838C19D34D8A009346EA /* MobileAppTracker.framework */; };
 		75ED838F19D34E80009346EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75ED838E19D34E80009346EA /* FacebookSDK.framework */; };
 		75F87C8E19CF114600331D5A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F87C8019CF114600331D5A /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -834,6 +839,11 @@
 		30EB6CF8199EE4F600B01CA9 /* MFAdColony.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAdColony.h; sourceTree = "<group>"; };
 		30EB6CF9199EE4F600B01CA9 /* MFAdColony.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAdColony.m; sourceTree = "<group>"; };
 		30FD12891992F3C40055705F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		45F5FB8119F96F810074EDBF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		45F5FB8319F96FB10074EDBF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		45F5FB8519F96FC30074EDBF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		45F5FB8719F96FDB0074EDBF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		45F5FB8919F96FEE0074EDBF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		75ED838C19D34D8A009346EA /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 		75ED838E19D34E80009346EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		75F87C7F19CF114600331D5A /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -898,10 +908,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F5FB8A19F96FEE0074EDBF /* Security.framework in Frameworks */,
+				45F5FB8819F96FDB0074EDBF /* MobileCoreServices.framework in Frameworks */,
+				45F5FB8619F96FC30074EDBF /* CoreLocation.framework in Frameworks */,
+				45F5FB8419F96FB10074EDBF /* CFNetwork.framework in Frameworks */,
+				3053ADA5199D84B5007DC626 /* AudioToolbox.framework in Frameworks */,
 				303886F419A65A55001FFB09 /* libsqlite3.0.dylib in Frameworks */,
 				3053ADA3199D84A7007DC626 /* AdSupport.framework in Frameworks */,
 				30EB6CD3199E860B00B01CA9 /* CoreData.framework in Frameworks */,
 				75ED838F19D34E80009346EA /* FacebookSDK.framework in Frameworks */,
+				45F5FB8219F96F810074EDBF /* Parse.framework in Frameworks */,
 				75ED838D19D34D8A009346EA /* MobileAppTracker.framework in Frameworks */,
 				3053ADAD199D84F8007DC626 /* SystemConfiguration.framework in Frameworks */,
 				303886F219A65825001FFB09 /* libz.dylib in Frameworks */,
@@ -919,7 +935,6 @@
 				3053ADA9199D84DA007DC626 /* MessageUI.framework in Frameworks */,
 				309B023A199F803100FE9668 /* libChartboost.a in Frameworks */,
 				3053ADA7199D84C9007DC626 /* AVFoundation.framework in Frameworks */,
-				3053ADA5199D84B5007DC626 /* AudioToolbox.framework in Frameworks */,
 				303886F819A65BEC001FFB09 /* libGoogleAnalyticsServices.a in Frameworks */,
 				30FD128A1992F3C40055705F /* CoreAudio.framework in Frameworks */,
 				30BEC84F197B1E600069093E /* CoreGraphics.framework in Frameworks */,
@@ -1649,6 +1664,11 @@
 		30BEC84B197B1E5F0069093E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45F5FB8919F96FEE0074EDBF /* Security.framework */,
+				45F5FB8719F96FDB0074EDBF /* MobileCoreServices.framework */,
+				45F5FB8519F96FC30074EDBF /* CoreLocation.framework */,
+				45F5FB8319F96FB10074EDBF /* CFNetwork.framework */,
+				45F5FB8119F96F810074EDBF /* Parse.framework */,
 				303886F319A65A55001FFB09 /* libsqlite3.0.dylib */,
 				303886F119A65825001FFB09 /* libz.dylib */,
 				30EB6CDF199E8D8900B01CA9 /* Social.framework */,
@@ -2632,7 +2652,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5af84e2d-4edd-4b81-87d2-4863ec656952";
+				PROVISIONING_PROFILE = "bde50b76-a5cc-4044-86d4-8153cd2c2736";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2666,7 +2686,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "5af84e2d-4edd-4b81-87d2-4863ec656952";
+				PROVISIONING_PROFILE = "bde50b76-a5cc-4044-86d4-8153cd2c2736";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2677,13 +2697,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Pavel Mamaev (94G97SK366)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/Mystie",
 					the,
 					Fox,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";
@@ -2698,7 +2720,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5af84e2d-4edd-4b81-87d2-4863ec656952";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2708,13 +2730,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Pavel Mamaev (94G97SK366)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/Mystie",
 					the,
 					Fox,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mystie the Fox/Mystie the Fox-Prefix.pch";
@@ -2729,7 +2753,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5af84e2d-4edd-4b81-87d2-4863ec656952";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
