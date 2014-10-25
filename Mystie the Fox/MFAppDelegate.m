@@ -19,12 +19,17 @@
 #else
 #import <floopsdk/floopsdk.h>
 #endif
-
+#import "ABX.h"
 #import "MKStoreManager.h"
 #import "GAI.h"
 
 NSString *const bookAppID = @"899196882";
+NSString *const mystieAppID = @"928804072";
+NSString *const mystiePaidAppID = @"932271627";
+
 NSString *const TAP_STREAM_KEY = @"c_9ek3--RY-PeLND6eR4_Q";
+NSString *const showingCounter = @"showingCounter";
+const NSInteger showPopUpAfter = 3;
 
 @implementation MFAppDelegate
 
@@ -39,7 +44,14 @@ NSString *const TAP_STREAM_KEY = @"c_9ek3--RY-PeLND6eR4_Q";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self frameworksSettings];
-    
+    NSNumber *number = [[NSUserDefaults standardUserDefaults] objectForKey:showingCounter];
+    if (number) {
+        number = @([number integerValue] + 1);
+    } else {
+        number = @0;
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:number forKey:showingCounter];
+
     [self.window makeKeyAndVisible];
     [[MFAdColony sharedAdColony] logEvent:EVENT_MAIN_APP_STARTED];
     self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
@@ -75,7 +87,11 @@ NSString *const TAP_STREAM_KEY = @"c_9ek3--RY-PeLND6eR4_Q";
                                                          UIRemoteNotificationTypeAlert |
                                                          UIRemoteNotificationTypeSound)];
     }
+    [[ABXApiClient instance] setApiKey:@"4d4a79e58e8b379e2a10d496dba190ab95e9376f"];
+
 #else
+    [[ABXApiClient instance] setApiKey:@"8ea9f155e639ed0ffe3c6090aadd9e8432552f04"];
+
     [[FloopSdkManager sharedInstance] startWithAppKey:@"17ef2aad77f1d417bb500d4469eb4bd6"];
 
 #endif

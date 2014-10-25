@@ -12,7 +12,6 @@
 #import "MFFirstPageScene.h"
 #import "MFSpecialPage.h"
 #import "MFCoverScene.h"
-
 #import "MFAdColony.h"
 
 @implementation MFViewController
@@ -37,7 +36,6 @@
 
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
 }
 
 

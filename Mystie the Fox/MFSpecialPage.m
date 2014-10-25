@@ -21,8 +21,12 @@
 #endif
 
 #import <AVFoundation/AVFoundation.h>
+#import "StoryboardUtils.h"
+#import "MFPopUpViewController.h"
 
 extern NSString *const bookAppID;
+extern NSString *const showingCounter;
+extern const NSInteger showPopUpAfter;
 
 @interface MFSpecialPage ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -251,6 +255,11 @@ extern NSString *const bookAppID;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[MFAdColony sharedAdColony] startSessionRecorderForScreen:@"who if mystie screen"];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:showingCounter] integerValue] >= showPopUpAfter) {
+        MFPopUpViewController *popUp = [MFPopUpViewController instantiateFromStoryboard];
+        [StoryboardUtils addViewController:popUp onViewController:self belowSubview:nil];
+        [[NSUserDefaults standardUserDefaults] setObject:@0 forKey:showingCounter];
+    }
 }
 
 
