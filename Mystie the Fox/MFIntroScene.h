@@ -10,4 +10,6 @@
 
 @interface MFIntroScene : SKScene
 
+- (void)recoredScene;
+
 @end

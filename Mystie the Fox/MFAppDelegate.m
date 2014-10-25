@@ -11,15 +11,20 @@
 #import "MFAdColony.h"
 
 #ifdef MystieFree
-#import "Chartboost.h"
+#import "TSTapstream.h"
+#import <Chartboost/Chartboost.h>
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
 #import <Parse/Parse.h>
+#else
+#import <floopsdk/floopsdk.h>
 #endif
 
 #import "MKStoreManager.h"
 #import "GAI.h"
 
+NSString *const bookAppID = @"899196882";
+NSString *const TAP_STREAM_KEY = @"c_9ek3--RY-PeLND6eR4_Q";
 
 @implementation MFAppDelegate
 
@@ -51,6 +56,8 @@
     self.splashView.alpha = 0.0;
     [UIView commitAnimations];
 #ifdef MystieFree
+    TSConfig *config = [TSConfig configWithDefaults];
+    [TSTapstream createWithAccountName:@"neoniks" developerSecret:TAP_STREAM_KEY config:config];
     [Parse setApplicationId:@"cVuYrhjOAgaAS1s2JE2XfOReatVA1vjF5rXH9TOQ"
                   clientKey:@"SLMLhk9PkZPGKToGKKIG3pjbO5QyFSjb2HpaaU8a"];
     // Register for Push Notitications, if running iOS 8
@@ -68,6 +75,9 @@
                                                          UIRemoteNotificationTypeAlert |
                                                          UIRemoteNotificationTypeSound)];
     }
+#else
+    [[FloopSdkManager sharedInstance] startWithAppKey:@"17ef2aad77f1d417bb500d4469eb4bd6"];
+
 #endif
     
     
@@ -110,9 +120,7 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 #ifdef MystieFree
-    [Chartboost startWithAppId:@"53e858d01873da2f5f619e43" appSignature:@"3fa1918953a2213d56b22b93db70bb9d8ff2ae09" delegate:self];
-    [[Chartboost sharedChartboost] cacheMoreApps:CBLocationHomeScreen];
-    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
+    [Chartboost cacheMoreApps:CBLocationHomeScreen];
     [MobileAppTracker measureSession];
 #endif
     
@@ -180,7 +188,23 @@
         }
     }
 }
-
+- (void)didCompleteRewardedVideo:(CBLocation)location
+                      withReward:(int)reward {
+    NSUserDefaults* storage = [NSUserDefaults standardUserDefaults];
+    
+    //        [storage setBool:YES forKey:@"isVideoWatched"];
+    
+    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+    dayComponent.day = 1;
+    
+    NSCalendar *theCalendar = [NSCalendar currentCalendar];
+    NSDate *expireDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+    
+    [storage setObject:expireDate forKey:@"expireDate"];
+    [storage synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIsVideoWatched" object:nil];
+}
 #endif
 
 #pragma mark - frameworks settings
@@ -189,6 +213,8 @@
     [MFSounds sharedSound];
     [MKStoreManager sharedManager];
 #ifdef MystieFree
+    [Chartboost startWithAppId:@"53e858d01873da2f5f619e43" appSignature:@"3fa1918953a2213d56b22b93db70bb9d8ff2ae09" delegate:self];
+    [Chartboost cacheRewardedVideo:CBLocationGameScreen];
     [AdColony configureWithAppID:@"app6452bf1c5bcc4cc782" zoneIDs:@[@"vz3a0c719cb27b400cb1", @"vz16512e0b8a19467b8e",@"vz38df8ea2870f41d48e"] delegate:self logging:YES];
     [MobileAppTracker initializeWithMATAdvertiserId:@"20460"
                                    MATConversionKey:@"e76deeecd77756a4861d9a10389124c7"];

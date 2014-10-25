@@ -185,7 +185,7 @@ static NSMutableData *sDataFromConnection;
 
     NSString *postData = [NSString stringWithFormat:@"receiptdata=%@", receiptDataString];
 
-    NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+    NSString *length = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
     [theRequest setValue:length forHTTPHeaderField:@"Content-Length"];
 
     [theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];

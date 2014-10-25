@@ -10,6 +10,7 @@
 
 @interface MFCoverScene : SKScene
 
+- (void)recoredScene;
 
 
 @end

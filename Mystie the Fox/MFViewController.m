@@ -7,7 +7,6 @@
 //
 
 #import "MFViewController.h"
-#import "MFMyScene.h"
 
 #import "MFIntroScene.h"
 #import "MFFirstPageScene.h"
@@ -88,6 +87,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if (segue) {
         if ([segue.identifier isEqualToString:@"specialPageSegue"]) {
+            [[MFAdColony sharedAdColony] stopRecording];
             __weak MFSpecialPage * destinationVC= segue.destinationViewController;
             destinationVC.parentVC =self;
         }

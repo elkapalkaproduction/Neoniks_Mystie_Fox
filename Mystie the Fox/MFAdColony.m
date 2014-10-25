@@ -9,35 +9,13 @@
 #import "MFAdColony.h"
 #import <SpriteKit/SpriteKit.h>
 #import "GAI.h"
-#import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #ifdef MystieFree
-#import "AdColony.h"
+#import <AdColony/AdColony.h>
+#import <Chartboost/Chartboost.h>
+#import <StartApp/StartApp.h>
 #endif
-/*
- 1.  App Started
- 2.  Who is Mystie clicked
- 3.  neoniks website clicked
- 4.  Start clicked
- (Who is Mystie screen):
- 5.  Play clicked
- 6.  More clicked
- (Play screen)
- 7.  More on Play clicked
- 8.  Mystie is clicked
- 9.  Character 1 clicked
- 10. Character 2 clicked
- 11.  Character 3 clicked
- 12.  Character 4 clicked
- 13.  Character 5 clicked
- 14. Character 6 clicked
- 15. Character 7 clicked
- 16. Character 8 clicked
- 17.  In-App Yes clicked
- 18. In-App No clicked
- 19.  Video Yes clicked
- 20 Video No clicked
- */
+
 NSString *const EVENT_MAIN_APP_STARTED = @"EVENT_MAIN_APP_STARTED";
 NSString *const EVENT_MAIN_WHO_IS_MISTY = @"EVENT_MAIN_WHO_IS_MISTY";
 NSString *const EVENT_MAIN_NEONIKS_WEBSITE = @"EVENT_MAIN_NEONIKS_WEBSITE";
@@ -52,8 +30,17 @@ NSString *const EVENT_IN_APP_NO = @"EVENT_IN_APP_NO";
 NSString *const EVENT_VIDEO_YES = @"EVENT_VIDEO_YES";
 NSString *const EVENT_VIDEO_NO = @"EVENT_VIDEO_NO";
 
+NSString *const START_APP_DEVELOPER_KEY = @"105068540";
+NSString *const START_APP_APP_KEY = @"210300540";
+
 
 NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
+#ifdef MystieFree
+@interface MFAdColony () <STADelegateProtocol>
+@property (strong, nonatomic) STAStartAppAd *appAd;
+
+@end
+#endif
 
 @implementation MFAdColony
 
@@ -76,6 +63,11 @@ NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
         [[GAI sharedInstance] trackerWithTrackingId:GOOGLE_ANALITYCS_TRACKING_ID];
 
 #ifdef MystieFree
+        STAStartAppSDK* sdk = [STAStartAppSDK sharedInstance];
+        sdk.appID = START_APP_APP_KEY;
+        sdk.devID = START_APP_DEVELOPER_KEY;
+        [self.appAd loadAdWithDelegate:self];
+
         self.interstitialView = [[GADInterstitial alloc] init];
         self.interstitialView.delegate=self;
         self.interstitialView.adUnitID = @"ca-app-pub-1480731978958686/7886942590";
@@ -88,6 +80,19 @@ NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
 }
 #pragma mark - GA
 #ifdef MystieFree
+- (void)showSplashAd {
+    [Chartboost showInterstitial:CBLocationHomeScreen];
+    [self.appAd showAd];
+}
+
+- (STAStartAppAd *)appAd {
+    if (!_appAd) {
+        _appAd = [[STAStartAppAd alloc] init];
+    }
+    
+    return _appAd;
+}
+
 - (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial{
 //    [self.interstitialView presentFromRootViewController:[self.view nextResponder]];
     self.isInterstitialRequestLoaded=YES;
@@ -113,6 +118,10 @@ NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
 
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)interstitial{
     ((SKView*)self.parentForGA.view).paused=NO;
+}
+- (void)didCloseAd:(STAAbstractAd *)ad {
+    self.appAd = nil;
+    [self.appAd loadAdWithDelegate:self];
 }
 
 #pragma mark - AC
@@ -140,6 +149,22 @@ NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
                                                            action:event
                                                             label:nil
                                                             value:nil] set:@"start" forKey:kGAISessionControl] build]];
+}
+
+
+- (void)startSessionRecorderForScreen:(NSString *)screen {
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // Start a new session with a screenView hit.
+    self.builder = [GAIDictionaryBuilder createScreenView];
+    [self.builder set:@"start" forKey:kGAISessionControl];
+    [tracker set:kGAIScreenName value:screen];
+    [tracker send:[self.builder build]];
+}
+
+
+- (void)stopRecording {
+    [self.builder set:@"end" forKey:kGAISessionControl];
 }
 
 @end

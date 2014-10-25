@@ -23,9 +23,13 @@
 #import "MKStoreManager.h"
 
 #ifdef MystieFree
-#import "AdColony.h"
+#import <AdColony/AdColony.h>
+#import <Chartboost/Chartboost.h>
 #import "MFAdColony.h"
 #endif
+
+NSInteger adcolonyAlertTag = 100;
+NSInteger inappAlertTag = 101;
 
 @interface MFCharactersScroller ()
 
@@ -199,7 +203,7 @@
                 message = @"Unlock all characters forever for $0.99?";
             }
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:restore otherButtonTitles:yesButton, noButton, nil];
-            alert.tag = 1043;
+            alert.tag = inappAlertTag;
             [alert show];
         }
 #endif
@@ -212,11 +216,11 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 1043) {
+    if (alertView.tag == inappAlertTag) {
         [self inAppAlertViewAnalizeWithButtonPressed:buttonIndex];
         return;
     }
-    if (alertView.tag == 1533) {
+    if (alertView.tag == adcolonyAlertTag) {
         [self adColonyUnlockAlertWithButtonPressed:buttonIndex];
         return;
     }
@@ -264,7 +268,7 @@
             message = @"You can unlock all the characters for one day by watching this video:";
         }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:noButton otherButtonTitles:yesButton, nil];
-        alert.tag = 1533;
+        alert.tag = adcolonyAlertTag;
         if ([MFAdColony sharedAdColony].isSecondZoneLoaded) {
             [alert show];
         }
@@ -282,10 +286,14 @@
     if (buttonIndex == 1) {
         [[MFAdColony sharedAdColony] logEvent:EVENT_VIDEO_YES];
 #ifdef MystieFree
-        [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
-                        withDelegate:self.parent
-                    withV4VCPrePopup:NO
-                    andV4VCPostPopup:NO];
+        if ([MFAdColony sharedAdColony].isSecondZoneLoaded && NO) {
+            [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
+                            withDelegate:self.parent
+                        withV4VCPrePopup:NO
+                        andV4VCPostPopup:NO];
+        } else if ([Chartboost hasRewardedVideo:CBLocationGameScreen]) {
+            [Chartboost showRewardedVideo:CBLocationGameScreen];
+        }
 #endif
     } else if (buttonIndex == 0) {
         [[MFAdColony sharedAdColony] logEvent:EVENT_VIDEO_NO];

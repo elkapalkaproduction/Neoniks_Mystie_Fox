@@ -100,7 +100,7 @@
     }
     [whiteScreen addChild:skeleton];
     
-    __weak MFFirstPageScene *scene = self.parent;
+    __weak MFFirstPageScene *scene = (MFFirstPageScene *)self.parent;
     SKAction * whiteScreenOn = [SKAction runBlock:^{
         scene.leftArrow.hidden =YES;
         scene.rightArrow.hidden =YES;

@@ -55,6 +55,8 @@
     [self.introSprite runAction:sequence];
 }
 
-
+- (void)recoredScene {
+    
+}
 
 @end

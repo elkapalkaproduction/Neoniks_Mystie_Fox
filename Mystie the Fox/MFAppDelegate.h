@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #ifdef MystieFree
-#import "AdColony.h"
+#import <AdColony/AdColony.h>
 #endif
 
 @interface MFAppDelegate : UIResponder <UIApplicationDelegate>

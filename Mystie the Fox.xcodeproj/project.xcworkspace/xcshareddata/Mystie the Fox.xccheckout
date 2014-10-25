@@ -10,6 +10,8 @@
 	<string>Mystie the Fox</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>2CF945458A24043D748290788123DFE245B414A7</key>
+		<string>github.com:elkapalkaproduction/Neoniks_XMas.git</string>
 		<key>F32434541FEFF643400891F676A83EDCB36BFE4E</key>
 		<string>https://github.com/elkapalkaproduction/Neoniks_Mystie_Fox.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Mystie the Fox.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>2CF945458A24043D748290788123DFE245B414A7</key>
+		<string>../../../xmas</string>
 		<key>F32434541FEFF643400891F676A83EDCB36BFE4E</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>F32434541FEFF643400891F676A83EDCB36BFE4E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Neoniks_Mystie_Fox</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2CF945458A24043D748290788123DFE245B414A7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>xmas</string>
 		</dict>
 	</array>
 </dict>

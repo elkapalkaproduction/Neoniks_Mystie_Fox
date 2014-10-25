@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GAIDictionaryBuilder.h"
 #ifdef MystieFree
 #import "GADInterstitial.h"
 #endif
@@ -39,12 +40,16 @@ NSString *const EVENT_VIDEO_NO;
 @property (weak,nonatomic) UIViewController * parentForAC;
 #ifdef MystieFree
 @property (strong,nonatomic) GADInterstitial *interstitialView;
+- (void)showSplashAd;
 #endif
+@property (strong, nonatomic) GAIDictionaryBuilder *builder;
 @property (nonatomic)BOOL isInterstitialRequestLoaded;
 
 -(void) showGADInterstitialWithParent:(UIViewController *)parent;
 -(void)playAdColonyVidioWithParent:(UIViewController*)parent zone:(NSString*)zone;
 
 - (void)logEvent:(NSString *)event;
+- (void)startSessionRecorderForScreen:(NSString *)screen;
+- (void)stopRecording;
 
 @end

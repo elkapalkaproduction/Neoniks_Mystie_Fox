@@ -22,7 +22,9 @@
 #import "MFAdColony.h"
 
 #ifdef MystieFree
-#import "Chartboost.h"
+#import <Chartboost/Chartboost.h>
+#else
+#import <floopsdk/floopsdk.h>
 #endif
 
 #import "MFSpecialPage.h"
@@ -79,11 +81,11 @@
         if ([language isEqualToString:@"ru"]) {
             backgroundName = ASSET_BY_SCREEN_HEIGHT(@"page1_background-568h.png", @"page1_background.png");
             siteNodeName = @"site_rus.png";
-            moreNodeName = @"more-rus.png";
+            moreNodeName = @"Who-is-Mystie-rus.png";
         }else{
             backgroundName = ASSET_BY_SCREEN_HEIGHT(@"page1_background-568h.png", @"page1_background.png");
             siteNodeName = @"site_eng.png";
-            moreNodeName = @"more-eng.png";
+            moreNodeName = @"Who-is-Mystie-eng.png";
         }
         //        Background
         
@@ -111,9 +113,9 @@
         float moreNodeRatio = [MFImageCropper spriteRatio:self.moreNode];
         if ([[UIDevice currentDevice] userInterfaceIdiom] !=UIUserInterfaceIdiomPad) {
             self.moreNode.size = CGSizeMake(150, 150*moreNodeRatio);
-            self.moreNode.position = CGPointMake(CGRectGetMaxX(self.frame) -self.moreNode.size.width/2, CGRectGetMaxY(self.frame) - self.moreNode.size.height/2);
+            self.moreNode.position = CGPointMake(CGRectGetMaxX(self.frame) /2, CGRectGetMaxY(self.frame) - self.moreNode.size.height/2);
         }else{
-            self.moreNode.position = CGPointMake(CGRectGetMaxX(self.frame) -self.moreNode.size.width/2, CGRectGetMaxY(self.frame) - self.moreNode.size.height/2);
+            self.moreNode.position = CGPointMake(CGRectGetMaxX(self.frame) /2, CGRectGetMaxY(self.frame) - self.moreNode.size.height/2);
         }
         self.moreNode.name =@"more";
         [self addChild:self.moreNode];
@@ -197,6 +199,7 @@
 }
 
 - (void)didMoveToView:(SKView *)view{
+    [self recoredScene];
     NSMutableArray * closeEyesArray = [[NSMutableArray alloc] init];
     NSMutableArray * openEyesArray = [[NSMutableArray alloc] init];
     for (int i = 0; i<6; i++) {
@@ -263,26 +266,23 @@
         }else if ([node.name isEqualToString:@"more"]){
             [[MFAdColony sharedAdColony] logEvent:EVENT_PLAY_MORE];
             [self runAction:self.playClickSound];
-#ifdef MystieFree
-            [[Chartboost sharedChartboost] showMoreApps:CBLocationHomeScreen];
-#else
             __weak UIViewController * vc=(UIViewController*)[self.view nextResponder];
-            
             [vc performSegueWithIdentifier:@"specialPageSegue" sender:vc];
-#endif
         }else if([node.name isEqualToString:@"siteNode"]){
             NSString *language = [MFLanguage sharedLanguage].language;
+            NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
             if ([language isEqualToString:@"ru"]) {
-                #ifdef MystieFree
-                NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
-                [[UIApplication sharedApplication] openURL:url];
-                #endif
-            }else{
-                #ifdef MystieFree
-                NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
-                [[UIApplication sharedApplication] openURL:url];
-                #endif
+                url = [NSURL URLWithString:@"http://www.neoniki.com"];
             }
+#ifdef MystieFree
+            [[UIApplication sharedApplication] openURL:url];
+#else
+            [[FloopSdkManager sharedInstance] showParentalGate:^(BOOL success) {
+                if (success) {
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+            }];
+#endif
         }
         
         if (![node.name isEqualToString:@"fox"] && ! [node.name isEqualToString:@"tail"] && node.name!=nil) {
@@ -404,10 +404,15 @@
 }
 
 -(void)willMoveFromView:(SKView *)view{
+    [[MFAdColony sharedAdColony] stopRecording];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MFIsVideoWatched" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MFIAPPurchased" object:nil];
 }
 
+
+- (void)recoredScene {
+    [[MFAdColony sharedAdColony] startSessionRecorderForScreen:@"play screen"];
+}
 
 
 @end

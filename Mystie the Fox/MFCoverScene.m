@@ -14,9 +14,11 @@
 #import "MFAdColony.h"
 
 #ifdef MystieFree
-#import "AdColony.h"
+#import <AdColony/AdColony.h>
 #import "GADBannerView.h"
 #import "GADInterstitial.h"
+#else
+#import <floopsdk/floopsdk.h>
 #endif
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height == 568.0) ? regular : longScreen)
@@ -84,7 +86,6 @@
 //        Background
         
         self.background = [[SKSpriteNode alloc] initWithImageNamed:backgroundName];
-        float backgroundRatio = [MFImageCropper spriteRatio:self.background];
 
         self.background.position=CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:self.background];
@@ -190,17 +191,19 @@
             }else if([node.name isEqualToString:@"siteNode"]){
                 [[MFAdColony sharedAdColony] logEvent:EVENT_MAIN_NEONIKS_WEBSITE];
                 NSString *language = [MFLanguage sharedLanguage].language;
+                NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
                 if ([language isEqualToString:@"ru"]) {
-                    #ifdef MystieFree
-                    NSURL *url = [NSURL URLWithString:@"http://www.neoniki.com"];
-                    [[UIApplication sharedApplication] openURL:url];
-                    #endif
-                }else{
-                    #ifdef MystieFree
-                    NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
-                    [[UIApplication sharedApplication] openURL:url];
-                    #endif
+                    url = [NSURL URLWithString:@"http://www.neoniki.com"];
                 }
+#ifdef MystieFree
+                [[UIApplication sharedApplication] openURL:url];
+#else
+                [[FloopSdkManager sharedInstance] showParentalGate:^(BOOL success) {
+                    if (success) {
+                        [[UIApplication sharedApplication] openURL:url];
+                    }
+                }];
+#endif
             }
             [self runAction:sound];
             
@@ -211,7 +214,9 @@
 }
 
 -(void)didMoveToView:(SKView *)view{
+    [self recoredScene];
 #ifdef MystieFree
+    [[MFAdColony sharedAdColony] showSplashAd];
     self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
     
     self.bannerView.adUnitID = @"ca-app-pub-1480731978958686/9867510198";
@@ -229,10 +234,11 @@
     NSComparisonResult result=[expireDate compare:now];
     BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
     if (!(result ==NSOrderedDescending||IAPurchased)) {
+        UIViewController *parent = (UIViewController *)[self.view nextResponder];
         if([MFAdColony sharedAdColony].isFirstZoneLoaded){
-            [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:[self.view nextResponder] zone:@"vz3a0c719cb27b400cb1"];
+            [[MFAdColony sharedAdColony] playAdColonyVidioWithParent:parent zone:@"vz3a0c719cb27b400cb1"];
         }else if ([MFAdColony sharedAdColony].isInterstitialRequestLoaded) {
-            [[MFAdColony sharedAdColony] showGADInterstitialWithParent:[self.view nextResponder]];
+            [[MFAdColony sharedAdColony] showGADInterstitialWithParent:parent];
         }
     }
 #endif
@@ -240,7 +246,12 @@
 }
 
 
-
+- (void)willMoveFromView:(SKView *)view {
+    [[MFAdColony sharedAdColony] stopRecording];
+}
+- (void)recoredScene {
+    [[MFAdColony sharedAdColony] startSessionRecorderForScreen:@"main page"];
+}
 
 
 @end

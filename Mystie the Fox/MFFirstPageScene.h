@@ -13,4 +13,6 @@
 @property (strong,nonatomic) UIImageView * leftArrow;
 @property (strong,nonatomic) UIImageView * rightArrow;
 
+- (void)recoredScene;
+
 @end

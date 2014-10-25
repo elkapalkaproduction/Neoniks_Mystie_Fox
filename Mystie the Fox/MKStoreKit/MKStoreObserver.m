@@ -82,7 +82,7 @@
 {			
 #if TARGET_OS_IPHONE
   [[MKStoreManager sharedManager] provideContent:transaction.payment.productIdentifier 
-                                      forReceipt:transaction.transactionReceipt];	
+                                      forReceipt:transaction.transactionReceipt];
 #elif TARGET_OS_MAC
   [[MKStoreManager sharedManager] provideContent:transaction.payment.productIdentifier 
                                       forReceipt:nil];	
