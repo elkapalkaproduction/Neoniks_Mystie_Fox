@@ -584,8 +584,8 @@
 		7594E01319FBAE3000F5C091 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7594E01219FBAE3000F5C091 /* FacebookSDK.framework */; };
 		7594E01619FBB5A800F5C091 /* StartApp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01419FBB5A800F5C091 /* StartApp.bundle */; };
 		7594E01719FBB5A800F5C091 /* StartApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7594E01519FBB5A800F5C091 /* StartApp.framework */; };
-		7594E01919FBBBFE00F5C091 /* iPade_page2-eng.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01819FBBBFE00F5C091 /* iPade_page2-eng.png */; };
-		7594E01A19FBBBFE00F5C091 /* iPade_page2-eng.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01819FBBBFE00F5C091 /* iPade_page2-eng.png */; };
+		7594E01919FBBBFE00F5C091 /* iPade_page2-eng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01819FBBBFE00F5C091 /* iPade_page2-eng@2x.png */; };
+		7594E01A19FBBBFE00F5C091 /* iPade_page2-eng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01819FBBBFE00F5C091 /* iPade_page2-eng@2x.png */; };
 		7594E01E19FBC8C300F5C091 /* about_button_read_book_eng.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01B19FBC8C300F5C091 /* about_button_read_book_eng.png */; };
 		7594E01F19FBC8C300F5C091 /* about_button_read_book_eng.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01B19FBC8C300F5C091 /* about_button_read_book_eng.png */; };
 		7594E02019FBC8C300F5C091 /* about_button_read_book_rus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01C19FBC8C300F5C091 /* about_button_read_book_rus.png */; };
@@ -1029,7 +1029,7 @@
 		7594E01219FBAE3000F5C091 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		7594E01419FBB5A800F5C091 /* StartApp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = StartApp.bundle; sourceTree = "<group>"; };
 		7594E01519FBB5A800F5C091 /* StartApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StartApp.framework; sourceTree = "<group>"; };
-		7594E01819FBBBFE00F5C091 /* iPade_page2-eng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPade_page2-eng.png"; sourceTree = "<group>"; };
+		7594E01819FBBBFE00F5C091 /* iPade_page2-eng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPade_page2-eng@2x.png"; sourceTree = "<group>"; };
 		7594E01B19FBC8C300F5C091 /* about_button_read_book_eng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_read_book_eng.png; sourceTree = "<group>"; };
 		7594E01C19FBC8C300F5C091 /* about_button_read_book_rus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_read_book_rus.png; sourceTree = "<group>"; };
 		7594E01D19FBC8C300F5C091 /* about_button_read_book_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_read_book_icon.png; sourceTree = "<group>"; };
@@ -1733,7 +1733,7 @@
 		30109337197BCDC300AA2295 /* eng */ = {
 			isa = PBXGroup;
 			children = (
-				7594E01819FBBBFE00F5C091 /* iPade_page2-eng.png */,
+				7594E01819FBBBFE00F5C091 /* iPade_page2-eng@2x.png */,
 				30109339197BCDC300AA2295 /* moreSpecial-eng@2x.png */,
 				3010933A197BCDC300AA2295 /* playSpecial-eng@2x.png */,
 				3010933B197BCDC300AA2295 /* linkSpecial-eng@2x.png */,
@@ -2474,7 +2474,7 @@
 				304A7B0D19A8CBF00004B2EF /* ufo@2x.png in Resources */,
 				304A7B0E19A8CBF00004B2EF /* InfoPlist.strings in Resources */,
 				304A7B0F19A8CBF00004B2EF /* icon_mystie_76x76.png in Resources */,
-				7594E01A19FBBBFE00F5C091 /* iPade_page2-eng.png in Resources */,
+				7594E01A19FBBBFE00F5C091 /* iPade_page2-eng@2x.png in Resources */,
 				304A7B1019A8CBF00004B2EF /* iPade_startup-screen_rus@2x~ipad.png in Resources */,
 				758BE62E19FC207B00AE7498 /* prompt_yes_rus.png in Resources */,
 				304A7B1119A8CBF00004B2EF /* linkSpecial-rus@2x.png in Resources */,
@@ -2684,7 +2684,7 @@
 				30109386197BCDC300AA2295 /* Fire-14@2x.png in Resources */,
 				301093D9197BCDC300AA2295 /* fox_body@2x.png in Resources */,
 				758BE62119FC207B00AE7498 /* having_fun_rus.png in Resources */,
-				7594E01919FBBBFE00F5C091 /* iPade_page2-eng.png in Resources */,
+				7594E01919FBBBFE00F5C091 /* iPade_page2-eng@2x.png in Resources */,
 				301093B4197BCDC300AA2295 /* IPad_button_5@2x.png in Resources */,
 				30109408197C27F100AA2295 /* icon_mystie_40x40.png in Resources */,
 				307386B0197D919800105ACE /* mystie_the_fox_rus@2x~iphone.png in Resources */,
