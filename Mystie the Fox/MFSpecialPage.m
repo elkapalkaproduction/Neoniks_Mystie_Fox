@@ -232,7 +232,6 @@ extern const NSInteger showPopUpAfter;
 #ifdef MystieFree
     [self goToReadBookParentGate];
 #else
-    [self goToReadBookParentGate];
     [[FloopSdkManager sharedInstance] showParentalGate:^(BOOL success) {
         if (success) {
             [self goToReadBookParentGate];
