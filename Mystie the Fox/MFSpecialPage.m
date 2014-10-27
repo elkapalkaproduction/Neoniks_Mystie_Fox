@@ -123,7 +123,7 @@ extern const NSInteger showPopUpAfter;
     UIImageView *readIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"about_button_read_book_icon"]];
     readIconImageView.userInteractionEnabled = YES;
     NSInteger customRatio = [[UIDevice currentDevice] userInterfaceIdiom] !=UIUserInterfaceIdiomPad? ratio : [UIScreen mainScreen].scale == 1.f? 2 : 1;
-    readIconImageView.frame = CGRectMake(30*positionRatio,
+    readIconImageView.frame = CGRectMake(20*positionRatio,
                                          (450*positionRatio - readIconImageView.frame.size.height/customRatio),
                                          readIconImageView.frame.size.width/customRatio,
                                          readIconImageView.frame.size.height/customRatio);
