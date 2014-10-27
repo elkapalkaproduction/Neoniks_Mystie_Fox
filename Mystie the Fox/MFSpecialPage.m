@@ -128,7 +128,7 @@ extern const NSInteger showPopUpAfter;
                                          readIconImageView.frame.size.width/customRatio,
                                          readIconImageView.frame.size.height/customRatio);
     
-    readBookImageView.frame = CGRectMake(32*positionRatio + readIconImageView.frame.size.width / 2g,
+    readBookImageView.frame = CGRectMake(32*positionRatio + readIconImageView.frame.size.width / 2,
                                          readIconImageView.frame.origin.y + (readIconImageView.frame.size.height - readBookImageView.frame.size.height/customRatio)/ 2 ,
                                          readBookImageView.frame.size.width/customRatio,
                                          readBookImageView.frame.size.height/customRatio);
