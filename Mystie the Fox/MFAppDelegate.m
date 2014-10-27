@@ -24,12 +24,12 @@
 #import "GAI.h"
 
 NSString *const bookAppID = @"899196882";
-NSString *const mystieAppID = @"928804072";
-NSString *const mystiePaidAppID = @"932271627";
+NSString *const mystieAppID = @"905042573";
+NSString *const mystiePaidAppID = @"912588789";
 
 NSString *const TAP_STREAM_KEY = @"c_9ek3--RY-PeLND6eR4_Q";
 NSString *const showingCounter = @"showingCounter";
-const NSInteger showPopUpAfter = 3;
+const NSInteger showPopUpAfter = 1;
 
 @implementation MFAppDelegate
 
