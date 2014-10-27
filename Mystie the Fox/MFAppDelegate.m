@@ -29,7 +29,7 @@ NSString *const mystiePaidAppID = @"912588789";
 
 NSString *const TAP_STREAM_KEY = @"c_9ek3--RY-PeLND6eR4_Q";
 NSString *const showingCounter = @"showingCounter";
-const NSInteger showPopUpAfter = 1;
+const NSInteger showPopUpAfter = 3;
 
 @implementation MFAppDelegate
 
