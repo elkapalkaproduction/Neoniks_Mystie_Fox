@@ -86,7 +86,8 @@ extern const NSInteger showPopUpAfter;
         ratio=2.4;
         positionRatio=1;
     }else{
-        backgroundSize=image.size;
+        NSInteger scaleFactor = [UIScreen mainScreen].scale == 1.f ? 2 : 1; ;
+        backgroundSize=CGSizeMake(image.size.width/scaleFactor, image.size.height/scaleFactor);
         closeRect=CGRectMake(self.scrollView.frame.size.width-50*2.4, 0, 50*2.4, 50*2.4);
         ratio=1;
         positionRatio=2.4;
@@ -117,12 +118,21 @@ extern const NSInteger showPopUpAfter;
     
     UIImageView *readBookImageView = [[UIImageView alloc] initWithImage:readImage];
     readBookImageView.userInteractionEnabled = YES;
-    readBookImageView.frame = CGRectMake(92*positionRatio, (460*positionRatio - readBookImageView.frame.size.height/ratio), readBookImageView.frame.size.width/ratio, readBookImageView.frame.size.height/ratio);
     [self.scrollView addSubview:readBookImageView];
     
     UIImageView *readIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"about_button_read_book_icon"]];
     readIconImageView.userInteractionEnabled = YES;
-    readIconImageView.frame = CGRectMake(10*positionRatio, (480*positionRatio - readIconImageView.frame.size.height/ratio), readIconImageView.frame.size.width/ratio, readIconImageView.frame.size.height/ratio);
+    NSInteger customRatio = [[UIDevice currentDevice] userInterfaceIdiom] !=UIUserInterfaceIdiomPad? ratio : [UIScreen mainScreen].scale == 1.f? 2 : 1;
+    readIconImageView.frame = CGRectMake(30*positionRatio,
+                                         (450*positionRatio - readIconImageView.frame.size.height/customRatio),
+                                         readIconImageView.frame.size.width/customRatio,
+                                         readIconImageView.frame.size.height/customRatio);
+    
+    readBookImageView.frame = CGRectMake(32*positionRatio + readIconImageView.frame.size.width / 2g,
+                                         readIconImageView.frame.origin.y + (readIconImageView.frame.size.height - readBookImageView.frame.size.height/customRatio)/ 2 ,
+                                         readBookImageView.frame.size.width/customRatio,
+                                         readBookImageView.frame.size.height/customRatio);
+
     [self.scrollView addSubview:readIconImageView];
     
     UITapGestureRecognizer * readGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToReadBook)];

@@ -586,12 +586,12 @@
 		7594E01719FBB5A800F5C091 /* StartApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7594E01519FBB5A800F5C091 /* StartApp.framework */; };
 		7594E01919FBBBFE00F5C091 /* iPade_page2-eng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01819FBBBFE00F5C091 /* iPade_page2-eng@2x.png */; };
 		7594E01A19FBBBFE00F5C091 /* iPade_page2-eng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01819FBBBFE00F5C091 /* iPade_page2-eng@2x.png */; };
-		7594E01E19FBC8C300F5C091 /* about_button_read_book_eng.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01B19FBC8C300F5C091 /* about_button_read_book_eng.png */; };
-		7594E01F19FBC8C300F5C091 /* about_button_read_book_eng.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01B19FBC8C300F5C091 /* about_button_read_book_eng.png */; };
-		7594E02019FBC8C300F5C091 /* about_button_read_book_rus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01C19FBC8C300F5C091 /* about_button_read_book_rus.png */; };
-		7594E02119FBC8C300F5C091 /* about_button_read_book_rus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01C19FBC8C300F5C091 /* about_button_read_book_rus.png */; };
-		7594E02219FBC8C300F5C091 /* about_button_read_book_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01D19FBC8C300F5C091 /* about_button_read_book_icon.png */; };
-		7594E02319FBC8C300F5C091 /* about_button_read_book_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01D19FBC8C300F5C091 /* about_button_read_book_icon.png */; };
+		7594E01E19FBC8C300F5C091 /* about_button_read_book_eng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01B19FBC8C300F5C091 /* about_button_read_book_eng@2x.png */; };
+		7594E01F19FBC8C300F5C091 /* about_button_read_book_eng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01B19FBC8C300F5C091 /* about_button_read_book_eng@2x.png */; };
+		7594E02019FBC8C300F5C091 /* about_button_read_book_rus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01C19FBC8C300F5C091 /* about_button_read_book_rus@2x.png */; };
+		7594E02119FBC8C300F5C091 /* about_button_read_book_rus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01C19FBC8C300F5C091 /* about_button_read_book_rus@2x.png */; };
+		7594E02219FBC8C300F5C091 /* about_button_read_book_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01D19FBC8C300F5C091 /* about_button_read_book_icon@2x.png */; };
+		7594E02319FBC8C300F5C091 /* about_button_read_book_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7594E01D19FBC8C300F5C091 /* about_button_read_book_icon@2x.png */; };
 		7594E02719FBCD0200F5C091 /* floopsdk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7594E02519FBCD0200F5C091 /* floopsdk.bundle */; };
 		7594E02819FBCD0200F5C091 /* floopsdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7594E02619FBCD0200F5C091 /* floopsdk.framework */; };
 		7594E02B19FBCF9400F5C091 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7594E02919FBCF9400F5C091 /* OpenAL.framework */; };
@@ -1030,9 +1030,9 @@
 		7594E01419FBB5A800F5C091 /* StartApp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = StartApp.bundle; sourceTree = "<group>"; };
 		7594E01519FBB5A800F5C091 /* StartApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StartApp.framework; sourceTree = "<group>"; };
 		7594E01819FBBBFE00F5C091 /* iPade_page2-eng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPade_page2-eng@2x.png"; sourceTree = "<group>"; };
-		7594E01B19FBC8C300F5C091 /* about_button_read_book_eng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_read_book_eng.png; sourceTree = "<group>"; };
-		7594E01C19FBC8C300F5C091 /* about_button_read_book_rus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_read_book_rus.png; sourceTree = "<group>"; };
-		7594E01D19FBC8C300F5C091 /* about_button_read_book_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_button_read_book_icon.png; sourceTree = "<group>"; };
+		7594E01B19FBC8C300F5C091 /* about_button_read_book_eng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_button_read_book_eng@2x.png"; sourceTree = "<group>"; };
+		7594E01C19FBC8C300F5C091 /* about_button_read_book_rus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_button_read_book_rus@2x.png"; sourceTree = "<group>"; };
+		7594E01D19FBC8C300F5C091 /* about_button_read_book_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_button_read_book_icon@2x.png"; sourceTree = "<group>"; };
 		7594E02519FBCD0200F5C091 /* floopsdk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = floopsdk.bundle; sourceTree = "<group>"; };
 		7594E02619FBCD0200F5C091 /* floopsdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = floopsdk.framework; sourceTree = "<group>"; };
 		7594E02919FBCF9400F5C091 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -1950,9 +1950,9 @@
 				758BE63919FC242200AE7498 /* StoryboardUtils.h */,
 				758BE63A19FC242200AE7498 /* StoryboardUtils.m */,
 				300664BA197DF1250048AE57 /* button_click.mp3 */,
-				7594E01B19FBC8C300F5C091 /* about_button_read_book_eng.png */,
-				7594E01C19FBC8C300F5C091 /* about_button_read_book_rus.png */,
-				7594E01D19FBC8C300F5C091 /* about_button_read_book_icon.png */,
+				7594E01B19FBC8C300F5C091 /* about_button_read_book_eng@2x.png */,
+				7594E01C19FBC8C300F5C091 /* about_button_read_book_rus@2x.png */,
+				7594E01D19FBC8C300F5C091 /* about_button_read_book_icon@2x.png */,
 				307386A4197D6B5400105ACE /* iPhone */,
 				301093EE197C27F100AA2295 /* icons */,
 				30109274197BCDC200AA2295 /* iPad_1536x2048 */,
@@ -2325,7 +2325,7 @@
 				304A7A8519A8CBF00004B2EF /* Fire-12@2x.png in Resources */,
 				304A7A8619A8CBF00004B2EF /* parachute_3@2x.png in Resources */,
 				304A7A8719A8CBF00004B2EF /* Fire-8@2x.png in Resources */,
-				7594E02319FBC8C300F5C091 /* about_button_read_book_icon.png in Resources */,
+				7594E02319FBC8C300F5C091 /* about_button_read_book_icon@2x.png in Resources */,
 				304A7A8819A8CBF00004B2EF /* dragon.mp3 in Resources */,
 				304A7A8919A8CBF00004B2EF /* arrow-left@2x.png in Resources */,
 				304A7A8A19A8CBF00004B2EF /* hole.mp3 in Resources */,
@@ -2397,7 +2397,7 @@
 				304A7AC719A8CBF00004B2EF /* 1iPhone5_page1_sample.png in Resources */,
 				304A7AC819A8CBF00004B2EF /* mosquito-7.png in Resources */,
 				304A7AC919A8CBF00004B2EF /* cloud-1@2x.png in Resources */,
-				7594E01F19FBC8C300F5C091 /* about_button_read_book_eng.png in Resources */,
+				7594E01F19FBC8C300F5C091 /* about_button_read_book_eng@2x.png in Resources */,
 				304A7ACA19A8CBF00004B2EF /* icon_mystie_50x50.png in Resources */,
 				304A7ACB19A8CBF00004B2EF /* ufo.mp3 in Resources */,
 				304A7ACC19A8CBF00004B2EF /* Fire-7@2x.png in Resources */,
@@ -2421,7 +2421,7 @@
 				304A7ADD19A8CBF00004B2EF /* Main_iPhone.storyboard in Resources */,
 				304A7ADE19A8CBF00004B2EF /* icon_mystie_512x512.png in Resources */,
 				758BE61419FC207B00AE7498 /* alert_love_to_eng.png in Resources */,
-				7594E02119FBC8C300F5C091 /* about_button_read_book_rus.png in Resources */,
+				7594E02119FBC8C300F5C091 /* about_button_read_book_rus@2x.png in Resources */,
 				304A7ADF19A8CBF00004B2EF /* Ghost-4@2x.png in Resources */,
 				304A7AE019A8CBF00004B2EF /* Fox-laughter-frame-4@2x.png in Resources */,
 				304A7AE119A8CBF00004B2EF /* parachute.gif in Resources */,
@@ -2534,7 +2534,7 @@
 				3010934A197BCDC300AA2295 /* start-rus@2x.png in Resources */,
 				30BEC865197B1E600069093E /* Main_iPad.storyboard in Resources */,
 				758BE62519FC207B00AE7498 /* improve_rus.png in Resources */,
-				7594E02019FBC8C300F5C091 /* about_button_read_book_rus.png in Resources */,
+				7594E02019FBC8C300F5C091 /* about_button_read_book_rus@2x.png in Resources */,
 				301093A4197BCDC300AA2295 /* mosquito-3@2x.png in Resources */,
 				30109392197BCDC300AA2295 /* fire.mp3 in Resources */,
 				758BE61F19FC207B00AE7498 /* having_fun_eng.png in Resources */,
@@ -2596,7 +2596,7 @@
 				758BE5C019FC1F0100AE7498 /* AppbotX.bundle in Resources */,
 				3010937B197BCDC300AA2295 /* hit_the_ground.mp3 in Resources */,
 				3010934E197BCDC300AA2295 /* bug@2x.png in Resources */,
-				7594E02219FBC8C300F5C091 /* about_button_read_book_icon.png in Resources */,
+				7594E02219FBC8C300F5C091 /* about_button_read_book_icon@2x.png in Resources */,
 				30109402197C27F100AA2295 /* icon_mystie_114x114.png in Resources */,
 				3010939C197BCDC300AA2295 /* ghost.mp3 in Resources */,
 				301093C9197BCDC300AA2295 /* Fox-laughter-frame-10@2x.png in Resources */,
@@ -2677,7 +2677,7 @@
 				301093A0197BCDC300AA2295 /* mosquito-6.png in Resources */,
 				30109367197BCDC300AA2295 /* cloud-4@2x.png in Resources */,
 				30109393197BCDC300AA2295 /* jet_away.mp3 in Resources */,
-				7594E01E19FBC8C300F5C091 /* about_button_read_book_eng.png in Resources */,
+				7594E01E19FBC8C300F5C091 /* about_button_read_book_eng@2x.png in Resources */,
 				301093E2197BCDC300AA2295 /* linkSpecial-eng@2x.png in Resources */,
 				30109398197BCDC300AA2295 /* Ghost-6@2x.png in Resources */,
 				30109394197BCDC300AA2295 /* Ghost-2@2x.png in Resources */,
