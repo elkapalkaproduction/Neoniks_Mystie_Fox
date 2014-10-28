@@ -116,12 +116,12 @@ extern const NSInteger showPopUpAfter;
     siteImageView.frame =CGRectMake(92*positionRatio, (375*positionRatio-siteImageView.frame.size.height/ratio),siteImageView.frame.size.width/ratio, siteImageView.frame.size.height/ratio);
     [self.scrollView addSubview:siteImageView];
     
-    UIImageView *readBookImageView = [[UIImageView alloc] initWithImage:readImage];
-    readBookImageView.userInteractionEnabled = YES;
+    UIButton *readBookImageView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, readImage.size.width, readImage.size.height)];
+    [readBookImageView setImage:readImage forState:UIControlStateNormal];
     [self.scrollView addSubview:readBookImageView];
-    
-    UIImageView *readIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"about_button_read_book_icon"]];
-    readIconImageView.userInteractionEnabled = YES;
+    UIImage *iconImage = [UIImage imageNamed:@"about_button_read_book_icon"];
+    UIButton *readIconImageView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconImage.size.width, iconImage.size.height)];
+    [readIconImageView setImage:iconImage forState:UIControlStateNormal];
     NSInteger customRatio = [[UIDevice currentDevice] userInterfaceIdiom] !=UIUserInterfaceIdiomPad? ratio : [UIScreen mainScreen].scale == 1.f? 2 : 1;
     readIconImageView.frame = CGRectMake(20*positionRatio,
                                          (450*positionRatio - readIconImageView.frame.size.height/customRatio),
@@ -134,10 +134,10 @@ extern const NSInteger showPopUpAfter;
                                          readBookImageView.frame.size.height/customRatio);
 
     [self.scrollView addSubview:readIconImageView];
-    
-    UITapGestureRecognizer * readGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToReadBook)];
-    [readBookImageView addGestureRecognizer:readGesture];
-    [readIconImageView addGestureRecognizer:readGesture];
+
+
+    [readBookImageView addTarget:self action:@selector(goToReadBook) forControlEvents:UIControlEventTouchUpInside];
+    [readIconImageView addTarget:self action:@selector(goToReadBook) forControlEvents:UIControlEventTouchUpInside];
 
     
     UITapGestureRecognizer * siteGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSite:)];
