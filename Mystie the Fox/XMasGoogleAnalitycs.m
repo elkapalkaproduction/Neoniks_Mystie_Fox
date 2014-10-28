@@ -58,7 +58,7 @@ NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
 - (void)setupAnalitycs {
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
     [[GAI sharedInstance] trackerWithTrackingId:GOOGLE_ANALITYCS_TRACKING_ID];
 }
 
