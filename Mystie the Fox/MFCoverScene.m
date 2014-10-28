@@ -179,19 +179,29 @@
         if (node.name !=nil) {
             SKAction * sound = [SKAction playSoundFileNamed:@"button_click.mp3" waitForCompletion:NO];
             if ([node.name isEqualToString:@"startNode"]) {
-                [[MFAdColony sharedAdColony] logEvent:EVENT_MAIN_START_CLICKED];
+                
+                [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class])
+                                                                   action:EVENT_MAIN_START_CLICKED
+                                                                    label:node.name
+                                                                    value:nil];
                 SKAction * transitionAction = [SKAction runBlock:^{
                     MFFirstPageScene *firstScene = [[MFFirstPageScene alloc] initWithSize:self.view.bounds.size];
                     [self.view presentScene:firstScene];
                 }];
                 sound = [SKAction group:@[sound, transitionAction]];
             }else if([node.name isEqualToString:@"whoIsNode"]){
-                [[MFAdColony sharedAdColony] logEvent:EVENT_MAIN_WHO_IS_MISTY];
+                [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class])
+                                                                   action:EVENT_MAIN_WHO_IS_MISTY
+                                                                    label:node.name
+                                                                    value:nil];
                 __weak UIViewController * vc=(UIViewController*)[self.view nextResponder];
                 
                 [vc performSegueWithIdentifier:@"specialPageSegue" sender:vc];
             }else if([node.name isEqualToString:@"siteNode"]){
-                [[MFAdColony sharedAdColony] logEvent:EVENT_MAIN_NEONIKS_WEBSITE];
+                [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class])
+                                                                   action:EVENT_MAIN_NEONIKS_WEBSITE
+                                                                    label:node.name
+                                                                    value:nil];
                 NSString *language = [MFLanguage sharedLanguage].language;
                 NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
                 if ([language isEqualToString:@"ru"]) {
@@ -249,10 +259,10 @@
 
 
 - (void)willMoveFromView:(SKView *)view {
-    [[MFAdColony sharedAdColony] stopRecording];
+    [[XMasGoogleAnalitycs sharedManager] endLogTime];
 }
 - (void)recoredScene {
-    [[MFAdColony sharedAdColony] startSessionRecorderForScreen:@"main page"];
+    [[XMasGoogleAnalitycs sharedManager] startLogTime:@"main page"];
 }
 
 

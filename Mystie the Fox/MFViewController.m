@@ -85,7 +85,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if (segue) {
         if ([segue.identifier isEqualToString:@"specialPageSegue"]) {
-            [[MFAdColony sharedAdColony] stopRecording];
+            [[XMasGoogleAnalitycs sharedManager] endLogTime];
             __weak MFSpecialPage * destinationVC= segue.destinationViewController;
             destinationVC.parentVC =self;
         }

@@ -173,14 +173,14 @@ extern const NSInteger showPopUpAfter;
 
 -(void)play:(id)object{
     [self click];
-    [[MFAdColony sharedAdColony] logEvent:EVENT_WHO_IS_MISTY_PLAY];
+    [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:EVENT_WHO_IS_MISTY_PLAY label:nil value:nil];
     self.parentVC.isNeededToPlay =YES;
     [self performSegueWithIdentifier:@"unwindToMain" sender:self];
 }
 
 -(void)showMore:(id)object{
     [self click];
-    [[MFAdColony sharedAdColony] logEvent:EVENT_WHO_IS_MISTY_MORE];
+    [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:EVENT_WHO_IS_MISTY_MORE label:nil value:nil];
 #ifdef MystieFree
     [Chartboost showMoreApps:CBLocationHomeScreen];
 #else
@@ -263,7 +263,7 @@ extern const NSInteger showPopUpAfter;
 */
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[MFAdColony sharedAdColony] startSessionRecorderForScreen:@"who if mystie screen"];
+    [[XMasGoogleAnalitycs sharedManager] startLogTime:@"who if mystie screen"];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:showingCounter] integerValue] >= showPopUpAfter) {
         MFPopUpViewController *popUp = [MFPopUpViewController instantiateFromStoryboard];
         [StoryboardUtils addViewController:popUp onViewController:self belowSubview:nil];
@@ -274,7 +274,7 @@ extern const NSInteger showPopUpAfter;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[MFAdColony sharedAdColony] stopRecording];
+    [[XMasGoogleAnalitycs sharedManager] endLogTime];
 }
 
 - (NSURL *)openStoreToAppWithID:(NSString *)appId {

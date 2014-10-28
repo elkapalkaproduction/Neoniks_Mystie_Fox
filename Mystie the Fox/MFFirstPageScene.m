@@ -247,7 +247,10 @@
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
         if ([node.name isEqualToString:@"fox"]) {
-            [[MFAdColony sharedAdColony] logEvent:EVENT_PLAY_MISTY];
+            [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class])
+                                                               action:EVENT_PLAY_MISTY
+                                                                label:node.name
+                                                                value:nil];
             if (!self.isLaughter) {
                 self.isLaughter=YES;
                 [self.eyesNode removeAllActions];
@@ -264,7 +267,10 @@
         }else if([node.name isEqualToString:@"tail"]){
             [node runAction:self.tailRotation];
         }else if ([node.name isEqualToString:@"more"]){
-            [[MFAdColony sharedAdColony] logEvent:EVENT_PLAY_MORE];
+            [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class])
+                                                       action:EVENT_PLAY_MORE
+                                                        label:node.name
+                                                        value:nil];
             [self runAction:self.playClickSound];
             __weak UIViewController * vc=(UIViewController*)[self.view nextResponder];
             [vc performSegueWithIdentifier:@"specialPageSegue" sender:vc];
@@ -404,14 +410,14 @@
 }
 
 -(void)willMoveFromView:(SKView *)view{
-    [[MFAdColony sharedAdColony] stopRecording];
+    [[XMasGoogleAnalitycs sharedManager] endLogTime];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MFIsVideoWatched" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MFIAPPurchased" object:nil];
 }
 
 
 - (void)recoredScene {
-    [[MFAdColony sharedAdColony] startSessionRecorderForScreen:@"play screen"];
+    [[XMasGoogleAnalitycs sharedManager] startLogTime:@"play screen"];
 }
 
 

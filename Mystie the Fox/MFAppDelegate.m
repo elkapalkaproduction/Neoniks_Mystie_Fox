@@ -21,7 +21,6 @@
 #endif
 #import "ABX.h"
 #import "MKStoreManager.h"
-#import "GAI.h"
 
 NSString *const bookAppID = @"899196882";
 NSString *const mystieAppID = @"905042573";
@@ -53,7 +52,7 @@ const NSInteger showPopUpAfter = 3;
     [[NSUserDefaults standardUserDefaults] setObject:number forKey:showingCounter];
 
     [self.window makeKeyAndVisible];
-    [[MFAdColony sharedAdColony] logEvent:EVENT_MAIN_APP_STARTED];
+    [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:EVENT_MAIN_APP_STARTED label:nil value:nil];
     self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
     self.splashView.image = [UIImage imageNamed:@"Default.png"];
     [_window addSubview:self.splashView];
@@ -238,16 +237,6 @@ const NSInteger showPopUpAfter = 3;
                          advertisingTrackingEnabled:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
 #endif
     // Optional: automatically send uncaught exceptions to Google Analytics.
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    
-    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    [GAI sharedInstance].dispatchInterval = 20;
-    
-    // Optional: set Logger to VERBOSE for debug information.
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    
-    // Initialize tracker. Replace with your tracking ID.
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-54008191-3"];
 #ifdef MystieFree
     [MFAdColony sharedAdColony];
 #endif

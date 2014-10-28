@@ -162,7 +162,7 @@ NSInteger inappAlertTag = 101;
     BOOL IAPurchased = [defaults boolForKey:@"IAPurchased"];
 #endif
     //    BOOL isVideoWathched = [defaults boolForKey:@"isVideoWatched"];
-    [[MFAdColony sharedAdColony] logEvent:[NSString stringWithFormat:@"%@%@", EVENT_PLAY_CHAR, [name stringByReplacingOccurrencesOfString:@"button_" withString:@"CHAR_"]]];
+    [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:[NSString stringWithFormat:@"%@%@", EVENT_PLAY_CHAR, [name stringByReplacingOccurrencesOfString:@"button_" withString:@"CHAR_"]] label:name value:nil];
     if ([name isEqualToString:@"button_0"]) {
         character = [[MFBug alloc] initWithParent:self.parent];
     }else if ([name isEqualToString:@"button_1"]){
@@ -252,7 +252,7 @@ NSInteger inappAlertTag = 101;
 
 - (void)inAppAlertViewAnalizeWithButtonPressed:(NSInteger)buttonIndex {
     if (buttonIndex == 2) {
-        [[MFAdColony sharedAdColony] logEvent:EVENT_IN_APP_NO];
+        [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:EVENT_IN_APP_NO label:nil value:nil];
 #ifdef MystieFree
         NSString *message;
         NSString *yesButton;
@@ -274,7 +274,7 @@ NSInteger inappAlertTag = 101;
         }
 #endif
     } else if (buttonIndex==1) {
-        [[MFAdColony sharedAdColony] logEvent:EVENT_IN_APP_YES];
+        [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:EVENT_IN_APP_YES label:nil value:nil];
         [self buy];
     }else if (buttonIndex ==0) {
         [self recover];
@@ -284,7 +284,7 @@ NSInteger inappAlertTag = 101;
 
 - (void)adColonyUnlockAlertWithButtonPressed:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [[MFAdColony sharedAdColony] logEvent:EVENT_VIDEO_YES];
+        [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:EVENT_VIDEO_YES label:nil value:nil];
 #ifdef MystieFree
         if ([MFAdColony sharedAdColony].isSecondZoneLoaded && NO) {
             [AdColony playVideoAdForZone:@"vz16512e0b8a19467b8e"
@@ -296,8 +296,7 @@ NSInteger inappAlertTag = 101;
         }
 #endif
     } else if (buttonIndex == 0) {
-        [[MFAdColony sharedAdColony] logEvent:EVENT_VIDEO_NO];
-
+        [[XMasGoogleAnalitycs sharedManager] logEventWithCategory:NSStringFromClass([self class]) action:EVENT_VIDEO_NO label:nil value:nil];
     }
 }
 

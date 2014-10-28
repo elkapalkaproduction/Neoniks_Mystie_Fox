@@ -8,33 +8,18 @@
 
 #import "MFAdColony.h"
 #import <SpriteKit/SpriteKit.h>
-#import "GAI.h"
-#import "GAIFields.h"
+
 #ifdef MystieFree
 #import <AdColony/AdColony.h>
 #import <Chartboost/Chartboost.h>
 #import <StartApp/StartApp.h>
 #endif
 
-NSString *const EVENT_MAIN_APP_STARTED = @"EVENT_MAIN_APP_STARTED";
-NSString *const EVENT_MAIN_WHO_IS_MISTY = @"EVENT_MAIN_WHO_IS_MISTY";
-NSString *const EVENT_MAIN_NEONIKS_WEBSITE = @"EVENT_MAIN_NEONIKS_WEBSITE";
-NSString *const EVENT_MAIN_START_CLICKED = @"EVENT_MAIN_START_CLICKED";
-NSString *const EVENT_WHO_IS_MISTY_PLAY = @"EVENT_WHO_IS_MISTY_PLAY";
-NSString *const EVENT_WHO_IS_MISTY_MORE = @"EVENT_WHO_IS_MISTY_MORE";
-NSString *const EVENT_PLAY_MORE = @"EVENT_PLAY_MORE";
-NSString *const EVENT_PLAY_MISTY = @"EVENT_PLAY_MISTY";
-NSString *const EVENT_PLAY_CHAR = @"EVENT_PLAY_";
-NSString *const EVENT_IN_APP_YES = @"EVENT_IN_APP_YES";
-NSString *const EVENT_IN_APP_NO = @"EVENT_IN_APP_NO";
-NSString *const EVENT_VIDEO_YES = @"EVENT_VIDEO_YES";
-NSString *const EVENT_VIDEO_NO = @"EVENT_VIDEO_NO";
-
 NSString *const START_APP_DEVELOPER_KEY = @"105068540";
 NSString *const START_APP_APP_KEY = @"210300540";
 
 
-NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
+
 #ifdef MystieFree
 @interface MFAdColony () <STADelegateProtocol>
 @property (strong, nonatomic) STAStartAppAd *appAd;
@@ -57,11 +42,6 @@ NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
 
 -(instancetype) init{
     if (self==[super init]) {
-        [GAI sharedInstance].trackUncaughtExceptions = YES;
-        [GAI sharedInstance].dispatchInterval = 20;
-        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
-        [[GAI sharedInstance] trackerWithTrackingId:GOOGLE_ANALITYCS_TRACKING_ID];
-
 #ifdef MystieFree
         STAStartAppSDK* sdk = [STAStartAppSDK sharedInstance];
         sdk.appID = START_APP_APP_KEY;
@@ -141,30 +121,5 @@ NSString *const GOOGLE_ANALITYCS_TRACKING_ID = @"UA-33114261-6";
     [AdColony playVideoAdForZone:zone withDelegate:self];
 }
 #endif
-
-
-- (void)logEvent:(NSString *)event {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[[GAIDictionaryBuilder createEventWithCategory:@"UX"
-                                                           action:event
-                                                            label:nil
-                                                            value:nil] set:@"start" forKey:kGAISessionControl] build]];
-}
-
-
-- (void)startSessionRecorderForScreen:(NSString *)screen {
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    // Start a new session with a screenView hit.
-    self.builder = [GAIDictionaryBuilder createScreenView];
-    [self.builder set:@"start" forKey:kGAISessionControl];
-    [tracker set:kGAIScreenName value:screen];
-    [tracker send:[self.builder build]];
-}
-
-
-- (void)stopRecording {
-    [self.builder set:@"end" forKey:kGAISessionControl];
-}
 
 @end
