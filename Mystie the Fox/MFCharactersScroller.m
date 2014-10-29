@@ -26,6 +26,7 @@
 #import <AdColony/AdColony.h>
 #import <Chartboost/Chartboost.h>
 #import "MFAdColony.h"
+#import <FacebookSDK/FacebookSDK.h>
 #endif
 
 NSInteger adcolonyAlertTag = 100;
@@ -291,8 +292,10 @@ NSInteger inappAlertTag = 101;
                             withDelegate:self.parent
                         withV4VCPrePopup:NO
                         andV4VCPostPopup:NO];
+            [FBAppEvents logEvent:@"AdColony Video Watched"];
         } else if ([Chartboost hasRewardedVideo:CBLocationGameScreen]) {
             [Chartboost showRewardedVideo:CBLocationGameScreen];
+            [FBAppEvents logEvent:@"Chartboost Video Watched"];
         }
 #endif
     } else if (buttonIndex == 0) {
@@ -334,6 +337,7 @@ NSInteger inappAlertTag = 101;
         [defaults setBool:YES forKey:@"IAPurchased"];
         [defaults synchronize];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIAPPurchased" object:nil];
+        [FBAppEvents logPurchase:0.99 currency:@"USD"];
     } onCancelled:^{
         NSLog(@"User Cancelled Transaction");
         if([MFAdColony sharedAdColony].isThirdZoneLaoded){

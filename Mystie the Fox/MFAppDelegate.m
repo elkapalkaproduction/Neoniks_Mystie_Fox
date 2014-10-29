@@ -16,11 +16,13 @@
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
 #import <Parse/Parse.h>
+#import <FacebookSDK/FacebookSDK.h>
 #else
 #import <floopsdk/floopsdk.h>
 #endif
 #import "ABX.h"
 #import "MKStoreManager.h"
+
 
 NSString *const bookAppID = @"899196882";
 NSString *const mystieAppID = @"905042573";
@@ -87,7 +89,7 @@ const NSInteger showPopUpAfter = 3;
                                                          UIRemoteNotificationTypeSound)];
     }
     [[ABXApiClient instance] setApiKey:@"4d4a79e58e8b379e2a10d496dba190ab95e9376f"];
-
+    
 #else
     [[ABXApiClient instance] setApiKey:@"8ea9f155e639ed0ffe3c6090aadd9e8432552f04"];
 
@@ -137,6 +139,7 @@ const NSInteger showPopUpAfter = 3;
 #ifdef MystieFree
     [Chartboost cacheMoreApps:CBLocationHomeScreen];
     [MobileAppTracker measureSession];
+    [FBAppEvents activateApp];
 #endif
     
 }
