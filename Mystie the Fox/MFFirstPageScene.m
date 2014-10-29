@@ -281,8 +281,8 @@
             if ([language isEqualToString:@"ru"]) {
                 url = [NSURL URLWithString:@"http://www.neoniki.com"];
             }
-            [FBAppEvents logEvent:@"Interested in Neoniks"];
 #ifdef MystieFree
+            [FBAppEvents logEvent:@"Interested in Neoniks"];
             [[UIApplication sharedApplication] openURL:url];
 #else
             [[FloopSdkManager sharedInstance] showParentalGate:^(BOOL success) {

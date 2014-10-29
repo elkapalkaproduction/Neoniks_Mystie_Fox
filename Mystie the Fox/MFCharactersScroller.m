@@ -337,7 +337,6 @@ NSInteger inappAlertTag = 101;
         [defaults setBool:YES forKey:@"IAPurchased"];
         [defaults synchronize];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MFIAPPurchased" object:nil];
-        [FBAppEvents logPurchase:0.99 currency:@"USD"];
     } onCancelled:^{
         NSLog(@"User Cancelled Transaction");
         if([MFAdColony sharedAdColony].isThirdZoneLaoded){

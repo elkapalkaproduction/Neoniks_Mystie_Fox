@@ -203,13 +203,13 @@
                                                                    action:EVENT_MAIN_NEONIKS_WEBSITE
                                                                     label:node.name
                                                                     value:nil];
-                [FBAppEvents logEvent:@"Interested in Neoniks"];
                 NSString *language = [MFLanguage sharedLanguage].language;
                 NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
                 if ([language isEqualToString:@"ru"]) {
                     url = [NSURL URLWithString:@"http://www.neoniki.com"];
                 }
 #ifdef MystieFree
+                 [FBAppEvents logEvent:@"Interested in Neoniks"];
                 [[UIApplication sharedApplication] openURL:url];
 #else
                 [[FloopSdkManager sharedInstance] showParentalGate:^(BOOL success) {
