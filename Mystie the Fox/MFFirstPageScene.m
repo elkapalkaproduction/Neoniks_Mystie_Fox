@@ -23,6 +23,7 @@
 
 #ifdef MystieFree
 #import <Chartboost/Chartboost.h>
+#import <FacebookSDK/FacebookSDK.h>
 #else
 #import <floopsdk/floopsdk.h>
 #endif
@@ -280,6 +281,7 @@
             if ([language isEqualToString:@"ru"]) {
                 url = [NSURL URLWithString:@"http://www.neoniki.com"];
             }
+            [FBAppEvents logEvent:@"Interested in Neoniks"];
 #ifdef MystieFree
             [[UIApplication sharedApplication] openURL:url];
 #else

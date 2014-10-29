@@ -19,6 +19,7 @@
 #import <AdColony/AdColony.h>
 #import "GADBannerView.h"
 #import "GADInterstitial.h"
+#import <FacebookSDK/FacebookSDK.h>
 #else
 #import <floopsdk/floopsdk.h>
 #endif
@@ -202,6 +203,7 @@
                                                                    action:EVENT_MAIN_NEONIKS_WEBSITE
                                                                     label:node.name
                                                                     value:nil];
+                [FBAppEvents logEvent:@"Interested in Neoniks"];
                 NSString *language = [MFLanguage sharedLanguage].language;
                 NSURL *url = [NSURL URLWithString:@"http://www.neoniks.com"];
                 if ([language isEqualToString:@"ru"]) {

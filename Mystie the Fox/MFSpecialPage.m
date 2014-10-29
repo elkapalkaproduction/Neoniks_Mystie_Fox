@@ -14,6 +14,7 @@
 
 #ifdef MystieFree
 #import <Chartboost/Chartboost.h>
+#import <FacebookSDK/FacebookSDK.h>
 #define NeoniksBookLink @"neoniks-bookfree://character/mystie"
 #else
 #define NeoniksBookLink @"neoniks-bookpro://character/mystie"
@@ -216,6 +217,7 @@ extern const NSInteger showPopUpAfter;
     if ([language isEqualToString:@"ru"]) {
         url = [NSURL URLWithString:@"http://www.neoniki.com"];
     }
+    [FBAppEvents logEvent:@"Interested in Neoniks"];
 #ifdef MystieFree
     [[UIApplication sharedApplication] openURL:url];
 #else
@@ -241,6 +243,7 @@ extern const NSInteger showPopUpAfter;
 - (void)goToReadBook {
 #ifdef MystieFree
     [self goToReadBookParentGate];
+    [FBAppEvents logEvent:@"Interested in Neoniks"];
 #else
     [[FloopSdkManager sharedInstance] showParentalGate:^(BOOL success) {
         if (success) {
